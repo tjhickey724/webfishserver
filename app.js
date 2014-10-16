@@ -39,7 +39,7 @@ var bodyParser = require('body-parser'); // this allows us to pass JSON values t
 var app = express();
 
 var monk = require('monk');
-var db = monk('localhost:27017/shopping');
+var db = monk('localhost:27017/webfish');
 var User = db.get("user");
 
 
@@ -58,10 +58,12 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var ensureAuthenticated = function(req, res, next) {
+    
         if (req.isAuthenticated()) {
             //console.log("req.user=" + JSON.stringify(req.user));
             return next();
         } else {
+            console.log("req="+req);
             res.redirect('/login.html');
         }
     };
@@ -76,11 +78,11 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
-
+/*
 passport.use(new GoogleStrategy({
-	    clientID: '1028409905067-r5a8sglbg21hpt4sk84i2hpjbdu3uekc.apps.googleusercontent.com',
-		clientSecret: 'Drxg-wgTb0m6hW2flm7DjpER',
-		callbackURL: "http://leiner.cs-i.brandeis.edu:6000/auth/google/callback"
+	    clientID: '327841892394-kg77ug2s36gk4dos0q6c5j8nhafqp9m7.apps.googleusercontent.com',
+		clientSecret: '69qGzj4O-iVO41f_RjVbVPKC',
+		callbackURL: "http://localhost:4000/oauth2callback"
 		},
 	function(accessToken, refreshToken, profile, done) {
         console.log("aT = " + JSON.stringify(accessToken) + 
@@ -106,7 +108,7 @@ passport.use(new GoogleStrategy({
             done(err, user[0]);
         }
 	})}));
-
+*/
 //**********************************************************
 
 
@@ -118,6 +120,7 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
     console.log('%s %s %s', req.method, req.url, JSON.stringify(req.body));
     //console.log("myData = "+JSON.stringify(myData));
+    req.user = {openID:"theUser"};
     next();
 });
 
@@ -147,7 +150,7 @@ app.get('/auth/google',
 
 
 app.get('/auth/google/callback', 
-	passport.authenticate('google', { failureRedirect: '/login' }),
+	//passport.authenticate('google', { failureRedirect: '/login' }),
 	function(req, res) {
 	    // Successful authentication, redirect home.
 	    res.redirect('/');
@@ -157,10 +160,8 @@ app.get('/auth/google/callback',
 app.use("/login.html", express.static(__dirname + '/public/login.html'));
 app.use("/logout.html", express.static(__dirname + '/public/logout.html'));
 
-// we require everyone to login before they can use the app!
-app.use(ensureAuthenticated, function(req, res, next) {
-    next()
-});
+
+//app.use(ensureAuthenticated, function(req, res, next) {   next() });
 
 //**********************************************************
 
@@ -265,7 +266,7 @@ app.delete('/model/:collection/:id', function(req, res) {
 //**********************************************************
 // Finally we assign the server to a port ....
 //**********************************************************
-var port = 6000;
+var port = 4000;
 app.listen(port, function() {
     console.log("server is listening on port " + port);
 });
