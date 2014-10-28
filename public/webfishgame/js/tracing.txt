@@ -1,0 +1,1492 @@
+reating gameModel model.js:14
+loading controller controller.js:2
+creating gameLoop gameLoop.js:2
+creating gameView view.js:6
+showing #consent-view controller.js:13
+showing #dashboard-view controller.js:13
+showing #game-view controller.js:13
+delta=4023 gameLoop.js:27
+true view.js:64
+game started... new fish will spawn in 1289 ms model.js:149
+delta=18 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=116 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=135 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=135 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=58 gameLoop.js:27
+false view.js:64
+delta=135 gameLoop.js:27
+false view.js:64
+delta=34 gameLoop.js:27
+false view.js:64
+delta=109 gameLoop.js:27
+false view.js:64
+delta=40 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=35 gameLoop.js:27
+false view.js:64
+spawned fish #1 at time 1410305463917 model.js:101
+["slow","slow","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":0,"correct":0,"incorrect":0,"missed":0,"time":0,"reaction":0,"missing":0,"wrong":0,"accuracy":0} controller.js:80
+just pushed birth{"time":1291,"action":"birth","id":1,"visual":"slow","audio":"slow","side":"left"} model.js:109
+delta=215 gameLoop.js:27
+true view.js:64
+delta=289 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=268 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=216 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=56 gameLoop.js:27
+true view.js:64
+delta=101 gameLoop.js:27
+true view.js:64
+delta=59 gameLoop.js:27
+true view.js:64
+delta=67 gameLoop.js:27
+true view.js:64
+delta=117 gameLoop.js:27
+true view.js:64
+delta=117 gameLoop.js:27
+true view.js:64
+delta=66 gameLoop.js:27
+true view.js:64
+delta=171 gameLoop.js:27
+true view.js:64
+delta=204 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 974 ms model.js:132
+delta=161 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=153 gameLoop.js:27
+false view.js:64
+delta=22 gameLoop.js:27
+false view.js:64
+delta=170 gameLoop.js:27
+false view.js:64
+delta=182 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=268 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+spawned fish #2 at time 1410305466896 model.js:101
+["slow","slow","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":4270,"action":"birth","id":2,"visual":"slow","audio":"slow","side":"left"} model.js:109
+delta=17 gameLoop.js:27
+true view.js:64
+delta=194 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=194 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=33 gameLoop.js:27
+true view.js:64
+delta=216 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=306 gameLoop.js:27
+true view.js:64
+delta=23 gameLoop.js:27
+true view.js:64
+delta=215 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=221 gameLoop.js:27
+true view.js:64
+delta=64 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1325 ms model.js:132
+delta=276 gameLoop.js:27
+false view.js:64
+delta=144 gameLoop.js:27
+false view.js:64
+delta=103 gameLoop.js:27
+false view.js:64
+delta=94 gameLoop.js:27
+false view.js:64
+delta=29 gameLoop.js:27
+false view.js:64
+delta=150 gameLoop.js:27
+false view.js:64
+delta=58 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=167 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=90 gameLoop.js:27
+false view.js:64
+spawned fish #3 at time 1410305470225 model.js:101
+["slow","slow","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":7599,"action":"birth","id":3,"visual":"slow","audio":"slow","side":"left"} model.js:109
+delta=530 gameLoop.js:27
+true view.js:64
+delta=19 gameLoop.js:27
+true view.js:64
+delta=27 gameLoop.js:27
+true view.js:64
+delta=267 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=374 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=273 gameLoop.js:27
+true view.js:64
+delta=84 gameLoop.js:27
+true view.js:64
+delta=305 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":3,"correct":0,"incorrect":0,"missed":3,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 666 ms model.js:132
+delta=280 gameLoop.js:27
+false view.js:64
+delta=306 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=206 gameLoop.js:27
+false view.js:64
+delta=20 gameLoop.js:27
+false view.js:64
+spawned fish #4 at time 1410305472895 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":3,"correct":0,"incorrect":0,"missed":3,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":10269,"action":"birth","id":4,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=274 gameLoop.js:27
+true view.js:64
+delta=229 gameLoop.js:27
+true view.js:64
+delta=162 gameLoop.js:27
+true view.js:64
+delta=224 gameLoop.js:27
+true view.js:64
+delta=32 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=206 gameLoop.js:27
+true view.js:64
+delta=341 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=224 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=49 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":4,"correct":0,"incorrect":0,"missed":4,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1128 ms model.js:132
+delta=252 gameLoop.js:27
+false view.js:64
+delta=84 gameLoop.js:27
+false view.js:64
+delta=217 gameLoop.js:27
+false view.js:64
+delta=151 gameLoop.js:27
+false view.js:64
+delta=200 gameLoop.js:27
+false view.js:64
+spawned fish #5 at time 1410305476027 model.js:101
+["fast","fast","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"fs","tries":0,"correct":0,"incorrect":0,"missed":0,"time":0,"reaction":0,"missing":0,"wrong":0,"accuracy":0} controller.js:80
+just pushed birth{"time":13401,"action":"birth","id":5,"visual":"fast","audio":"slow","side":"left"} model.js:109
+delta=234 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=58 gameLoop.js:27
+true view.js:64
+delta=260 gameLoop.js:27
+true view.js:64
+delta=247 gameLoop.js:27
+true view.js:64
+delta=56 gameLoop.js:27
+true view.js:64
+delta=245 gameLoop.js:27
+true view.js:64
+delta=248 gameLoop.js:27
+true view.js:64
+delta=36 gameLoop.js:27
+true view.js:64
+delta=29 gameLoop.js:27
+true view.js:64
+delta=226 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=274 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"fs","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1987 ms model.js:132
+delta=322 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=200 gameLoop.js:27
+false view.js:64
+delta=355 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=213 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=28 gameLoop.js:27
+false view.js:64
+delta=239 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=240 gameLoop.js:27
+false view.js:64
+delta=78 gameLoop.js:27
+false view.js:64
+spawned fish #6 at time 1410305480018 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"sf","tries":0,"correct":0,"incorrect":0,"missed":0,"time":0,"reaction":0,"missing":0,"wrong":0,"accuracy":0} controller.js:80
+just pushed birth{"time":17392,"action":"birth","id":6,"visual":"slow","audio":"fast","side":"right"} model.js:109
+delta=197 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=214 gameLoop.js:27
+true view.js:64
+delta=100 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=283 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=36 gameLoop.js:27
+true view.js:64
+delta=308 gameLoop.js:27
+true view.js:64
+delta=267 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=267 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=40 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"sf","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 724 ms model.js:132
+delta=282 gameLoop.js:27
+false view.js:64
+delta=51 gameLoop.js:27
+false view.js:64
+delta=306 gameLoop.js:27
+false view.js:64
+delta=83 gameLoop.js:27
+false view.js:64
+spawned fish #7 at time 1410305482745 model.js:101
+["fast","fast","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":0,"correct":0,"incorrect":0,"missed":0,"time":0,"reaction":0,"missing":0,"wrong":0,"accuracy":0} controller.js:80
+just pushed birth{"time":20119,"action":"birth","id":7,"visual":"fast","audio":"fast","side":"left"} model.js:109
+delta=209 gameLoop.js:27
+true view.js:64
+delta=67 gameLoop.js:27
+true view.js:64
+delta=273 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=54 gameLoop.js:27
+true view.js:64
+delta=266 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=272 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=20 gameLoop.js:27
+true view.js:64
+delta=289 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=19 gameLoop.js:27
+true view.js:64
+delta=282 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 891 ms model.js:132
+delta=133 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=93 gameLoop.js:27
+false view.js:64
+delta=73 gameLoop.js:27
+false view.js:64
+delta=271 gameLoop.js:27
+false view.js:64
+delta=163 gameLoop.js:27
+false view.js:64
+delta=84 gameLoop.js:27
+false view.js:64
+delta=66 gameLoop.js:27
+false view.js:64
+spawned fish #8 at time 1410305485640 model.js:101
+["fast","fast","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":23015,"action":"birth","id":8,"visual":"fast","audio":"fast","side":"right"} model.js:109
+delta=234 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=51 gameLoop.js:27
+true view.js:64
+delta=275 gameLoop.js:27
+true view.js:64
+delta=226 gameLoop.js:27
+true view.js:64
+delta=98 gameLoop.js:27
+true view.js:64
+delta=247 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=23 gameLoop.js:27
+true view.js:64
+delta=277 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=212 gameLoop.js:27
+true view.js:64
+delta=85 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 649 ms model.js:132
+delta=260 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=71 gameLoop.js:27
+false view.js:64
+delta=170 gameLoop.js:27
+false view.js:64
+delta=57 gameLoop.js:27
+false view.js:64
+spawned fish #9 at time 1410305488294 model.js:101
+["fast","fast","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":25668,"action":"birth","id":9,"visual":"fast","audio":"fast","side":"left"} model.js:109
+delta=210 gameLoop.js:27
+true view.js:64
+delta=68 gameLoop.js:27
+true view.js:64
+delta=237 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=211 gameLoop.js:27
+true view.js:64
+delta=215 gameLoop.js:27
+true view.js:64
+delta=137 gameLoop.js:27
+true view.js:64
+delta=64 gameLoop.js:27
+true view.js:64
+delta=227 gameLoop.js:27
+true view.js:64
+delta=35 gameLoop.js:27
+true view.js:64
+delta=24 gameLoop.js:27
+true view.js:64
+delta=219 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=173 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":3,"correct":0,"incorrect":0,"missed":3,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 833 ms model.js:132
+delta=357 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=285 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=29 gameLoop.js:27
+false view.js:64
+spawned fish #10 at time 1410305491130 model.js:101
+["fast","fast","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"fs","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":28505,"action":"birth","id":10,"visual":"fast","audio":"slow","side":"left"} model.js:109
+delta=251 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=66 gameLoop.js:27
+true view.js:64
+delta=217 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=250 gameLoop.js:27
+true view.js:64
+delta=57 gameLoop.js:27
+true view.js:64
+delta=184 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=317 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=99 gameLoop.js:27
+true view.js:64
+delta=269 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"fs","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1083 ms model.js:132
+delta=316 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=291 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=52 gameLoop.js:27
+false view.js:64
+delta=242 gameLoop.js:27
+false view.js:64
+spawned fish #11 at time 1410305494218 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":4,"correct":0,"incorrect":0,"missed":4,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":31592,"action":"birth","id":11,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=325 gameLoop.js:27
+true view.js:64
+delta=24 gameLoop.js:27
+true view.js:64
+delta=251 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=257 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=254 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=36 gameLoop.js:27
+true view.js:64
+delta=262 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=38 gameLoop.js:27
+true view.js:64
+delta=284 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":5,"correct":0,"incorrect":0,"missed":5,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1023 ms model.js:132
+delta=258 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=265 gameLoop.js:27
+false view.js:64
+delta=265 gameLoop.js:27
+false view.js:64
+delta=52 gameLoop.js:27
+false view.js:64
+delta=255 gameLoop.js:27
+false view.js:64
+spawned fish #12 at time 1410305497245 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":5,"correct":0,"incorrect":0,"missed":5,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":34619,"action":"birth","id":12,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=245 gameLoop.js:27
+true view.js:64
+delta=51 gameLoop.js:27
+true view.js:64
+delta=326 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=282 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=239 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=218 gameLoop.js:27
+true view.js:64
+delta=71 gameLoop.js:27
+true view.js:64
+delta=312 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":6,"correct":0,"incorrect":0,"missed":6,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1633 ms model.js:132
+delta=237 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=193 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=57 gameLoop.js:27
+false view.js:64
+delta=270 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=46 gameLoop.js:27
+false view.js:64
+delta=258 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=249 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+spawned fish #13 at time 1410305500881 model.js:101
+["fast","fast","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":3,"correct":0,"incorrect":0,"missed":3,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":38255,"action":"birth","id":13,"visual":"fast","audio":"fast","side":"left"} model.js:109
+delta=272 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=28 gameLoop.js:27
+true view.js:64
+delta=300 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=271 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=226 gameLoop.js:27
+true view.js:64
+delta=48 gameLoop.js:27
+true view.js:64
+delta=175 gameLoop.js:27
+true view.js:64
+delta=143 gameLoop.js:27
+true view.js:64
+delta=83 gameLoop.js:27
+true view.js:64
+delta=221 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ff","tries":4,"correct":0,"incorrect":0,"missed":4,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1980 ms model.js:132
+delta=229 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=24 gameLoop.js:27
+false view.js:64
+delta=238 gameLoop.js:27
+false view.js:64
+delta=349 gameLoop.js:27
+false view.js:64
+delta=19 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=156 gameLoop.js:27
+false view.js:64
+delta=23 gameLoop.js:27
+false view.js:64
+delta=231 gameLoop.js:27
+false view.js:64
+delta=19 gameLoop.js:27
+false view.js:64
+delta=140 gameLoop.js:27
+false view.js:64
+delta=207 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=23 gameLoop.js:27
+false view.js:64
+delta=227 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+spawned fish #14 at time 1410305504864 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":6,"correct":0,"incorrect":0,"missed":6,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":42238,"action":"birth","id":14,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=17 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=158 gameLoop.js:27
+true view.js:64
+delta=101 gameLoop.js:27
+true view.js:64
+delta=302 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=190 gameLoop.js:27
+true view.js:64
+delta=42 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=176 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=38 gameLoop.js:27
+true view.js:64
+delta=180 gameLoop.js:27
+true view.js:64
+delta=81 gameLoop.js:27
+true view.js:64
+delta=153 gameLoop.js:27
+true view.js:64
+delta=98 gameLoop.js:27
+true view.js:64
+delta=33 gameLoop.js:27
+true view.js:64
+delta=39 gameLoop.js:27
+true view.js:64
+delta=130 gameLoop.js:27
+true view.js:64
+delta=56 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":7,"correct":0,"incorrect":0,"missed":7,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1216 ms model.js:132
+delta=79 gameLoop.js:27
+false view.js:64
+delta=71 gameLoop.js:27
+false view.js:64
+delta=75 gameLoop.js:27
+false view.js:64
+delta=121 gameLoop.js:27
+false view.js:64
+delta=62 gameLoop.js:27
+false view.js:64
+delta=93 gameLoop.js:27
+false view.js:64
+delta=24 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=50 gameLoop.js:27
+false view.js:64
+delta=73 gameLoop.js:27
+false view.js:64
+delta=127 gameLoop.js:27
+false view.js:64
+delta=33 gameLoop.js:27
+false view.js:64
+delta=104 gameLoop.js:27
+false view.js:64
+delta=80 gameLoop.js:27
+false view.js:64
+delta=35 gameLoop.js:27
+false view.js:64
+delta=56 gameLoop.js:27
+false view.js:64
+delta=95 gameLoop.js:27
+false view.js:64
+spawned fish #15 at time 1410305508083 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":7,"correct":0,"incorrect":0,"missed":7,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":45458,"action":"birth","id":15,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=17 gameLoop.js:27
+true view.js:64
+delta=58 gameLoop.js:27
+true view.js:64
+delta=75 gameLoop.js:27
+true view.js:64
+delta=92 gameLoop.js:27
+true view.js:64
+delta=30 gameLoop.js:27
+true view.js:64
+delta=70 gameLoop.js:27
+true view.js:64
+delta=69 gameLoop.js:27
+true view.js:64
+delta=114 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=118 gameLoop.js:27
+true view.js:64
+delta=54 gameLoop.js:27
+true view.js:64
+delta=28 gameLoop.js:27
+true view.js:64
+delta=84 gameLoop.js:27
+true view.js:64
+delta=40 gameLoop.js:27
+true view.js:64
+delta=69 gameLoop.js:27
+true view.js:64
+delta=133 gameLoop.js:27
+true view.js:64
+delta=67 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=57 gameLoop.js:27
+true view.js:64
+delta=69 gameLoop.js:27
+true view.js:64
+delta=126 gameLoop.js:27
+true view.js:64
+delta=64 gameLoop.js:27
+true view.js:64
+delta=39 gameLoop.js:27
+true view.js:64
+delta=67 gameLoop.js:27
+true view.js:64
+delta=52 gameLoop.js:27
+true view.js:64
+delta=151 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=41 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":8,"correct":0,"incorrect":0,"missed":8,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 857 ms model.js:132
+delta=121 gameLoop.js:27
+false view.js:64
+delta=66 gameLoop.js:27
+false view.js:64
+delta=133 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=39 gameLoop.js:27
+false view.js:64
+delta=144 gameLoop.js:27
+false view.js:64
+delta=51 gameLoop.js:27
+false view.js:64
+delta=71 gameLoop.js:27
+false view.js:64
+delta=117 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+spawned fish #16 at time 1410305510945 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":8,"correct":0,"incorrect":0,"missed":8,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":48320,"action":"birth","id":16,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=75 gameLoop.js:27
+true view.js:64
+delta=25 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=99 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=66 gameLoop.js:27
+true view.js:64
+delta=85 gameLoop.js:27
+true view.js:64
+delta=53 gameLoop.js:27
+true view.js:64
+delta=38 gameLoop.js:27
+true view.js:64
+delta=95 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=37 gameLoop.js:27
+true view.js:64
+delta=129 gameLoop.js:27
+true view.js:64
+delta=159 gameLoop.js:27
+true view.js:64
+delta=25 gameLoop.js:27
+true view.js:64
+delta=90 gameLoop.js:27
+true view.js:64
+delta=142 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=41 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=80 gameLoop.js:27
+true view.js:64
+delta=129 gameLoop.js:27
+true view.js:64
+delta=20 gameLoop.js:27
+true view.js:64
+delta=104 gameLoop.js:27
+true view.js:64
+delta=77 gameLoop.js:27
+true view.js:64
+delta=32 gameLoop.js:27
+true view.js:64
+delta=59 gameLoop.js:27
+true view.js:64
+delta=91 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":9,"correct":0,"incorrect":0,"missed":9,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1231 ms model.js:132
+delta=200 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=149 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=38 gameLoop.js:27
+false view.js:64
+delta=78 gameLoop.js:27
+false view.js:64
+delta=36 gameLoop.js:27
+false view.js:64
+delta=91 gameLoop.js:27
+false view.js:64
+delta=49 gameLoop.js:27
+false view.js:64
+delta=60 gameLoop.js:27
+false view.js:64
+delta=64 gameLoop.js:27
+false view.js:64
+delta=138 gameLoop.js:27
+false view.js:64
+delta=79 gameLoop.js:27
+false view.js:64
+delta=54 gameLoop.js:27
+false view.js:64
+delta=80 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=49 gameLoop.js:27
+false view.js:64
+delta=83 gameLoop.js:27
+false view.js:64
+spawned fish #17 at time 1410305514180 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"sf","tries":1,"correct":0,"incorrect":0,"missed":1,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":51555,"action":"birth","id":17,"visual":"slow","audio":"fast","side":"right"} model.js:109
+delta=117 gameLoop.js:27
+true view.js:64
+delta=133 gameLoop.js:27
+true view.js:64
+delta=127 gameLoop.js:27
+true view.js:64
+delta=107 gameLoop.js:27
+true view.js:64
+delta=53 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=59 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=55 gameLoop.js:27
+true view.js:64
+delta=39 gameLoop.js:27
+true view.js:64
+delta=71 gameLoop.js:27
+true view.js:64
+delta=52 gameLoop.js:27
+true view.js:64
+delta=135 gameLoop.js:27
+true view.js:64
+delta=121 gameLoop.js:27
+true view.js:64
+delta=96 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=117 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=20 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=84 gameLoop.js:27
+true view.js:64
+delta=38 gameLoop.js:27
+true view.js:64
+delta=70 gameLoop.js:27
+true view.js:64
+delta=60 gameLoop.js:27
+true view.js:64
+delta=60 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"sf","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1770 ms model.js:132
+delta=108 gameLoop.js:27
+false view.js:64
+delta=68 gameLoop.js:27
+false view.js:64
+delta=88 gameLoop.js:27
+false view.js:64
+delta=28 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=20 gameLoop.js:27
+false view.js:64
+delta=47 gameLoop.js:27
+false view.js:64
+delta=74 gameLoop.js:27
+false view.js:64
+delta=109 gameLoop.js:27
+false view.js:64
+delta=100 gameLoop.js:27
+false view.js:64
+delta=71 gameLoop.js:27
+false view.js:64
+delta=62 gameLoop.js:27
+false view.js:64
+delta=50 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=50 gameLoop.js:27
+false view.js:64
+delta=83 gameLoop.js:27
+false view.js:64
+delta=57 gameLoop.js:27
+false view.js:64
+delta=77 gameLoop.js:27
+false view.js:64
+delta=70 gameLoop.js:27
+false view.js:64
+delta=81 gameLoop.js:27
+false view.js:64
+delta=75 gameLoop.js:27
+false view.js:64
+delta=59 gameLoop.js:27
+false view.js:64
+delta=67 gameLoop.js:27
+false view.js:64
+delta=84 gameLoop.js:27
+false view.js:64
+delta=39 gameLoop.js:27
+false view.js:64
+delta=59 gameLoop.js:27
+false view.js:64
+delta=66 gameLoop.js:27
+false view.js:64
+delta=34 gameLoop.js:27
+false view.js:64
+delta=58 gameLoop.js:27
+false view.js:64
+spawned fish #18 at time 1410305517954 model.js:101
+["slow","slow","right",-20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":9,"correct":0,"incorrect":0,"missed":9,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":55328,"action":"birth","id":18,"visual":"slow","audio":"slow","side":"right"} model.js:109
+delta=51 gameLoop.js:27
+true view.js:64
+delta=140 gameLoop.js:27
+true view.js:64
+delta=83 gameLoop.js:27
+true view.js:64
+delta=67 gameLoop.js:27
+true view.js:64
+delta=33 gameLoop.js:27
+true view.js:64
+delta=56 gameLoop.js:27
+true view.js:64
+delta=53 gameLoop.js:27
+true view.js:64
+delta=109 gameLoop.js:27
+true view.js:64
+delta=41 gameLoop.js:27
+true view.js:64
+delta=68 gameLoop.js:27
+true view.js:64
+delta=23 gameLoop.js:27
+true view.js:64
+delta=57 gameLoop.js:27
+true view.js:64
+delta=70 gameLoop.js:27
+true view.js:64
+delta=110 gameLoop.js:27
+true view.js:64
+delta=84 gameLoop.js:27
+true view.js:64
+delta=63 gameLoop.js:27
+true view.js:64
+delta=67 gameLoop.js:27
+true view.js:64
+delta=93 gameLoop.js:27
+true view.js:64
+delta=25 gameLoop.js:27
+true view.js:64
+delta=72 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=50 gameLoop.js:27
+true view.js:64
+delta=44 gameLoop.js:27
+true view.js:64
+delta=82 gameLoop.js:27
+true view.js:64
+delta=54 gameLoop.js:27
+true view.js:64
+delta=63 gameLoop.js:27
+true view.js:64
+delta=83 gameLoop.js:27
+true view.js:64
+delta=134 gameLoop.js:27
+true view.js:64
+delta=103 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"ss","tries":10,"correct":0,"incorrect":0,"missed":10,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1838 ms model.js:132
+delta=17 gameLoop.js:27
+false view.js:64
+delta=107 gameLoop.js:27
+false view.js:64
+delta=49 gameLoop.js:27
+false view.js:64
+delta=73 gameLoop.js:27
+false view.js:64
+delta=79 gameLoop.js:27
+false view.js:64
+delta=75 gameLoop.js:27
+false view.js:64
+delta=42 gameLoop.js:27
+false view.js:64
+delta=102 gameLoop.js:27
+false view.js:64
+delta=65 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=77 gameLoop.js:27
+false view.js:64
+delta=89 gameLoop.js:27
+false view.js:64
+delta=84 gameLoop.js:27
+false view.js:64
+delta=67 gameLoop.js:27
+false view.js:64
+delta=20 gameLoop.js:27
+false view.js:64
+delta=63 gameLoop.js:27
+false view.js:64
+delta=20 gameLoop.js:27
+false view.js:64
+delta=88 gameLoop.js:27
+false view.js:64
+delta=69 gameLoop.js:27
+false view.js:64
+delta=50 gameLoop.js:27
+false view.js:64
+delta=80 gameLoop.js:27
+false view.js:64
+delta=148 gameLoop.js:27
+false view.js:64
+delta=84 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=102 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=40 gameLoop.js:27
+false view.js:64
+spawned fish #19 at time 1410305521796 model.js:101
+["slow","slow","left",20] model.js:102
+about to push birth! model.js:106
+pushing [object Object] controller.js:35
+stats are {"name":"sf","tries":2,"correct":0,"incorrect":0,"missed":2,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+just pushed birth{"time":59170,"action":"birth","id":19,"visual":"slow","audio":"fast","side":"left"} model.js:109
+delta=59 gameLoop.js:27
+true view.js:64
+delta=142 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=83 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=60 gameLoop.js:27
+true view.js:64
+delta=77 gameLoop.js:27
+true view.js:64
+delta=100 gameLoop.js:27
+true view.js:64
+delta=17 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=39 gameLoop.js:27
+true view.js:64
+delta=43 gameLoop.js:27
+true view.js:64
+delta=18 gameLoop.js:27
+true view.js:64
+delta=66 gameLoop.js:27
+true view.js:64
+delta=103 gameLoop.js:27
+true view.js:64
+delta=90 gameLoop.js:27
+true view.js:64
+delta=40 gameLoop.js:27
+true view.js:64
+delta=70 gameLoop.js:27
+true view.js:64
+delta=48 gameLoop.js:27
+true view.js:64
+delta=22 gameLoop.js:27
+true view.js:64
+delta=77 gameLoop.js:27
+true view.js:64
+delta=82 gameLoop.js:27
+true view.js:64
+delta=60 gameLoop.js:27
+true view.js:64
+delta=32 gameLoop.js:27
+true view.js:64
+delta=78 gameLoop.js:27
+true view.js:64
+delta=64 gameLoop.js:27
+true view.js:64
+delta=56 gameLoop.js:27
+true view.js:64
+delta=94 gameLoop.js:27
+true view.js:64
+delta=25 gameLoop.js:27
+true view.js:64
+Times up! model.js:116
+pushing [object Object] controller.js:35
+stats are {"name":"sf","tries":3,"correct":0,"incorrect":0,"missed":3,"time":0,"reaction":0,"missing":"100%","wrong":"0%","accuracy":"0%"} controller.js:80
+Object model.js:122
+fish killed... new fish will spawn in 1184 ms model.js:132
+delta=411 gameLoop.js:27
+false view.js:64
+delta=154 gameLoop.js:27
+false view.js:64
+delta=26 gameLoop.js:27
+false view.js:64
+delta=66 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=24 gameLoop.js:27
+false view.js:64
+delta=193 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=217 gameLoop.js:27
+false view.js:64
+delta=18 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+delta=17 gameLoop.js:27
+false view.js:64
+showing #log-view 
