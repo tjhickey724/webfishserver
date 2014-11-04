@@ -60,9 +60,11 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var ensureAuthenticated = function(req, res, next) {
     
         if (req.isAuthenticated()) {
-            //console.log("req.user=" + JSON.stringify(req.user));
+            console.log("we are authenticated!!");
+            console.log("req.user=" + JSON.stringify(req.user));
             return next();
         } else {
+            console.log("you are not authenticated!");
             console.log("req="+req);
             res.redirect('/login.html');
         }
@@ -79,6 +81,32 @@ passport.deserializeUser(function(obj, done) {
 });
 
 /*
+passport.use('google', new OAuth2Strategy({
+    authorizationURL: 'https://www.provider.com/oauth2/authorize',
+    tokenURL: 'https://www.provider.com/oauth2/token',
+    clientID: '123-456-789',
+    clientSecret: 'shhh-its-a-secret'
+    callbackURL: 'https://www.example.com/auth/provider/callback'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate(..., function(err, user) {
+      done(err, user);
+    });
+  }
+));
+
+passport.use(new GoogleStrategy({
+    returnURL: 'http://127.0.0.1/auth/google/return',
+    realm: 'http://127.0.0.1/'
+  },
+  function(identifier, profile, done) {
+    db.get("user").findOrCreate({ openId: identifier }, function(err, user) {
+      done(err, user);
+    });
+  }
+));
+*/
+
 passport.use(new GoogleStrategy({
 	    clientID: '327841892394-kg77ug2s36gk4dos0q6c5j8nhafqp9m7.apps.googleusercontent.com',
 		clientSecret: '69qGzj4O-iVO41f_RjVbVPKC',
@@ -108,7 +136,8 @@ passport.use(new GoogleStrategy({
             done(err, user[0]);
         }
 	})}));
-*/
+
+
 //**********************************************************
 
 
@@ -120,7 +149,7 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
     console.log('%s %s %s', req.method, req.url, JSON.stringify(req.body));
     //console.log("myData = "+JSON.stringify(myData));
-    req.user = {openID:"theUser"};
+    //req.user = {openID:"theUser"};
     next();
 });
 
@@ -141,6 +170,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+/*
+// Redirect the user to Google for authentication.  When complete, Google
+// will redirect the user back to the application at
+//     /auth/google/return
+app.get('/auth/google', passport.authenticate('google'));
+
+// Google will redirect the user to this URL after authentication.  Finish
+// the process by verifying the assertion.  If valid, the user will be
+// logged in.  Otherwise, authentication has failed.
+app.get('/auth/google/return', 
+  passport.authenticate('google', { successRedirect: '/',
+                                    failureRedirect: '/login' }));
+*/
 
 app.get('/auth/google',
 	passport.authenticate('google', 
@@ -149,19 +191,20 @@ app.get('/auth/google',
 
 
 
-app.get('/auth/google/callback', 
-	//passport.authenticate('google', { failureRedirect: '/login' }),
+app.get('/oauth2callback', 
+	passport.authenticate('google', { failureRedirect: '/login' }),
 	function(req, res) {
 	    // Successful authentication, redirect home.
 	    res.redirect('/');
 	});
+
 
 // serve static content from the public folder 
 app.use("/login.html", express.static(__dirname + '/public/login.html'));
 app.use("/logout.html", express.static(__dirname + '/public/logout.html'));
 
 
-//app.use(ensureAuthenticated, function(req, res, next) {   next() });
+app.use(ensureAuthenticated, function(req, res, next) {   next() });
 
 //**********************************************************
 
