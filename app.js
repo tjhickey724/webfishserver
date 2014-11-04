@@ -235,7 +235,23 @@ app.get('/api/user', ensureAuthenticated, function(req, res) {
 });
 //**********************************************************
 
+app.get('/allstats',function(req,res){
+    var collection = db.get("gamestats");
+    collection.col.aggregate([{$group: {_id:"total",ff:{$sum: "$stats.fast.fast.tries"},ss:{$sum: "$stats.slow.slow.tries"},fs:{$sum: "$stats.fast.slow.tries"},sf:{$sum: "$stats.slow.fast.tries"} ,ffc:{$sum: "$stats.fast.fast.correct"},ssc:{$sum: "$stats.slow.slow.correct"},fsc:{$sum: "$stats.fast.slow.correct"},sfc:{$sum: "$stats.slow.fast.correct"}}}],
+      function(err,result){
+        res.json(result);          
+      }    );
 
+})
+
+app.get('/mystats',function(req,res){
+    var collection = db.get("gamestats");
+    collection.col.aggregate([{$group: {_id:"$user",ff:{$sum: "$stats.fast.fast.tries"},ss:{$sum: "$stats.slow.slow.tries"},fs:{$sum: "$stats.fast.slow.tries"},sf:{$sum: "$stats.slow.fast.tries"} ,ffc:{$sum: "$stats.fast.fast.correct"},ssc:{$sum: "$stats.slow.slow.correct"},fsc:{$sum: "$stats.fast.slow.correct"},sfc:{$sum: "$stats.slow.fast.correct"}}}],
+      function(err,result){
+        res.json(result);          
+      }    );
+
+})
 
 //**********************************************************
 // the rest of this app implements a REST interface to parts of the database ...
