@@ -10,7 +10,7 @@ var userModel = (function(){
         console.log("calling getUserInfo");
         $.ajax({
                type: "GET",
-               url: "http://localhost:4000/api/user",
+               url: "/api/user",
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(userInfo) {

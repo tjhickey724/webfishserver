@@ -256,7 +256,7 @@ var gameControl = (function() {
         var userID = userModel.getUserID();
         $.ajax({
                type: "POST",
-               url: "http://localhost:4000/model/gamestats",
+               url: "/model/gamestats",
                data: JSON.stringify({user:userID,stats:gameStats}),
                contentType: "application/json; charset=utf-8",
                dataType: "json"
