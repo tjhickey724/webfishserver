@@ -6,6 +6,7 @@ var gameControl = (function() {
     debugPrint("loading controller");
 
     var showView = function(selected) {
+            $('#userName').text(userModel.getUserName());
             window.location.hash = '#' + selected;
             $('.view').hide();
             $('#'+selected+'-view').show();
@@ -20,6 +21,7 @@ var gameControl = (function() {
             if (selected=="dashboard"){
                 gameModel.updateParameters();
             }
+            
         };
 
 
@@ -251,10 +253,11 @@ var gameControl = (function() {
     
     function uploadStats(gameStats){
         console.log("uploading stats!!");
+        var userID = userModel.getUserID();
         $.ajax({
                type: "POST",
                url: "http://localhost:4000/model/gamestats",
-               data: JSON.stringify({user:"tim",stats:gameStats}),
+               data: JSON.stringify({user:userID,stats:gameStats}),
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(items) {
@@ -283,9 +286,10 @@ var gameControl = (function() {
     
     
     function start(){
+        userModel.getUserInfo();
         if (window.localStorage.consentStatus != "consented")
             showView("consent");
-        else
+        else 
             showView("dashboard");
     }
     

@@ -1,5 +1,10 @@
 /**
-this object has an update method which draws the current model onto the canvas
+the gameView object is responsible for updating the user's view,
+both in gameview mode and when visiting other pages...
+We might want to separate this out later into multiple objects,
+especially if we have multiple games!!  
+Ideally the games will be relatively independent of each other
+and we shouldn't use a SinglePageApp model for the games...
 **/
 
 var gameView = (function(){
