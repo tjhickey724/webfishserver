@@ -27,6 +27,7 @@ var gameControl = (function() {
 
     var log = [];
     var gameStart = (new Date()).getTime();
+    var allStats={};
     
     function initStat(name){
         return( {name:name, tries:0,correct:0,incorrect:0,missed:0,time:0,reaction:0,missing:0,wrong:0,accuracy:0} );
@@ -114,6 +115,8 @@ var gameControl = (function() {
             goodKeyPress(now);
         } else if (keyPressed == "L") {
             badKeyPress(now);
+        } else if (keyPressed == "O") {
+            oddKeyPress(now);
         }
     }
     
@@ -192,21 +195,61 @@ var gameControl = (function() {
 
     }
     
+    
+    function oddKeyPress(now) {
+          debugPrint("pressed O");
+
+          // if there is not visual or audio any keypresses are wrong!
+          // these are the oddball cases ...
+          if (gameModel.getFishVisual()=='none' ){
+              gameModel.logKeyPress('novis','O','correct',now);
+              gameView.playGood(now);
+              gameModel.killFish();
+              return;
+          }
+          if (gameModel.getFishAudio()=='none'){
+              gameModel.logKeyPress('noaud','O','correct',now);
+              gameView.playGood(now);
+              gameModel.killFish();
+              return;
+          }
+
+
+          // this is the case where they saw and heard a fish
+          //  and pushed the "O" key        
+          if (gameModel.getFishVisible()) {
+              gameModel.killFish();
+              if (gameModel.isGoodFish()) {
+                  gameModel.logKeyPress('good', 'O', 'incorrect', now);
+                  gameView.playBad();
+              } else {
+                  gameModel.logKeyPress('bad', 'O', 'incorrect', now);
+                  gameView.playBad();
+              }
+          }
+
+      }
+      
+      
     function getPercentCorrect(){
         var totalCongTries = gameStats.fast.fast.tries + gameStats.slow.slow.tries;
         var totalCongCorrect = gameStats.fast.fast.correct  + gameStats.slow.slow.correct;
         var totalIncongTries =  gameStats.fast.slow.tries + gameStats.slow.fast.tries ;
         var totalIncongCorrect =  gameStats.fast.slow.correct + gameStats.slow.fast.correct ;
+        var totalOddballTries = gameStats.none.fast.tries+gameStats.none.slow.tries+gameStats.fast.none.tries+gameStats.slow.none.tries;
+        var totalOddballCorrect = 
+            gameStats.none.fast.correct+gameStats.none.slow.correct+gameStats.fast.none.correct+gameStats.slow.none.correct;
         
         var reactionCong = (totalCongTries==0)?0:(gameStats.fast.fast.time + gameStats.slow.slow.time)/totalCongTries;
         var reactionIncong = (totalIncongTries==0)?0:(gameStats.fast.slow.time + gameStats.slow.fast.time)/totalIncongTries;
+        var reactionOddball = (totalOddballTries==0)?0:(gameStats.none.slow.time + gameStats.none.fast.time 
+                                                  + gameStats.slow.none.time + gameStats.fast.none.time
+                                                   )/totalOddballTries;
         
         var totalTries = totalCongTries+totalIncongTries;
         var totalCorrect = totalCongCorrect+totalIncongCorrect;
         
-        var totalOddballTries = gameStats.none.fast.tries+gameStats.none.slow.tries+gameStats.fast.none.tries+gameStats.slow.none.tries;
-        var totalOddballCorrect = 
-            gameStats.none.fast.missed+gameStats.none.slow.missed+gameStats.fast.none.missed+gameStats.slow.none.missed;
+
 
             
         totalAllTries = totalTries + totalOddballTries;
@@ -216,7 +259,7 @@ var gameControl = (function() {
         var CongPercent = (totalCongTries==0)? 0: totalCongCorrect*100/totalCongTries;
         var IncongPercent = (totalIncongTries==0)? 0: totalIncongCorrect*100/totalIncongTries;
         var OddballPercent = (totalOddballTries==0)? 0: totalOddballCorrect*100/totalOddballTries;
-        return [Allpercent,CongPercent,IncongPercent,OddballPercent,reactionCong,reactionIncong,totalCongTries,totalIncongTries];
+        return [Allpercent,CongPercent,IncongPercent,OddballPercent,reactionCong,reactionIncong,totalCongTries,totalIncongTries,reactionOddball,totalOddballTries];
     }
     
     function endGame(){
@@ -234,21 +277,43 @@ var gameControl = (function() {
         }
         //logelt.textContent = JSON.stringify(gameStats)+"\n\n\n"+(JSON.stringify(log));
         var statString = "<h2> Percent correct: "+Math.round(stats[0]) + "<br/>"+msgString+"</h2>"+
-          "<h2>Congruent: " + stats[6]+" tries "+ Math.round(stats[4])+"ms/correct "+Math.round(stats[1])+"% correct"+ "</h2>"+ 
+          "<h2>Congruent: "+Math.round(stats[1])+"% correct in " + stats[6]+" tries "+ Math.round(stats[4])+"ms/correct "+ "</h2>"+ 
           "<ul><li>"
            +JSON.stringify(gameStats.fast.fast)+"</li><li>"
-           +JSON.stringify(gameStats.slow.slow)+"</li></ul><h2>Incongruent " + stats[7]+" tries "+Math.round(stats[5])+"ms/correct "+Math.round(stats[2])+"% correct"+ "</h2><ul><li>"
+           +JSON.stringify(gameStats.slow.slow)+"</li></ul>"
+           + "<h2>Incongruent " +Math.round(stats[2])+"% correct  in "+ stats[7]+" tries " +Math.round(stats[5])+"ms/correct "+ "</h2><ul><li>"
            +JSON.stringify(gameStats.fast.slow)+"</li><li>"
-           +JSON.stringify(gameStats.slow.fast)+"</li></ul><br/><h2>OddBall " +Math.round(stats[3])+"% correct"+ "</h2><ul><li>"
+           +JSON.stringify(gameStats.slow.fast)+"</li></ul>"
+           +"<br/><h2>OddBall "+Math.round(stats[3])+"% correct  in " + stats[9]+" tries " +Math.round(stats[8])+"ms/correct "+ "</h2><ul><li>"
            +JSON.stringify(gameStats.none.fast)+"</li><li>"
            +JSON.stringify(gameStats.none.slow)+"</li><li>"
            +JSON.stringify(gameStats.fast.none)+"</li><li>"
            +JSON.stringify(gameStats.slow.none)+
            "</li></ul><br/><h2>Log</h2>"
+           +"<h1>All players stats</h1>"
+           +"<h2>Congruent: "+allStats.cong+"% correct </h2>"
+           +"<h2>Incongruent: "+allStats.incong+"% correct</h2>"
+           
            ;
         $("#log").html( statString+"<\hr>"+(JSON.stringify(log)))
         showView("log");
         gameLoop.stop();
+    }
+    
+    function getAllStats(){
+        $.ajax({
+               type: "GET",
+               url: "/allstats",
+               contentType: "application/json; charset=utf-8",
+               dataType: "json"
+           }).done(function(stats) {
+               stats = stats[0];
+               // {"_id":"total","ff":41,"ss":42,"fs":37,"sf":27,"ffc":13,"ssc":20,"fsc":15,"sfc":12}
+               console.log("just go the stats"+JSON.stringify(stats));
+               allStats = {cong:Math.round((stats.ffc+stats.ssc)*100/(stats.ff+stats.ss)),
+                         incong:Math.round((stats.fsc+stats.sfc)*100/(stats.fs+stats.sf))};
+               console.log("just go the allstats"+JSON.stringify(allStats));
+           });
     }
     
     function uploadStats(gameStats){
@@ -300,6 +365,7 @@ var gameControl = (function() {
     }
     
     function startGame(){
+        getAllStats();
         gameLoop.start(); 
         gameModel.start();   
     }
