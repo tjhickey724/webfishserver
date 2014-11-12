@@ -33,7 +33,7 @@ var gameControl = (function() {
         return( {name:name, tries:0,correct:0,incorrect:0,missed:0,time:0,reaction:0,missing:0,wrong:0,accuracy:0} );
         };
         
-    function initGameStats(){
+    function initGameStats(){ 
       return (     
        {
            fast:{fast:initStat("ff"), slow:initStat("fs"), none:initStat("fn")},
@@ -291,8 +291,8 @@ var gameControl = (function() {
            +JSON.stringify(gameStats.slow.none)+
            "</li></ul><br/><h2>Log</h2>"
            +"<h1>All players stats</h1>"
-           +"<h2>Congruent: "+allStats.cong+"% correct </h2>"
-           +"<h2>Incongruent: "+allStats.incong+"% correct</h2>"
+           +"<h2>Congruent: "+allStats.cong+"% correct with reaction time "+allStats.congt+"ms </h2>"
+           +"<h2>Incongruent: "+allStats.incong+"% correct with reaction time "+allStats.incongt+"ms </h2>"
            
            ;
         $("#log").html( statString+"<\hr>"+(JSON.stringify(log)))
@@ -311,7 +311,10 @@ var gameControl = (function() {
                // {"_id":"total","ff":41,"ss":42,"fs":37,"sf":27,"ffc":13,"ssc":20,"fsc":15,"sfc":12}
                console.log("just go the stats"+JSON.stringify(stats));
                allStats = {cong:Math.round((stats.ffc+stats.ssc)*100/(stats.ff+stats.ss)),
-                         incong:Math.round((stats.fsc+stats.sfc)*100/(stats.fs+stats.sf))};
+                         incong:Math.round((stats.fsc+stats.sfc)*100/(stats.fs+stats.sf)),
+                         congt:Math.round((stats.fft+stats.sst)/(stats.ff+stats.ss)),
+                         incongt:Math.round((stats.fst+stats.sft)/(stats.fs+stats.sf))
+                         };
                console.log("just go the allstats"+JSON.stringify(allStats));
            });
     }
@@ -322,7 +325,7 @@ var gameControl = (function() {
         $.ajax({
                type: "POST",
                url: "/model/gamestats",
-               data: JSON.stringify({user:userID,stats:gameStats}),
+               data: JSON.stringify({user:userID,stats:gameStats}), // also upload the avmode and the level and date and other info (gameid?)
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(items) {

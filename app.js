@@ -237,7 +237,14 @@ app.get('/api/user', ensureAuthenticated, function(req, res) {
 
 app.get('/allstats',function(req,res){
     var collection = db.get("gamestats");
-    collection.col.aggregate([{$group: {_id:"total",ff:{$sum: "$stats.fast.fast.tries"},ss:{$sum: "$stats.slow.slow.tries"},fs:{$sum: "$stats.fast.slow.tries"},sf:{$sum: "$stats.slow.fast.tries"} ,ffc:{$sum: "$stats.fast.fast.correct"},ssc:{$sum: "$stats.slow.slow.correct"},fsc:{$sum: "$stats.fast.slow.correct"},sfc:{$sum: "$stats.slow.fast.correct"}}}],
+    collection.col.aggregate([{$group: {_id:"total",
+      ff:{$sum: "$stats.fast.fast.tries"},ss:{$sum: "$stats.slow.slow.tries"},
+      fs:{$sum: "$stats.fast.slow.tries"},sf:{$sum: "$stats.slow.fast.tries"} ,
+      ffc:{$sum: "$stats.fast.fast.correct"},ssc:{$sum: "$stats.slow.slow.correct"},
+      fsc:{$sum: "$stats.fast.slow.correct"},sfc:{$sum: "$stats.slow.fast.correct"},
+      fft:{$sum: "$stats.fast.fast.time"},sst:{$sum: "$stats.slow.slow.time"},
+      fst:{$sum: "$stats.fast.slow.time"},sft:{$sum: "$stats.slow.fast.time"},      
+      }}],
       function(err,result){
         res.json(result);          
       }    );
