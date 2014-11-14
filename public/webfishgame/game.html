@@ -46,20 +46,7 @@
 		<div id="dashboard-view" class="view">
 			<h1>Your Current Skill Level is <span id="level">0</span>/10</h1>
 			<button id="resetLevel" onclick="gameModel.resetUserLevel();$('#level').html(0)">Reset User Level to 0 </button>
-			<div id="rules">
-				<h1>Rules</h1>
-				<ul><li>
-					The good fish are those that oscillate slowly, the bad fish oscillate quickly.
-				</li><li>
-					In VISUAL mode you use the visual oscillation speed to determine if fish are good or bad.
-				</li><li>
-					In AURAL mode, you use the audio oscillation to determine the goodness/badness of fish
-				</li><li>
-					Press "P" for good fish, and "L" for bad fish.
-				</li><li>
-					BUT if fish has no audio or no video it is an oddball and you shouldn't press any keys!
-				</li></ul>
-			</div>
+		
 		
 			<h1>Choose a Game Type:
 				<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
