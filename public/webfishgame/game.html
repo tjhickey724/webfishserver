@@ -1,116 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>game</title>
+<html lang="en">
 
-  <link href="css/bootstrap-3.2.0-dist/css/bootstrap.css" rel="stylesheet" />
-  <link href="css/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+	<head>
+	    <meta charset="utf-8">
+		<meta name="keywords" content="Brandeis, Fish, Police, Game">
+		<meta name="description" content="Fish Police">
+		<meta name="Author" content="Brandeis University"> 
+	   
+		<link rel="icon" href="favicon.ico" type="image/x-icon"> 
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">		
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/bootstrap-theme.css" rel="stylesheet" />
+		<link href="css/fishgame.css" rel="stylesheet" />
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->			
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+		<title>Fish Police!!</title>		
+	</head>
 
-  <link rel="stylesheet" href="css/game.css"/>
-</head>
-<body>
-	
-
-	
-
-	<div id="header" class="page-header">
-		<div style="text-align:right"><a href="/auth/logout">logout</a></div>
-		<div id="userName">not logged in</div>
-			<h1> <span id="title">The Brandeis A/V Interaction Game</span></h1>
-   		</div>
-
-
-
-
-		<div id="game-view" class="view">
-			<canvas id="canvas"></canvas>
-			<audio id="fastFish" src="sounds/8hz/fish.wav"></audio>
-			<audio id="slowFish" src="sounds/5hz/fish.wav"></audio>
-			<audio id="good" src="sounds/good.wav"></audio>
-			<audio id="bad" src="sounds/bad.wav"></audio>
+	<body>
+		<div class="game_introWrapper">
+			<div class="game_logoLarge">Fish Police</div>
+			<br><br>
+			<a href="/auth/google" role="button" class="btn btn-lg btn-primary game_introButton">Login</a>
+			<br><br>
+			<a href="game.html" role="button" class="btn btn-lg btn-primary game_introButton">Play Game</a>
+			
 		</div>
-
-
-
-
-		<div id="consent-view" class="view">
-			<div>
-				<input type="checkbox" onclick="gameControl.consent();"/>
-				I agree to participate in this study
-			</div>
-		</div>
-	
-	
-	
-	
-		<div id="dashboard-view" class="view">
-			<h1>Your Current Skill Level is <span id="level">0</span>/10</h1>
-			<button id="resetLevel" onclick="gameModel.resetUserLevel();$('#level').html(0)">Reset User Level to 0 </button>
-			<div id="rules">
-				<h1>Rules</h1>
-				<ul><li>
-					The good fish are those that oscillate slowly, the bad fish oscillate quickly.
-				</li><li>
-					In VISUAL mode you use the visual oscillation speed to determine if fish are good or bad.
-				</li><li>
-					In AURAL mode, you use the audio oscillation to determine the goodness/badness of fish
-				</li><li>
-					Press "P" for good fish, and "L" for bad fish.
-				</li><li>
-					BUT if fish has no audio or no video it is an oddball and you shouldn't press any keys!
-				</li></ul>
-			</div>
-		
-			<h1>Choose a Game Type:
-				<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
-				<button id="aural" onclick="gameControl.runAural()"> Aural</button>
-			</h1>
-		
-			<h1> Choose a Theme:
-				<select id="skin">
-					<option>fish</option> <option>space</option>
-				</select> 
-			</h1>
-		
-			<h1>Set Parameters</h1>
-			<div>
-				<input type="text" id="gameDuration" value="60"> game Length (in sec)<br/>
-				<input type="text" id="fishSizePercent" value="20"> fish size (in percent of screen width)<br/>
-				<input type="text" id="lifetime" value="2000"> fish lifetime (in ms)<br/>
-				<input type="text" id="minIFI" value="500"> minimum interfish interval (in ms)<br/>
-				<input type="text" id="maxIFI" value="2000"> maximum interfish interval (in ms)<br/>
-				<input type="text" id="oddBallRate" value="25"> oddball rate (in percent)<br/>
-			</div>
-		</div>
-		
-		
-
-	
-		<div id="log-view" class="view">
-			<a href="game.html">Play again (hard reset??)</a><br/>
-			<div id="log">The Log goes here</div>
-		</div>
-
-
-
-
-	
-		<div id="graph-view" class="view">
-			<canvas id="graphCanvas" width="400" height="400"></canvas>
-		</div>
-		
-	</div>
-
-	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/requestNextAnimationFrame.js"></script>
-	<script src="js/plog.js"></script>
-	<script src="js/model.js"></script>
-	<script src="js/controller.js"></script>
-	<script src="js/gameLoop.js"></script>
-	<script src="js/view.js"></script>
-	<script src="js/script.js"></script>
-	<script src="js/usermodel.js"></script>
-	<script>gameControl.start(); </script>
-</body>
+	</body>
 </html>
