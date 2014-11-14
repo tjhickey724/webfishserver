@@ -1,0 +1,32 @@
+html{
+	background: url(../images/bg_intro.png) #5ac2ea bottom center repeat-x;	
+	height: 100%;
+}
+body{
+	background-color: transparent;
+}
+h3{
+	color: #ffffff;
+	
+}
+.game_introWrapper{
+	background: url(../images/intro_logo.png) transparent top center no-repeat;	
+	margin: 0px auto;
+	text-align: center;
+	margin-top: 20px;
+	padding-top: 90px;
+}
+.game_logoLarge{
+	font-family: KGBrokenVesselsSketch;
+	font-size: 72px;
+	color: #ffffff;
+	font-weight: 300;
+}
+.game_introButton
+{
+	width: 200px;
+}
+@font-face {
+    font-family: KGBrokenVesselsSketch;
+    src: url(../fonts/KGBrokenVesselsSketch.ttf);
+}

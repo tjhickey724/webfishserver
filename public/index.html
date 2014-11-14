@@ -1,78 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Fish Police!!</title>
-    <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/bootstrap-theme.css" rel="stylesheet" />
-    <script src="js/jquery-2.1.1.min.js"></script>
+<html lang="en">
 
+	<head>
+	    <meta charset="utf-8">
+		<meta name="keywords" content="Brandeis, Fish, Police, Game">
+		<meta name="description" content="Fish Police">
+		<meta name="Author" content="Brandeis University"> 
+	   
+		<link rel="icon" href="favicon.ico" type="image/x-icon"> 
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">		
+		
+		<link href="webfishgame/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="webfishgame/css/bootstrap-theme.css" rel="stylesheet" />
+		<link href="webfishgame/css/fishgame.css" rel="stylesheet" />
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->			
+		<script type="text/javascript" src="webfishgame/js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="webfishgame/js/bootstrap.min.js"></script>
+		
+		<title>Fish Police!!</title>		
+	</head>
 
-
-</head>
-<body>
-  <div class="container">
-    <div class="page-header">
-        <div style="text-align:right"><a href="/auth/logout">logout</a></div>
-        <div style="text-align:right"><a href="/auth/google">login</a></div>
-        <h1> <span id="title">BLGI: the Brandeis Learning Games Initiative</span></h1>
-		<p>
-			The goal of this initiative is to create web-based games that are 
-			designed to help us study how humans learn in a digital environment.
-			Our first game, FishPolice!, is a simple 2D fast-reaction game designed 
-			to study the interaction between visual and auditory processing in the brain.
-		</p>
-		<p>
-			In the FishPolice! game, your job will be to rapidly classify good 
-			from bad based on either visual or auditory stimulus. We will be studying 
-			the interaction between the visual and the auditory processing systems 
-			in the brain and you will get to see how your performance compares 
-			to everyone else in the study after each game!
-		</p>
-		<p>
-			The FishPolice! has several levels and each level lasts 3 minutes. 
-			Your goal is to correctly classify as many fish as you can!
-		</p>
-		<p> There are two modes: Visual and Auditory. 
-			In both cases, the fish will oscillate in two modes, fast and slow. 
-			The fast fish are bad and the slow fish are good.  
-			You should press "P" for the good fish to "Process" them 
-			and "L" for the bad fish to "Leave" them alone. 
-			In Visual mode you should only pay attention to the visual appearance of the fish 
-			and in Auditory mode you should only pay attention to the sound of the fish.
-			</p
-			<p>
-				One complication is that you will sometimes experience oddball fish. 
-				Most fish have both a visual and an auditory presence. 
-				The oddball fish are either invisible or silent and when an oddball fish is present, 
-				you need to press the "O" key! 
-				The main reason for oddballs is to make sure that 
-				you don't turn down your sound in the Visual mode 
-				or look away from the screen in Auditory mode!
-			</p>
-			
-			<p>
-					<div id="rules">
-						<h1>Rules</h1>
-						<ul><li>
-							The good fish are those that oscillate slowly, the bad fish oscillate quickly.
-						</li><li>
-							In VISUAL mode you use the visual oscillation speed to determine if fish are good or bad.
-						</li><li>
-							In AURAL mode, you use the audio oscillation to determine the goodness/badness of fish
-						</li><li>
-							Press "P" for good fish, and "L" for bad fish.
-						</li><li>
-							BUT if a fish has no audio or no video it is an oddball and you should press the "O" key.
-						</li></ul>
-					</div>
-			</p>
-    </div>
-
-   <div id="welcome-view" class="view">
-	<p> <a href="webfishgame/game.html">Play the game!!</a>
-		</p>
-
-  </div>
- </div>
-</body>
+	<body>
+		<div class="game_introWrapper">
+			<div class="game_logoLarge">Fish Police</div>
+			<br><br>
+			<a href="/auth/google" role="button" class="btn btn-lg btn-success game_introButton" id="game_loginButton">Login</a>
+			<br><br>
+			<a href="webfishgame/game.html" role="button" class="btn btn-lg btn-primary game_introButton" id="game_playButton">Play Game</a>
+			<br><br>						
+			<a href="/auth/logout" role="button" class="btn btn-lg btn-danger game_introButton" id="game_logoutButton">Logout</a>
+		</div>
+	</body>
 </html>
