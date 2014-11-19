@@ -204,7 +204,7 @@ app.use("/login.html", express.static(__dirname + '/public/login.html'));
 app.use("/logout.html", express.static(__dirname + '/public/logout.html'));
 
 
-app.use(ensureAuthenticated, function(req, res, next) {   next() });
+app.use("/webfishgame",ensureAuthenticated, function(req, res, next) {   next() });
 
 //**********************************************************
 
