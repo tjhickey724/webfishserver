@@ -42,6 +42,8 @@ var monk = require('monk');
 var db = monk('localhost:27017/webfish');
 var User = db.get("user");
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
 
 
 
@@ -200,6 +202,7 @@ app.get('/oauth2callback',
 
 
 // serve static content from the public folder 
+app.use("/index.html",function(req,res){res.render("index",{val:77})})
 app.use("/login.html", express.static(__dirname + '/public/login.html'));
 app.use("/logout.html", express.static(__dirname + '/public/logout.html'));
 

@@ -1,0 +1,30 @@
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(name="keywords", content="Brandeis, Fish, Police, Game")
+		meta(name="description", content="Fish Police")
+		meta(name="Author", content="Brandeis University")
+		link(rel="icon", href="favicon.ico", type="image/x-icon") 
+		link(rel="shortcut icon", href="favicon.ico" type="image/x-icon")		
+		link(href="css/bootstrap.min.css", rel="stylesheet")
+		link(href="css/bootstrap-theme.css", rel="stylesheet")
+		link(href="css/fishgame.css", rel="stylesheet")
+		script(type="text/javascript", src="js/jquery-2.1.1.min.js")
+		script(type="text/javascript", src="js/bootstrap.min.js")
+		title = val + '|' + Fish Police!!		
+	body
+		div.game_introWrapper
+			div.game_logoLarge
+				Fish Police
+			br
+			br
+			a#game_loginButton(href="/auth/google", role="button", class="btn btn-lg btn-success game_introButton")
+				Login
+			br
+			br
+			a#game_playButton(href="webfishgame/game.html", role="button", class="btn btn-lg btn-primary game_introButton" )
+				Play Game
+			br
+			br						
+			a#game_logoutButton(href="/auth/logout", role="button", class="btn btn-lg btn-danger game_introButton")
+				Logout
