@@ -20,13 +20,14 @@ var userModel = (function(){
            });
 
     }
-    
+    console.log("getting user info");
+    getUserInfo();
 
     
     
     return {
         getUserID: function(){return userProfile.id;}, 
-        getUserName: function(){return userProfile==null?"not logged in": userProfile.displayName;},
+        getUserName: function(){return userProfile==null?"": userProfile.displayName;},
         getUserInfo: getUserInfo
     }
 }())

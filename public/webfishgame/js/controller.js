@@ -6,28 +6,32 @@ var gameControl = (function() {
     debugPrint("loading controller");
 
     var showView = function(selected) {
-            $('#userName').text(userModel.getUserName());
-            window.location.hash = '#' + selected;
-            $('.view').hide();
-            $('#'+selected+'-view').show();
+        if (selected=="dashboard"){
+            gameModel.updateParameters();
+        }
+        console.log("username = "+ userModel.getUserName());
+        
+        //$('#userName').text(userModel.getUserName());
+        window.location.hash = '#' + selected;
+        $('.view').hide();
+        $('#'+selected+'-view').show();
+    
+        if (selected=="game"){
+            $('#header').hide();
+            $("#canvas").css("display","block");
+        }else {
+            $('#header').show();
+        }
+        debugPrint("showing "+'#'+selected+'-view')
+
             
-            if (selected=="game"){
-                $('#header').hide();
-                $("#canvas").css("display","block");
-            }else {
-                $('#header').show();
-            }
-            debugPrint("showing "+'#'+selected+'-view')
-            if (selected=="dashboard"){
-                gameModel.updateParameters();
-            }
-            
-        };
+    };
 
 
     var log = [];
     var gameStart = (new Date()).getTime();
     var allStats={};
+    var allSummaryStats={};
     
     function initStat(name){
         return( {name:name, tries:0,correct:0,incorrect:0,missed:0,time:0,reaction:0,missing:0,wrong:0,accuracy:0} );
@@ -41,6 +45,20 @@ var gameControl = (function() {
            none:{fast:initStat("nf"), slow:initStat("ns"), none:initStat("nn")}
        });
      };
+     
+     function getSummaryStats(){
+         console.log(JSON.stringify(gameStats));
+         var correct = gameStats.fast.fast.correct + gameStats.fast.slow.correct + gameStats.slow.fast.correct +gameStats.slow.slow.correct + 
+                   gameStats.none.fast.correct + gameStats.none.slow.correct + gameStats.slow.none.correct +gameStats.fast.none.correct;
+         var tries = gameStats.fast.fast.tries + gameStats.fast.slow.tries + gameStats.slow.fast.tries +gameStats.slow.slow.tries + 
+                   gameStats.none.fast.tries + gameStats.none.slow.tries + gameStats.slow.none.tries +gameStats.fast.none.tries;
+         var totalTime = gameStats.fast.fast.time + gameStats.fast.slow.time + gameStats.slow.fast.time +gameStats.slow.slow.time + 
+                   gameStats.none.fast.time + gameStats.none.slow.time + gameStats.slow.none.time +gameStats.fast.none.time;
+         var reactionTime = totalTime/correct;
+         var percentCorrect = correct*100/tries;
+         console.log("totalTime="+totalTime+" tries="+tries+" correct="+correct);
+         return {reactionTime:reactionTime, percentCorrect:percentCorrect, tries:tries, correct:correct, totalTime:totalTime};                 
+     }
      
      var gameStats = initGameStats();
     
@@ -267,16 +285,34 @@ var gameControl = (function() {
         var stats = getPercentCorrect();
         var percentCorrect = stats[0];
         var msgString = "Sorry you did not advance to the next level...";
-        uploadStats(gameStats);
+        var userLevel = gameModel.getUserLevel();
+        uploadStats(gameStats); 
+        summaryStats = getSummaryStats()  
+        uploadLogAndSummary(log,summaryStats)
+
+        
+        console.log("Summary Stats ="+JSON.stringify(allSummaryStats));
 
         if (percentCorrect > 90) {
-            var userLevel = gameModel.incrementUserLevel();
+            userLevel = gameModel.incrementUserLevel();
 
             alert("new level is "+userLevel);
             msgString = "Congrats!!! You have advanced to level "+ userLevel;
         }
+        
         //logelt.textContent = JSON.stringify(gameStats)+"\n\n\n"+(JSON.stringify(log));
-        var statString = "<h2> Percent correct: "+Math.round(stats[0]) + "<br/>"+msgString+"</h2>"+
+        var statString = "<h2>Percent Correct: "+Math.round(summaryStats.percentCorrect)+"%"+
+                        " (avg for all players is "+Math.round(allSummaryStats.correct*100/allSummaryStats.tries)+"%"+ ")"+
+            " </h2>" +"\n"+
+            "<h2>Reaction Time: "+   Math.round(summaryStats.reactionTime)+"ms"+
+                        " (avg for all players is "+Math.round(allSummaryStats.time/allSummaryStats.correct)+"ms"+ ")" +          
+            " </h2>";
+         
+
+            
+            
+            
+        var statString2 = "<h2> Percent correct: "+Math.round(stats[0]) + "<br/>"+msgString+"</h2>"+
           "<h2>Congruent: "+Math.round(stats[1])+"% correct in " + stats[6]+" tries "+ Math.round(stats[4])+"ms/correct "+ "</h2>"+ 
           "<ul><li>"
            +JSON.stringify(gameStats.fast.fast)+"</li><li>"
@@ -295,7 +331,7 @@ var gameControl = (function() {
            +"<h2>Incongruent: "+allStats.incong+"% correct with reaction time "+allStats.incongt+"ms </h2>"
            
            ;
-        $("#log").html( statString+"<\hr>"+(JSON.stringify(log)))
+        $("#log").html( statString+"<\hr>")
         showView("log");
         gameLoop.stop();
     }
@@ -319,6 +355,23 @@ var gameControl = (function() {
            });
     }
     
+    
+    
+    function getAllSummaryStats(){
+        $.ajax({
+               type: "GET",
+               url: "/summarystats",
+               contentType: "application/json; charset=utf-8",
+               dataType: "json"
+           }).done(function(stats) {
+               stats = stats[0];
+               console.log("allSummaryStats"+JSON.stringify(stats));
+               allSummaryStats = stats;
+               console.log("just got the allSummaryStats "+JSON.stringify(allSummaryStats));
+           });
+           return allSummaryStats;
+    }
+    
     function uploadStats(gameStats){
         console.log("uploading stats!!");
         var userID = userModel.getUserID();
@@ -331,6 +384,66 @@ var gameControl = (function() {
            }).done(function(items) {
                console.log("upload complete"+JSON.stringify(items));
            });
+    }
+    
+
+    
+    function uploadLogAndSummary(log,summaryStats){
+        console.log("uploading log");
+        var userID = userModel.getUserID();
+        var userLevel = window.localStorage.level;
+        var age = window.localStorage.age;
+        var mode = window.localStorage.mode;
+        var theTime = new Date().getTime();
+        var logItem = 
+            {userID:userID,
+             level:userLevel,
+             age:age,
+             mode:mode,
+             time:theTime,
+             log:log
+            };
+        console.log("log element is \n"+log+"\n");
+        $.ajax({
+               type: "POST",
+               url: "/model/gamelog",
+               data: JSON.stringify(logItem), // also upload the avmode and the level and date and other info (gameid?)
+               contentType: "application/json; charset=utf-8",
+               dataType: "json"
+           }).done(function(items) {
+               console.log("log upload complete"); //+JSON.stringify(items));
+           });
+           
+         var summaryStats = getSummaryStats();
+         var summaryItem = 
+            {userID:userID,
+             level:userLevel,
+             age:age,
+             mode:mode,
+             time:theTime,
+             summary:summaryStats
+            };
+         console.log("log element is \n"+log+"\n");
+           $.ajax({
+                  type: "POST",
+                  url: "/model/gamesummary",
+                  data: JSON.stringify(summaryItem), // also upload the avmode and the level and date and other info (gameid?)
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json"
+              }).done(function(items) {
+                  console.log("summary upload complete "+JSON.stringify(items));
+              });
+           
+           
+        
+    }
+    
+    function runGame(){
+        if (window.localStorage.mode=="visual") {
+            runVisual();
+        } else {
+            runAural();
+        }
     }
     
     function runVisual(){
@@ -349,16 +462,27 @@ var gameControl = (function() {
     
     function consent(){
         window.localStorage.consentStatus = "consented";
+        window.localStorage.level=0;
+        window.localStorage.age = $("#age").val();
+        window.localStorage.mode = 
+          (Math.random()>0.5)?"visual":"auditory";  // or auditory with 50% likelihood
         showView("dashboard");
     }
     
     
     function start(){
         userModel.getUserInfo();
+        $("#gameMode").text(window.localStorage.mode);
         if (window.localStorage.consentStatus != "consented")
             showView("consent");
-        else 
-            showView("dashboard");
+        else {
+            if (window.location.hash == "")
+                showView("start");
+            else {
+                console.log("showing "+window.location.hash);
+                showView(window.location.hash.substring(1));
+            }
+        }
     }
     
     function setSkin(){
@@ -369,6 +493,7 @@ var gameControl = (function() {
     
     function startGame(){
         getAllStats();
+        getAllSummaryStats();
         gameLoop.start(); 
         gameModel.start();   
     }
@@ -379,10 +504,12 @@ var gameControl = (function() {
         start:start,
         runVisual:runVisual,
         runAural:runAural,
+        runGame: runGame,
         pushLog:pushLog,
         endGame:endGame,
         consent:consent,
-        setSkin: setSkin
+        setSkin: setSkin,
+        getAllSummaryStats: getAllSummaryStats
     })
 
 }())

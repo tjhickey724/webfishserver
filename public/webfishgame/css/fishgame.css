@@ -30,3 +30,19 @@ h3{
     font-family: KGBrokenVesselsSketch;
     src: url(../fonts/KGBrokenVesselsSketch.ttf);
 }
+
+.game_consent
+{
+    font-size:24pt;
+    font-weight:250;
+}
+
+.game_playGame
+{
+    background-color:#ddddff;
+    border: thick solid red;
+    color:red;
+    font-size:36pt;
+    font-weight:600;
+    text-align:center;
+}

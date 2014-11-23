@@ -13,7 +13,7 @@ When a fish is spawned, the visual and auditory oscillations are selected as are
 var gameModel = (function() {
     debugPrint("creating gameModel");
     
-    var userLevel = getUserLevel();
+    var userLevel = parseInt(getUserLevel());
     
     function getUserLevel(){
         window.localStorage.level = window.localStorage.level || 0;
@@ -22,6 +22,10 @@ var gameModel = (function() {
     
     function resetUserLevel(){
         window.localStorage.level = 0;
+    }
+    
+    function getUserLevel(){
+        return window.localStorage.level;
     }
     
     function incrementUserLevel(){
@@ -355,6 +359,7 @@ var gameModel = (function() {
         getStatus: getStatus,
         updateParameters: updateParameters,
         incrementUserLevel: incrementUserLevel,
+        getUserLevel: getUserLevel,
         resetUserLevel: resetUserLevel
     }
 }());

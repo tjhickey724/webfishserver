@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>game</title>
-<!-->
+<!--
   <link href="css/bootstrap-3.2.0-dist/css/bootstrap.css" rel="stylesheet" />
   <link href="css/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
 --> 
@@ -32,14 +32,17 @@
 	
 
 	<div id="header" class="page-header">
-		<div style="text-align:right"><a href="/auth/logout">logout</a></div>
-		<div id="userName">not logged in</div>
-			<h1> <span id="title">The Brandeis A/V Interaction Game</span></h1>
-   		</div>
+		<div class="game_introWrapper">
+			<div style="text-align:right"><a href="/auth/logout">logout</a></div>
+			<div id="userName"></div>
+				<div class="game_logoLarge">Fish Police</div>
+			</div>
+		</div>
 
 
-
-
+		<div id="debugging-view" class="view">
+			This shouldn't appear!!
+		</div>
 
 		<div id="game-view" class="view">
 			<canvas id="canvas"></canvas>
@@ -49,35 +52,56 @@
 			<audio id="bad" src="sounds/bad.wav"></audio>
 		</div>
 
-
+		<div id="start-view" class="view">
+			<button onclick="gameControl.showView('dashboard')" class="btn btn-large">Start Game</button>
+		</div>
 
 
 		<div id="consent-view" class="view">
-			<div class="game_introWrapper">
-				<div class="game_logoLarge">Fish Police</div>
+				<!--
 				<br><br>
 				<a href="/auth/google" role="button" class="btn btn-lg btn-primary game_introButton">Login</a>
 				<br><br>
 				<a href="game.html" role="button" class="btn btn-lg btn-primary game_introButton">Play Game</a>
-
-			</div>
-			<div>
-				<input type="checkbox" onclick="gameControl.consent();"/>
-				I agree to participate in this study
-			</div>
+				-->
+				<div class="game_consent">
+					My age is 
+					<select id="age">
+						<option value="0">0-9</option>
+						<option value="1">10-19</option>
+						<option value="2">20-29</option>
+						<option value="3">30-39</option>
+						<option value="4">40-49</option>
+						<option value="5">50-59</option>
+						<option value="6">60-69</option>
+						<option value="7">70-79</option>
+						<option value="8">80+</option>
+					</select>
+					<br/>
+					<div class="btn-group" data-toggle="buttons_checkbox">>
+						<button type="checkbox" id="consentStatus" class="btn btn-lg" onclick="gameControl.consent();"/>
+							I agree to participate in this study
+						</button>
+					</div>	
+				</div>
 		</div>
 	
 	
 	
-	
 		<div id="dashboard-view" class="view">
-			<h1>Your Current Skill Level is <span id="level">0</span>/10</h1>
-			<button id="resetLevel" onclick="gameModel.resetUserLevel();$('#level').html(0)">Reset User Level to 0 </button>
+			<h1>Skill Level: <span id="level">0</span>/10</h1>
+			<!-- 
+				<button id="resetLevel" onclick="gameModel.resetUserLevel();$('#level').html(0)">Reset User Level to 0 </button>
+			-->
 		
-		
-			<h1>Choose a Game Type:
-				<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
-				<button id="aural" onclick="gameControl.runAural()"> Aural</button>
+			<h1>Mode: <span id="gameMode">N/A</span></h1>
+				<button id="playGame" class="btn btn-lg game_playGame" onclick="gameControl.runGame()">
+					Play Game!
+				</button>
+					<!-- 
+						<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
+						<button id="aural" onclick="gameControl.runAural()"> Aural</button>
+					-->
 			</h1>
 		
 		</div>
@@ -114,8 +138,10 @@
 			<div id="graph-view" class="view">
 				<canvas id="graphCanvas" width="400" height="400"></canvas>
 			</div>
+			
 
 		</div>
+
 
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>

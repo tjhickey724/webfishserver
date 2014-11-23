@@ -189,7 +189,10 @@ app.get('/auth/google/return',
 app.get('/auth/google',
 	passport.authenticate('google', 
 
-			      {scope: 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'}));
+			      //{scope: 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'}
+			      //{scope: 'https://www.googleapis.com/auth/plus.me'}
+			      {scope: 'https://www.googleapis.com/auth/plus.me'}
+			      ));
 
 
 
@@ -248,6 +251,20 @@ app.get('/allstats',function(req,res){
       fft:{$sum: "$stats.fast.fast.time"},sst:{$sum: "$stats.slow.slow.time"},
       fst:{$sum: "$stats.fast.slow.time"},sft:{$sum: "$stats.slow.fast.time"},      
       }}],
+      function(err,result){
+        res.json(result);          
+      }    );
+
+})
+
+app.get('/summarystats',function(req,res){
+    var collection = db.get("gamesummary");
+    collection.col.aggregate([{$group: 
+        {_id:"total",
+         tries:  {$sum: "$summary.tries"},
+         correct:{$sum: "$summary.correct"},
+         time:{$sum: "$summary.totalTime"}      
+        }}],
       function(err,result){
         res.json(result);          
       }    );
