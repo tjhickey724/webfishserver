@@ -24,10 +24,6 @@ var gameModel = (function() {
         window.localStorage.level = 0;
     }
     
-    function getUserLevel(){
-        return window.localStorage.level;
-    }
-    
     function incrementUserLevel(){
         userLevel += 1;
         window.localStorage.level = userLevel;
@@ -68,7 +64,7 @@ var gameModel = (function() {
 
     // record the start time of the game and set the end time, all games are the same length
     var gameStart = (new Date()).getTime();
-    var gameDuration = 20; // in seconds
+    var gameDuration = 15; // in seconds
     var endTime = gameStart + gameDuration * 1000;
 
 
@@ -225,6 +221,7 @@ var gameModel = (function() {
 
         fishVisible = false;
         var delay = minFishSpawn + randInt(maxFishSpawn - minFishSpawn);
+        debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
         debugPrint("killFish: fish killed... new fish will spawn in " + delay + " ms");
         setTimeout(spawnFish, delay);
         gameView.stopFishAudio();
@@ -245,6 +242,8 @@ var gameModel = (function() {
 
         var delay = 1000 + randInt(1000);
         debugPrint("start: game started... new fish will spawn in " + delay + " ms");
+        debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
+        
         setTimeout(spawnFish, delay);
 
         setCanvasSize();

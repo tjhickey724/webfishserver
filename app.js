@@ -257,19 +257,34 @@ app.get('/allstats',function(req,res){
 
 })
 
-app.get('/summarystats',function(req,res){
+app.get('/summarystats/:mode/:level',function(req,res){
+    var level = req.params.level;
+    var mode = req.params.mode;
     var collection = db.get("gamesummary");
-    collection.col.aggregate([{$group: 
+    collection.col.aggregate([
+        {$match: {level: level, mode:mode}},
+        {$group: 
         {_id:"total",
          tries:  {$sum: "$summary.tries"},
          correct:{$sum: "$summary.correct"},
-         time:{$sum: "$summary.totalTime"}      
+         time:{$sum: "$summary.totalTime"},
+         count:{$sum: 1}  
         }}],
       function(err,result){
         res.json(result);          
       }    );
 
 })
+
+app.post('/resetall', function(req,res){
+    var collection = db.get("gamelog");
+    console.log("collection = "+collection);
+    collection.remove({});
+    db.get("gamestats").remove({});
+    db.get("gamesummary").remove({});
+    db.get("users").remove({});
+    res.json({result:'reset'});
+});
 
 app.get('/mystats',function(req,res){
     var collection = db.get("gamestats");

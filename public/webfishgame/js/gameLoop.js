@@ -22,8 +22,14 @@ var gameLoop = (function(){
         gameOver=true;
     }
     
+    function startGame(){
+        gameOver=false;
+        gameLoop();
+    }
+    
     
     function gameLoop() {
+        //console.log("updating "+Date());
         if (gameOver) return;
         count++;
         
@@ -38,6 +44,7 @@ var gameLoop = (function(){
 
         if(true) { //delta > interval) {
             //debugPrint("delta="+ delta);
+            
             gameModel.update(now);
             gameView.update(now);
         }
@@ -56,7 +63,7 @@ var gameLoop = (function(){
     }
     
     gameLoopObj = {
-        start: gameLoop,
+        start: startGame,
         stop: stopGame,
         getStepTimes: getStepTimes,
         getLastStepTime: getLastStepTime
