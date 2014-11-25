@@ -7,20 +7,20 @@ var userModel = (function(){
     var userProfile = null;
     
     function getUserInfo(){
-        console.log("calling getUserInfo");
+        //console.log("calling getUserInfo");
         $.ajax({
                type: "GET",
                url: "/api/user",
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(userInfo) {
-               console.log("upload complete"+JSON.stringify(userInfo));
+               //console.log("upload complete"+JSON.stringify(userInfo));
                userProfile = userInfo.profile;
-               console.log("just got user info!!");
+               //console.log("just got user info!!");
            });
 
     }
-    console.log("getting user info");
+    //console.log("getting user info");
     getUserInfo();
 
     

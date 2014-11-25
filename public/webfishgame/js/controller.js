@@ -9,7 +9,7 @@ var gameControl = (function() {
         if (selected=="dashboard"){
             gameModel.updateParameters();
         }
-        console.log("username = "+ userModel.getUserName());
+        //console.log("username = "+ userModel.getUserName());
         
         //$('#userName').text(userModel.getUserName());
         window.location.hash = '#' + selected;
@@ -50,7 +50,7 @@ var gameControl = (function() {
      };
      
      function getSummaryStats(){
-         console.log(JSON.stringify(gameStats));
+         //console.log(JSON.stringify(gameStats));
          var correct = gameStats.fast.fast.correct + gameStats.fast.slow.correct + gameStats.slow.fast.correct +gameStats.slow.slow.correct + 
                    gameStats.none.fast.correct + gameStats.none.slow.correct + gameStats.slow.none.correct +gameStats.fast.none.correct;
          var tries = gameStats.fast.fast.tries + gameStats.fast.slow.tries + gameStats.slow.fast.tries +gameStats.slow.slow.tries + 
@@ -59,7 +59,7 @@ var gameControl = (function() {
                    gameStats.none.fast.time + gameStats.none.slow.time + gameStats.slow.none.time +gameStats.fast.none.time;
          var reactionTime = totalTime/correct;
          var percentCorrect = correct*100/tries;
-         console.log("totalTime="+totalTime+" tries="+tries+" correct="+correct);
+         //console.log("totalTime="+totalTime+" tries="+tries+" correct="+correct);
          return {reactionTime:reactionTime, percentCorrect:percentCorrect, tries:tries, correct:correct, totalTime:totalTime};                 
      }
      
@@ -70,6 +70,7 @@ var gameControl = (function() {
         debugPrint("pushing "+data);
         log.push(data);
         updateStats(data);
+        //console.log("stats = "+JSON.stringify(gameStats));
     }
     
     // here is where we update the current stats for this players game
@@ -295,7 +296,7 @@ var gameControl = (function() {
         uploadLogAndSummary(log,summaryStats)
 
         
-        console.log("Summary Stats ="+JSON.stringify(allSummaryStats));
+        //console.log("Summary Stats ="+JSON.stringify(allSummaryStats));
 
         if (percentCorrect > 90) {
             userLevel = gameModel.incrementUserLevel();
@@ -342,13 +343,13 @@ var gameControl = (function() {
            }).done(function(stats) {
                stats = stats[0];
                // {"_id":"total","ff":41,"ss":42,"fs":37,"sf":27,"ffc":13,"ssc":20,"fsc":15,"sfc":12}
-               console.log("just go the stats"+JSON.stringify(stats));
+               //console.log("just go the stats"+JSON.stringify(stats));
                allStats = {cong:Math.round((stats.ffc+stats.ssc)*100/(stats.ff+stats.ss)),
                          incong:Math.round((stats.fsc+stats.sfc)*100/(stats.fs+stats.sf)),
                          congt:Math.round((stats.fft+stats.sst)/(stats.ff+stats.ss)),
                          incongt:Math.round((stats.fst+stats.sft)/(stats.fs+stats.sf))
                          };
-               console.log("just go the allstats"+JSON.stringify(allStats));
+               //console.log("just go the allstats"+JSON.stringify(allStats));
            });
     }
     
@@ -365,16 +366,16 @@ var gameControl = (function() {
                    allSummaryStats = {};
                }else {
                    stats = stats[0];
-                   console.log("allSummaryStats"+JSON.stringify(stats));
+                   //console.log("allSummaryStats"+JSON.stringify(stats));
                    allSummaryStats = stats;
-                   console.log("just got the allSummaryStats "+JSON.stringify(allSummaryStats));
+                   //console.log("just got the allSummaryStats "+JSON.stringify(allSummaryStats));
                }
            });
            return allSummaryStats;
     }
     
     function uploadStats(gameStats){
-        console.log("uploading stats!!");
+        //console.log("uploading stats!!");
         var userID = userModel.getUserID();
         $.ajax({
                type: "POST",
@@ -383,14 +384,14 @@ var gameControl = (function() {
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(items) {
-               console.log("upload complete"+JSON.stringify(items));
+               //console.log("upload complete"+JSON.stringify(items));
            });
     }
     
 
     
     function uploadLogAndSummary(log,summaryStats){
-        console.log("uploading log");
+        //console.log("uploading log");
         var userID = userModel.getUserID();
         var userLevel = window.localStorage.level;
         var age = window.localStorage.age;
@@ -404,7 +405,7 @@ var gameControl = (function() {
              time:theTime,
              log:log
             };
-        console.log("log element is \n"+log+"\n");
+        //console.log("log element is \n"+log+"\n");
         $.ajax({
                type: "POST",
                url: "/model/gamelog",
@@ -412,7 +413,7 @@ var gameControl = (function() {
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(items) {
-               console.log("log upload complete"); //+JSON.stringify(items));
+               //console.log("log upload complete"); //+JSON.stringify(items));
            });
            
          var summaryStats = getSummaryStats();
@@ -424,7 +425,7 @@ var gameControl = (function() {
              time:theTime,
              summary:summaryStats
             };
-         console.log("log element is \n"+log+"\n");
+         //console.log("log element is \n"+JSON.stringify(log)+"\n");
            $.ajax({
                   type: "POST",
                   url: "/model/gamesummary",
@@ -432,7 +433,7 @@ var gameControl = (function() {
                   contentType: "application/json; charset=utf-8",
                   dataType: "json"
               }).done(function(items) {
-                  console.log("summary upload complete "+JSON.stringify(items));
+                  //console.log("summary upload complete "+JSON.stringify(items));
               });
            
            
@@ -468,7 +469,7 @@ var gameControl = (function() {
         window.localStorage.mode = 
           (Math.random()>0.5)?"visual":"auditory";  // or auditory with 50% likelihood
         $("#gameMode").text(window.localStorage.mode);
-        console.log("setting up consent"+JSON.stringify(window.localStorage));
+        //console.log("setting up consent"+JSON.stringify(window.localStorage));
         showView("dashboard");
     }
     
@@ -484,7 +485,7 @@ var gameControl = (function() {
                   contentType: "application/json; charset=utf-8",
                   dataType: "json"
               }).done(function(items) {
-                  console.log("reset complete "+JSON.stringify(items));
+                  //console.log("reset complete "+JSON.stringify(items));
               });
         
     }
@@ -500,7 +501,7 @@ var gameControl = (function() {
             if (window.location.hash == "")
                 showView("start");
             else {
-                console.log("showing "+window.location.hash);
+                //console.log("showing "+window.location.hash);
                 showView(window.location.hash.substring(1));
             }
         }
@@ -514,6 +515,8 @@ var gameControl = (function() {
     
     function startGame(){
         //getAllStats();
+        log=[];
+        gameStats = initGameStats();
         getAllSummaryStats(window.localStorage.mode, gameModel.getUserLevel());
         gameLoop.start(); 
         gameModel.start();   

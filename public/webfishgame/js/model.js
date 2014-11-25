@@ -35,16 +35,16 @@ var gameModel = (function() {
         return 2000-level*150;
     }
     
-    function getMinFishSpawn(level){ // 1000 -> 750
-        return 1000 - level*25;
+    function getMinFishSpawn(level){ // 1000 -> 250
+        return 1000 - level*75;
     }
     
-    function getMaxFishSpawn(level){ // 2000 -> 1500
-        return 2000 - level*50;
+    function getMaxFishSpawn(level){ // 2000 -> 500
+        return 2000 - level*150;
     }
     
     function getOddBallRate(level){
-        return level*5;
+        return level<3?0:25;
     }
 
     var fishLifetime = getFishLifetime(userLevel); // how long fish stays on the screen in ms
@@ -75,7 +75,14 @@ var gameModel = (function() {
     var totalReactionTime = 1;
     var lastReactionTime = 1;
 
-
+    function resetTrialStats(){
+        correct=0;
+        incorrect=0;
+        missed=0;
+        timeRemaining = gameDuration;
+        totalReactionTime = 1;
+        lastReactionTime = 1;
+    }
 
     // specify the size of the gameboard in the model (having nothing to do with pixels!!)
     var width = height = 100;
@@ -235,6 +242,8 @@ var gameModel = (function() {
         gameDuration = parseInt($("#gameDuration").val());
         oddBallRate = parseInt($("#oddBallRate").val());
         
+        resetTrialStats();
+        
         fishVisible = false;
         gameStart = (new Date()).getTime();
         endTime = gameStart + gameDuration * 1000;
@@ -271,6 +280,8 @@ var gameModel = (function() {
         };
         gameControl.pushLog(entry);
         debugPrint("logKeyPress"+JSON.stringify(entry));
+        //console.log(isCorrect+" --> "+JSON.stringify(entry));
+        //console.log(JSON.stringify({correct:correct, incorrect:incorrect}));
         if (isCorrect == "correct") {
             correct++;
             lastReactionTime = (now - fishBirth);
