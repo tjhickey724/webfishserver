@@ -31,12 +31,23 @@
 
 	
 
-	<div id="header" class="page-header">
-		<div class="game_introWrapper">
-			<div style="text-align:right"><a href="/auth/logout">logout</a></div>
+	<div id="header">
+	
+		<div id="start-view" class="game_introWrapper view">
+			
 			<div id="userName"></div>
-				<div class="game_logoLarge">Fish Police</div>
-			</div>
+			<div class="game_logoLarge">Fish Police</div>
+				   			
+			<div class="game_introButtonsWrapper">
+				<br><br>
+					
+					<button onclick="gameControl.showView('dashboard')" class="btn btn-lg btn-warning">Start Game</button>
+					
+					<br><br>
+								
+					<a href="/auth/logout" role="button" class="btn btn-lg btn-danger">Quit Game</a>
+		
+			</div>		
 		</div>
 
 
@@ -45,6 +56,17 @@
 		</div>
 
 		<div id="game-view" class="view">
+		
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="game_indicatorsWrapper">
+					<div class="game_indicatorTopText game_indicatorTopLeft" id="game_data_l"></div>
+					<div class="game_indicatorTopText game_indicatorTopRightSm" id="game_data_rs"></div>
+					<div class="game_indicatorTopText game_indicatorTopRightLg" id="game_data_rl"></div>
+					<div class="cleaner"></div>
+				</div>
+		    </nav>	
+		    		
+		    		
 			<canvas id="canvas"></canvas>
 			<audio id="fastFish" src="sounds/8hz/fish.wav"></audio>
 			<audio id="slowFish" src="sounds/5hz/fish.wav"></audio>
@@ -52,12 +74,14 @@
 			<audio id="bad" src="sounds/bad.wav"></audio>
 		</div>
 
-		<div id="start-view" class="view">
-			<button onclick="gameControl.showView('dashboard')" class="btn btn-large">Start Game</button>
-		</div>
 
 
-		<div id="consent-view" class="view">
+
+		<div id="consent-view" class="game_introWrapper view">
+		
+			<div class="game_logoLarge">Fish Police</div>
+				   			
+			<div class="game_introButtonsWrapper">		
 				<!--
 				<br><br>
 				<a href="/auth/google" role="button" class="btn btn-lg btn-primary game_introButton">Login</a>
@@ -78,31 +102,45 @@
 						<option value="8">80+</option>
 					</select>
 					<br/>
-					<div class="btn-group" data-toggle="buttons_checkbox">>
-						<button type="checkbox" id="consentStatus" class="btn btn-lg" onclick="gameControl.consent();"/>
+					<div class="btn-group" data-toggle="buttons_checkbox">
+						<button type="checkbox" id="consentStatus" class="btn btn-lg btn-primary" onclick="gameControl.consent();"/>
 							I agree to participate in this study
 						</button>
 					</div>	
 				</div>
+			</div>
 		</div>
 	
 	
 	
-		<div id="dashboard-view" class="view">
-			<h1>Skill Level: <span id="level">0</span>/10</h1>
+		<div id="dashboard-view" class="game_paddedView view">
+		
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="game_indicatorsWrapper">
+					<div class="game_indicatorTopText game_indicatorTopLeft"><span id="gameMode">No</span> Mode</div>
+	<!-- 				<div class="game_indicatorTopText game_indicatorTopRightSm">/10</div>	 -->
+					<div class="game_indicatorTopText game_indicatorTopRightSm">&nbsp;</div>
+					<div class="game_indicatorTopText game_indicatorTopRightLg">
+						<span id="level">0</span>
+					</div>
+					<div class="game_indicatorTopText game_indicatorTopRightSm">Level</div>			
+					<div class="cleaner"></div>
+				</div>
+		    </nav>		
+			
+			<div class="game_introButtonsWrapper">
 			<!-- 
 				<button id="resetLevel" onclick="gameModel.resetUserLevel();$('#level').html(0)">Reset User Level to 0 </button>
 			-->
-		
-			<h1>Mode: <span id="gameMode">N/A</span></h1>
-				<button id="playGame" class="btn btn-lg game_playGame" onclick="gameControl.runGame()">
-					Play Game!
+			<br><br><br><br><br><br><br><br>
+				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.runGame()">
+					Ready to Play!
 				</button>
 					<!-- 
 						<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
 						<button id="aural" onclick="gameControl.runAural()"> Aural</button>
 					-->
-			</h1>
+			</div>
 		
 		</div>
 		
@@ -126,9 +164,14 @@
 		
 		
 
-			<div id="log-view" class="view">
-				<div id="log">The Log goes here</div>
-				<button onclick="gameControl.showView('dashboard')" class="btn btn-large game_playAgain">Play Again?</button>
+			<div id="log-view" class="game_introWrapper view">
+				   			
+				<div class="game_introButtonsWrapper">	
+					<br><br>		
+					<div id="log" class="game_logInfoWrapper"></div>
+					<br>
+					<button onclick="gameControl.showView('dashboard')" class="btn btn-lg btn-warning">Play Again?</button>
+				</div>
 
 			</div>
 

@@ -1,6 +1,9 @@
 html{
 	background: url(../images/bg_intro.png) #5ac2ea bottom center repeat-x;	
+	background-size:100% auto;
 	height: 100%;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
 }
 body{
 	background-color: transparent;
@@ -30,3 +33,16 @@ h3{
     font-family: KGBrokenVesselsSketch;
     src: url(../fonts/KGBrokenVesselsSketch.ttf);
 }
+.game_introButtonsWrapper
+{
+	text-align: center;
+}
+
+  
+@media (max-width: 768px) {
+ html{
+	background-size:230% auto;
+	}
+}
+
+

@@ -1,6 +1,8 @@
 html{
 	background: url(../images/bg_intro.png) #5ac2ea bottom center repeat-x;	
 	height: 100%;
+	background-size:100% auto;
+
 }
 body{
 	background-color: transparent;
@@ -33,6 +35,7 @@ h3{
 
 .game_consent
 {
+	padding-top: 50px;
     font-size:24pt;
     font-weight:250;
 }
@@ -46,7 +49,13 @@ h3{
     font-weight:600;
     text-align:center;
 }
-
+.game_logInfoWrapper
+{
+	font-size: 18px;
+	color: #ffffff;
+	text-shadow: 1px 1px #000000;
+	text-align: center;
+}
 .game_playAgain
 {
     background-color:#ddddff;
@@ -55,4 +64,49 @@ h3{
     font-size:36pt;
     font-weight:600;
     text-align:center;    
+}
+.game_introButtonsWrapper
+{
+	text-align: center;
+}
+.cleaner
+{
+	clear:both;
+}
+.game_indicatorsWrapper
+{
+	position: absolute;
+	width: 100%;
+}
+.game_indicatorTopText{
+	text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+	color: #eda74c;	
+	font-weight: 900;
+}
+.game_indicatorTopRightLg
+{
+	font-size: 70px;
+	margin-top: -20px;
+	float: right;
+}
+.game_indicatorTopRightSm
+{
+	font-size: 30px;
+	float: right;
+	margin: 20px 20px 0px 10px;
+}
+.game_indicatorTopLeft
+{
+	font-size: 30px;
+	float: left;
+	margin: 20px 20px 0px 10px;
+}
+@media (max-width: 768px) {
+ html{
+	background-size:230% auto;
+	}
+}
+.game_paddedView
+{
+	padding: 70px 20px 0px 20px;
 }
