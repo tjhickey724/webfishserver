@@ -16,13 +16,14 @@ var gameControl = (function() {
         $('.view').hide();
         $('#'+selected+'-view').show();
     
-        if (selected=="game"){
+       /* if (selected=="game"){
             $('#header').hide();
             $("#canvas").css("display","block");
             $('#canvas').show();
         }else {
             $('#header').show();
         }
+		   */
         debugPrint("showing "+'#'+selected+'-view')
 
             
@@ -298,7 +299,7 @@ var gameControl = (function() {
         
         //console.log("Summary Stats ="+JSON.stringify(allSummaryStats));
 
-        if (percentCorrect > 90) {
+        if (percentCorrect > 80) {
             userLevel = gameModel.incrementUserLevel();
             levelInfo = "<h2>Congratulations!  You have advanced to level "+userLevel+"!</h2>";
 

@@ -201,6 +201,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
         ctx.scale(1,-1);
         ctx.drawImage(img,0,-yoff,w,h);
         ctx.restore();
+		console.log(document.getElementById('canvas'));
     }
     
     return({
