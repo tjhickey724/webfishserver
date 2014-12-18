@@ -405,7 +405,7 @@ app.get('/leaderboard/:mode/:level',function(req,res){
 				accuracy:{$divide:["$summary.correct","$summary.tries"]},
 				reaction:{$divide:["$summary.totalTime","$summary.tries"]}
 			}},
-		{$sort: {_id:1,accuracy:-1, reaction:1}}
+		{$sort: {accuracy:-1, reaction:1, _id:1}}
     	],
       function(err,result){
 		  console.log("Error in mysummarstats"+JSON.stringify(err));
