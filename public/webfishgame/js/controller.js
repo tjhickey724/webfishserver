@@ -8,8 +8,12 @@ var gameControl = (function() {
     var showView = function(selected) {
         if (selected=="dashboard"){
             gameModel.updateParameters();
+			userModel.loadGameStats();
+        }else if (selected=="profile"){
+        	gameView.showLevels();
+			
         }
-        //console.log("username = "+ userModel.getUserName());
+        console.log("username = "+ userModel.getUserName());
         
         //$('#userName').text(userModel.getUserName());
         window.location.hash = '#' + selected;
@@ -522,6 +526,12 @@ var gameControl = (function() {
         gameLoop.start(); 
         gameModel.start();   
     }
+	
+	function changeLevelMode(level,mode){
+		gameModel.setUserLevel(level);
+		gameModel.setAVMode(mode);
+		showView("dashboard");
+	}
     
     
     return({
@@ -536,7 +546,9 @@ var gameControl = (function() {
         consent:consent,
         setSkin: setSkin,
         getAllSummaryStats: getAllSummaryStats,
-        clearData: clearData
+        clearData: clearData,
+		changeLevelMode: changeLevelMode,
+		showView: showView
     })
 
 }())

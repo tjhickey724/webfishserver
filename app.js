@@ -261,6 +261,7 @@ app.get('/summarystats/:mode/:level',function(req,res){
     var level = req.params.level;
     var mode = req.params.mode;
     var collection = db.get("gamesummary");
+
     collection.col.aggregate([
         {$match: {level: level, mode:mode}},
         {$group: 
@@ -275,6 +276,191 @@ app.get('/summarystats/:mode/:level',function(req,res){
       }    );
 
 })
+
+// this shows my stats for level 7
+app.get('/mysummarystats/:mode/:level',function(req,res){
+    var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+	console.log("the user is "+JSON.stringify(req.user));
+	console.log("the userid is "+JSON.stringify(req.user.openID));
+    collection.col.aggregate([
+        {$match: {userID:req.user.openID,level: level, mode:mode}},
+        {$group: 
+        {_id:"total",
+         tries:  {$sum: "$summary.tries"},
+         correct:{$sum: "$summary.correct"},
+         time:{$sum: "$summary.totalTime"},
+         count:{$sum: 1}  
+        }}],
+      function(err,result){
+        res.json(result);          
+      }    );
+
+})
+
+// this shows my stats for level 7
+app.get('/mysummarystats/:mode',function(req,res){
+    //var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+	//console.log("the user is "+JSON.stringify(req.user));
+	console.log("the userid is "+JSON.stringify(req.user.openID));
+    collection.col.aggregate([
+        {$match: {userID:req.user.openID, mode:mode}},
+        {$group: 
+			{
+		 _id:{level:"$level"}, //"total",
+         tries:  {$sum: "$summary.tries"},
+         correct:{$sum: "$summary.correct"},
+         time:{$sum: "$summary.totalTime"},
+         count:{$sum: 1}  
+        }},
+		{$sort: {_id:1}}
+    	],
+      function(err,result){
+		  console.log("Error in mysummarstats"+JSON.stringify(err));
+        res.json(result);          
+      }    );
+
+})
+
+// this shows my stats for level 7
+app.get('/myavgstats/:mode',function(req,res){
+    //var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+	//console.log("the user is "+JSON.stringify(req.user));
+	console.log("the userid is "+JSON.stringify(req.user.openID));
+    collection.col.aggregate([
+        {$match: {userID:req.user.openID, mode:mode}},
+        {$group: 
+			{
+		 _id:{level:"$level"}, //"total",
+         tries:  {$sum: "$summary.tries"},
+         correct:{$sum: "$summary.correct"},
+         time:{$sum: "$summary.totalTime"},
+         count:{$sum: 1}  
+        }},
+		{$project:
+			{
+				accuracy:{$divide:["$correct","$tries"]},
+				reaction:{$divide:["$time","$tries"]}
+			}},
+		{$sort: {_id:1}}
+    	],
+      function(err,result){
+		  console.log("Error in mysummarstats"+JSON.stringify(err));
+        res.json(result);          
+      }    );
+
+})
+
+// this shows my stats for level 7
+app.get('/mybeststats/:mode',function(req,res){
+    //var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+	//console.log("the user is "+JSON.stringify(req.user));
+	console.log("the userid is "+JSON.stringify(req.user.openID));
+    collection.col.aggregate([
+        {$match: {userID:req.user.openID, mode:mode}},
+
+		{$project:
+			{
+				_id:{level:"$level"},
+				//level:"$level",
+				accuracy:{$divide:["$summary.correct","$summary.tries"]},
+				reaction:{$divide:["$summary.totalTime","$summary.tries"]}
+			}},
+		{$sort: {_id:1,accuracy:-1, reaction:1}},
+		{$group:
+			{_id:"$_id",
+			accuracy:{$first:"$accuracy"},
+			reaction:{$first:"$reaction"}
+			 }},
+		{$sort: {_id:1,accuracy:-1, reaction:1}},
+    	],
+      function(err,result){
+		  console.log("Error in mysummarstats"+JSON.stringify(err));
+        res.json(result);          
+      }    );
+
+})
+
+// this shows my stats for level 7
+app.get('/leaderboard/:mode/:level',function(req,res){
+    var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+	//console.log("the user is "+JSON.stringify(req.user));
+	console.log("the userid is "+JSON.stringify(req.user.openID));
+    collection.col.aggregate([
+        {$match: {level:level, mode:mode}},
+
+		{$project:
+			{
+				_id:{user:"$userID", level:"$level"},
+				//level:"$level",
+				accuracy:{$divide:["$summary.correct","$summary.tries"]},
+				reaction:{$divide:["$summary.totalTime","$summary.tries"]}
+			}},
+		{$sort: {_id:1,accuracy:-1, reaction:1}}
+    	],
+      function(err,result){
+		  console.log("Error in mysummarstats"+JSON.stringify(err));
+        res.json(result);          
+      }    );
+
+})
+
+
+// this shows my stats for level 7
+app.get('/myrank/:mode/:level/:accuracy/:reaction',function(req,res){
+    var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+	var acc = parseFloat(req.params.accuracy);
+	var react = parseFloat(req.params.reaction);
+	console.log("Accuracy="+acc);
+	var val = 0.5;
+	//console.log("the user is "+JSON.stringify(req.user));
+	console.log("the userid is "+JSON.stringify(req.user.openID));
+    collection.col.aggregate([
+        {$match: {userID:req.user.openID,level:level, mode:mode}},
+
+		{$project:
+			{
+				_id:{user:"$userID", level:"$level"},
+				//level:"$level",
+				accuracy:{$divide:["$summary.correct","$summary.tries"]},
+				reaction:{$divide:["$summary.totalTime","$summary.tries"]}
+			}},
+		{$sort: {_id:1,accuracy:-1, reaction:1}},
+		{$match:{
+				accuracy:{$gte: acc}
+		        } },
+		{$match:{
+			     $or:[{accuracy:{$gt: acc}},
+					  {reaction:{$lte: react}}]
+		}},
+		{$group:{_id:"$_id",rank:{$sum:1}}}
+				
+//		,
+//		{$match:{
+//			reaction:{$lt:req.params.reaction}
+//		}}
+//		,
+//		{$group: {_id:"$_id",
+//		          count:{$sum:1}}}
+    	],
+      function(err,result){
+		  console.log("Error in myrank: "+JSON.stringify(err)+" "+JSON.stringify(result));
+        res.json(result);          
+      }    );
+
+})
+
 
 app.post('/resetall', function(req,res){
     var collection = db.get("gamelog");

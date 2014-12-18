@@ -31,7 +31,8 @@
 
 	
 
-	<div id="header">
+	<div id="header" class="container-fluid">
+
 	
 		<div id="start-view" class="game_introWrapper view">
 			
@@ -136,6 +137,10 @@
 				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.runGame()">
 					Ready to Play!
 				</button>
+				<br/>
+				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.showView('profile')">
+					View your best games
+				</button>
 					<!-- 
 						<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
 						<button id="aural" onclick="gameControl.runAural()"> Aural</button>
@@ -148,7 +153,7 @@
 			<h1>Set Parameters</h1>
 			<div>
 				<input type="text" id="gameDuration" value="10"> game Length (in sec)<br/>
-				<input type="text" id="fishSizePercent" value="20"> fish size (in percent of screen width)<br/>
+				<input type="text" id="fishSizePercent" value="10"> fish size (in percent of screen width)<br/>
 				<input type="text" id="lifetime" value="2000"> fish lifetime (in ms)<br/>
 				<input type="text" id="minIFI" value="500"> minimum interfish interval (in ms)<br/>
 				<input type="text" id="maxIFI" value="2000"> maximum interfish interval (in ms)<br/>
@@ -188,9 +193,41 @@
 				<a href="/auth/logout">logout</a>
 			</div>
 			
+		
+			<div id="profile-view" class="view">
+				
+				<div class="row">
+					<div class="col-md-3">
+						<div id="visual"><h1>Visual Mode</h1>
+
+							<table id="visualList" class="table table-bordered bg-info">
+							</table>
+						</div>
+					</div>
+	
+					<div class="col-md-3">
+						<div id="auditory"><h1>Auditory Mode</h1>	
+							<table id="auditoryList" class="table table-bordered bg-info">
+							</table>
+						</div>
+					</div>
+					
+					<div class="col-md-3">
+						<div><h1>Back to the game
+						  <button  onclick="gameControl.showView('dashboard')">
+						  	 Go
+						  </button>
+						  </h1>
+					    </div>
+					</div>
+				</div>
+				
+			</div>
+				
+			
 
 		</div>
-
+</div>
 
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
@@ -203,5 +240,7 @@
 		<script src="js/script.js"></script>
 		<script src="js/usermodel.js"></script>
 		<script>gameControl.start(); </script>
+		
+		
 	</body>
 </html>

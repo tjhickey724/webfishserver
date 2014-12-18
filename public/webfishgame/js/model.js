@@ -19,6 +19,11 @@ var gameModel = (function() {
         window.localStorage.level = window.localStorage.level || 0;
         return parseInt(window.localStorage.level);
     }
+	
+	function setUserLevel(k){
+		userLevel = parseInt(k);
+        window.localStorage.level = userLevel;
+	}
     
     function resetUserLevel(){
         window.localStorage.level = 0;
@@ -59,6 +64,7 @@ var gameModel = (function() {
 
     function setAVMode(mode) {
         avmode = mode;
+		window.localStorage.mode = mode;
     }
 
 
@@ -110,6 +116,7 @@ var gameModel = (function() {
     
     function updateParameters(){
         $("#level").html(userLevel);
+		$("#gameMode").html(window.localStorage.mode);
         $("#gameDuration").attr('value',gameDuration);
         $("#minIFI").attr('value',getMinFishSpawn(userLevel));
         $("#maxIFI").attr('value',getMaxFishSpawn(userLevel));
@@ -261,8 +268,8 @@ var gameModel = (function() {
 
     function setCanvasSize() {
         var canvas = document.getElementById('canvas');
-        canvas.width = Math.min(1000, window.innerWidth);
-        canvas.height = Math.min(1000, window.innerHeight);
+        canvas.width = window.innerWidth; //Math.min(1000, window.innerWidth);
+        canvas.height = window.innerHeight; //Math.min(1000, window.innerHeight);
     };
 
     function logKeyPress(fishType, key, isCorrect, now) {
@@ -368,6 +375,7 @@ var gameModel = (function() {
         setAVMode: setAVMode,
         getStatus: getStatus,
         updateParameters: updateParameters,
+		setUserLevel: setUserLevel,
         incrementUserLevel: incrementUserLevel,
         getUserLevel: getUserLevel,
         resetUserLevel: resetUserLevel
