@@ -13,29 +13,6 @@ When a fish is spawned, the visual and auditory oscillations are selected as are
 var gameModel = (function() {
     debugPrint("creating gameModel");
     
-    var userLevel = parseInt(getUserLevel());
-    
-    function getUserLevel(){
-        window.localStorage.level = window.localStorage.level || 0;
-        return parseInt(window.localStorage.level);
-    }
-	
-	function setUserLevel(k){
-		userLevel = parseInt(k);
-        window.localStorage.level = userLevel;
-	}
-    
-    function resetUserLevel(){
-        window.localStorage.level = 0;
-    }
-    
-    function incrementUserLevel(){
-        userLevel += 1;
-        window.localStorage.level = userLevel;
-        
-        return userLevel;
-    }
-    
     function getFishLifetime(level){ // 2000 -> 500ms in 10 steps
         return 2000-level*150;
     }
@@ -52,20 +29,10 @@ var gameModel = (function() {
         return level<3?0:25;
     }
 
-    var fishLifetime = getFishLifetime(userLevel); // how long fish stays on the screen in ms
-    var minFishSpawn = getMinFishSpawn(userLevel); // minimum time before new fish appears
-    var maxFishSpawn = getMaxFishSpawn(userLevel); // maximum time before new fish appears
-    var oddBallRate = getOddBallRate(userLevel); // percent
-    
-    
-    var avmode = "visual"; // which mode determines whether a fish is "good"
-    // two choices: visual or aural
-    // this determines which feature the player should be attending to
-
-    function setAVMode(mode) {
-        avmode = mode;
-		window.localStorage.mode = mode;
-    }
+    var fishLifetime = getFishLifetime(userModel.getLevel()); // how long fish stays on the screen in ms
+    var minFishSpawn = getMinFishSpawn(userModel.getLevel()); // minimum time before new fish appears
+    var maxFishSpawn = getMaxFishSpawn(userModel.getLevel()); // maximum time before new fish appears
+    var oddBallRate = getOddBallRate(userModel.getLevel()); // percent
 
 
     // record the start time of the game and set the end time, all games are the same length
@@ -115,13 +82,13 @@ var gameModel = (function() {
     var fishSizePercent = 20;
     
     function updateParameters(){
-        $("#level").html(userLevel);
-		$("#gameMode").html(window.localStorage.mode);
+        $("#level").html(userModel.getLevel());
+		$("#gameMode").html(userModel.getMode()); 
         $("#gameDuration").attr('value',gameDuration);
-        $("#minIFI").attr('value',getMinFishSpawn(userLevel));
-        $("#maxIFI").attr('value',getMaxFishSpawn(userLevel));
-        $("#lifetime").attr('value',getFishLifetime(userLevel));
-        $("#oddBallRate").attr('value',getOddBallRate(userLevel));
+        $("#minIFI").attr('value',getMinFishSpawn(userModel.getLevel()));
+        $("#maxIFI").attr('value',getMaxFishSpawn(userModel.getLevel()));
+        $("#lifetime").attr('value',getFishLifetime(userModel.getLevel()));
+        $("#oddBallRate").attr('value',getOddBallRate(userModel.getLevel()));
         
         
         
@@ -135,7 +102,7 @@ var gameModel = (function() {
     };
 
     function isGoodFish() {
-        if (avmode == "visual") {
+        if (userModel.getMode() == "visual") {
             return fishVisual == 'slow';
         } else {
             return fishAudio == 'slow';
@@ -372,12 +339,8 @@ var gameModel = (function() {
         start: start,
         logKeyPress: logKeyPress,
         update: update,
-        setAVMode: setAVMode,
         getStatus: getStatus,
-        updateParameters: updateParameters,
-		setUserLevel: setUserLevel,
-        incrementUserLevel: incrementUserLevel,
-        getUserLevel: getUserLevel,
-        resetUserLevel: resetUserLevel
+        updateParameters: updateParameters
+
     }
 }());

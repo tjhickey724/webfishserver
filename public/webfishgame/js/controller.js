@@ -294,7 +294,7 @@ var gameControl = (function() {
         var stats = getPercentCorrect();
         var percentCorrect = stats[0];
         var msgString = "Sorry you did not advance to the next level...";
-        var userLevel = gameModel.getUserLevel();
+        var userLevel = userModel.getLevel(); 
         var originalLevel = userLevel;
         uploadStats(gameStats); 
         summaryStats = getSummaryStats()  
@@ -304,13 +304,15 @@ var gameControl = (function() {
         //console.log("Summary Stats ="+JSON.stringify(allSummaryStats));
 
         if (percentCorrect > 80) {
-            userLevel = gameModel.incrementUserLevel();
+			userModel.setLevel(userModel.getLevel()+1);
+			userLevel = userModel.getLevel();
+
             levelInfo = "<h2>Congratulations!  You have advanced to level "+userLevel+"!</h2>";
 
             //alert("new level is "+userLevel);
             msgString = "Congrats!!! You have advanced to level "+ userLevel;
         }else {
-            userLevel = gameModel.getUserLevel();
+            userLevel = userModel.getLevel();
             levelInfo = "<h2>Level "+userLevel+"</h2>";
         }
         
@@ -398,9 +400,9 @@ var gameControl = (function() {
     function uploadLogAndSummary(log,summaryStats){
         //console.log("uploading log");
         var userID = userModel.getUserID();
-        var userLevel = window.localStorage.level;
-        var age = window.localStorage.age;
-        var mode = window.localStorage.mode;
+        var userLevel = userModel.getLevel();
+        var age = userModel.getAge(); 
+        var mode = userModel.getMode(); 
         var theTime = new Date().getTime();
         var logItem = 
             {userID:userID,
@@ -446,7 +448,7 @@ var gameControl = (function() {
     }
     
     function runGame(){
-        if (window.localStorage.mode=="visual") {
+        if (userModel.getMode()=="visual") {
             runVisual();
         } else {
             runAural();
@@ -456,53 +458,44 @@ var gameControl = (function() {
     function runVisual(){
         setSkin();
         showView("game");
-        gameModel.setAVMode("visual");
+		userModel.setMode("visual");
         startGame();
     }
     
     function runAural(){
         setSkin();
         showView("game");
-        gameModel.setAVMode("audio");
+		userModel.setMode("auditory");
         startGame();
     }
     
     function consent(){
-        window.localStorage.consentStatus = "consented";
-        window.localStorage.level=0;
-        window.localStorage.age = $("#age").val();
-        window.localStorage.mode = 
-          (Math.random()>0.5)?"visual":"auditory";  // or auditory with 50% likelihood
-        $("#gameMode").text(window.localStorage.mode);
-        //console.log("setting up consent"+JSON.stringify(window.localStorage));
+		userModel.setConsent("consented");
+		userModel.setLevel(0);
+		userModel.setAge($("#age").val());
+		userModel.setMode((Math.random()>0.5)?"visual":"auditory");
+
+        $("#gameMode").text(userModel.getMode());
+		$("#level").text(userModel.getLevel());
+        
         showView("dashboard");
     }
     
-    function clearData(){
-        window.localStorage.removeItem("consentStatus");
-        window.localStorage.removeItem("age");
-        window.localStorage.removeItem("level");
-        window.localStorage.removeItem("mode");
-        $.ajax({
-                  type: "POST",
-                  url: "/resetall",
-                  data: JSON.stringify({action:"reset"}), // also upload the avmode and the level and date and other info (gameid?)
-                  contentType: "application/json; charset=utf-8",
-                  dataType: "json"
-              }).done(function(items) {
-                  //console.log("reset complete "+JSON.stringify(items));
-              });
-        
-    }
-    
+
     
     function start(){
         userModel.getUserInfo();
+		setTimeout(checkConsent, 2000);
+	}
+	
+	function checkConsent(){
+		userModel.printInfo();
+		console.log("inside start method");
         
-        if (window.localStorage.consentStatus != "consented")
+        if (userModel.getConsent() != "consented")
             showView("consent");
         else {
-            $("#gameMode").text(window.localStorage.mode);
+            $("#gameMode").text(userModel.getMode());
             if (window.location.hash == "")
                 showView("start");
             else {
@@ -522,14 +515,15 @@ var gameControl = (function() {
         //getAllStats();
         log=[];
         gameStats = initGameStats();
-        getAllSummaryStats(window.localStorage.mode, gameModel.getUserLevel());
+        getAllSummaryStats(userModel.getMode(),userModel.getLevel());
+		
         gameLoop.start(); 
         gameModel.start();   
     }
 	
 	function changeLevelMode(level,mode){
-		gameModel.setUserLevel(level);
-		gameModel.setAVMode(mode);
+		userModel.setLevel(level);
+		userModel.setMode(mode);
 		showView("dashboard");
 	}
     
@@ -546,7 +540,6 @@ var gameControl = (function() {
         consent:consent,
         setSkin: setSkin,
         getAllSummaryStats: getAllSummaryStats,
-        clearData: clearData,
 		changeLevelMode: changeLevelMode,
 		showView: showView
     })

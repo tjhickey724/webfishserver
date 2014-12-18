@@ -201,7 +201,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
         ctx.scale(1,-1);
         ctx.drawImage(img,0,-yoff,w,h);
         ctx.restore();
-		console.log(document.getElementById('canvas'));
+		//console.log(document.getElementById('canvas'));
     }
 	
 	function showLevels(){
@@ -211,14 +211,14 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		levels =gameStats.visual;
 		rows="";
 		for(var x in levels){
-			console.log(JSON.stringify(levels[x]));
+			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
 			var level = y["_id"].level;
 			rows += "<tr><td><button onclick='gameControl.changeLevelMode("+level+",\"visual\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
 			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+" ms</td></tr>";
 			
 		}
-		console.log(rows);
+		//console.log(rows);
 		var z1 = document.getElementById("visualList");
 		z1.innerHTML = rows;
 		
@@ -226,14 +226,14 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		levels =gameStats.auditory;
 		rows="";
 		for(var x in levels){
-			console.log(JSON.stringify(levels[x]));
+			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
 			var level = y["_id"].level;
 			rows += "<tr><td><button  onclick='gameControl.changeLevelMode("+level+",\"auditory\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
 			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+"ms </td></tr>";
 			
 		}
-		console.log(rows);		
+		//console.log(rows);		
 		var z2 = document.getElementById("auditoryList");
 		z2.innerHTML = rows;
 	}

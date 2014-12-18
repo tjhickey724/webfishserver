@@ -82,32 +82,6 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
-/*
-passport.use('google', new OAuth2Strategy({
-    authorizationURL: 'https://www.provider.com/oauth2/authorize',
-    tokenURL: 'https://www.provider.com/oauth2/token',
-    clientID: '123-456-789',
-    clientSecret: 'shhh-its-a-secret'
-    callbackURL: 'https://www.example.com/auth/provider/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate(..., function(err, user) {
-      done(err, user);
-    });
-  }
-));
-
-passport.use(new GoogleStrategy({
-    returnURL: 'http://127.0.0.1/auth/google/return',
-    realm: 'http://127.0.0.1/'
-  },
-  function(identifier, profile, done) {
-    db.get("user").findOrCreate({ openId: identifier }, function(err, user) {
-      done(err, user);
-    });
-  }
-));
-*/
 
 passport.use(new GoogleStrategy({
 	    clientID: '327841892394-kg77ug2s36gk4dos0q6c5j8nhafqp9m7.apps.googleusercontent.com',
@@ -239,6 +213,30 @@ app.get('/auth/logout', function(req, res) {
 app.get('/api/user', ensureAuthenticated, function(req, res) {
     res.json(req.user);
 });
+
+app.get('/api/userState',ensureAuthenticated,function(req,res){
+		console.log("\n\n **** userState = '"+JSON.stringify(req.user.userState)+"'\n\n");
+	if (req.user.userState == undefined){
+		req.user.userState = {level:0, mode:"visual",consent:"no",age:-1};
+		var collection = db.get("user");
+		var u = collection.find({"_id":req.user["_id"]}); console.log(JSON.stringify(u));
+		collection.update({"_id":req.user["_id"]}, req.user);
+		req.session.passport.user = req.user;
+	}
+
+	res.json(req.user.userState);
+	console.log("user = '"+JSON.stringify(req.user)+"'");
+})
+
+app.put('/api/userState',ensureAuthenticated, function(req,res){
+	console.log("entering /api/userState .. user = "+JSON.stringify(req.user));
+	req.user.userState = req.body;
+	req.session.passport.user = req.user;
+	var collection = db.get("user");
+	collection.update({"_id":req.user["_id"]}, req.user);
+	console.log("leaving /api/userState user = '"+JSON.stringify(req.user)+"'");
+	res.json(JSON.stringify(req.user.userState));
+})
 //**********************************************************
 
 app.get('/allstats',function(req,res){
@@ -350,7 +348,7 @@ app.get('/myavgstats/:mode',function(req,res){
 		{$sort: {_id:1}}
     	],
       function(err,result){
-		  console.log("Error in mysummarstats"+JSON.stringify(err));
+		  console.log("Error in myavgstats"+JSON.stringify(err));
         res.json(result);          
       }    );
 
@@ -382,7 +380,7 @@ app.get('/mybeststats/:mode',function(req,res){
 		{$sort: {_id:1,accuracy:-1, reaction:1}},
     	],
       function(err,result){
-		  console.log("Error in mysummarstats"+JSON.stringify(err));
+		  console.log("Error in mybeststats"+JSON.stringify(err));
         res.json(result);          
       }    );
 
@@ -408,7 +406,7 @@ app.get('/leaderboard/:mode/:level',function(req,res){
 		{$sort: {accuracy:-1, reaction:1, _id:1}}
     	],
       function(err,result){
-		  console.log("Error in mysummarstats"+JSON.stringify(err));
+		  console.log("Error in leaderboard"+JSON.stringify(err));
         res.json(result);          
       }    );
 
