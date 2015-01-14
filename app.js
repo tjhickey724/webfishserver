@@ -409,7 +409,7 @@ app.get('/mybeststats/:mode',function(req,res){
 
 // this shows my stats for level 7
 app.get('/leaderboard/:mode/:level',function(req,res){
-    var level = req.params.level;
+    var level = parseInt(req.params.level);
     var mode = req.params.mode;
     var collection = db.get("gamesummary");
 	//console.log("the user is "+JSON.stringify(req.user));
