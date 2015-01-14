@@ -7,6 +7,7 @@ var userModel = (function() {
 	var userProfile = null;
 	var visualStats=null;
 	var auditoryStats=null;
+	var leaders = {visual:[], auditory:[]};
 	var userState = {mode:"visual",level:"level",consentStatus:"no",age: -1};
 	
 	function printInfo(){
@@ -77,6 +78,26 @@ var userModel = (function() {
 			auditoryStats = userInfo
 			//console.log("just got user info!!");
 		});	
+		
+		for(var level=0; level<=10; level++){
+			console.log("level = "+level);
+			for(var mode in leaders){
+				console.log("trying level "+level+" and mode "+mode);
+				console.log("with the url = '"+"/leaderboard/"+mode+"/"+level+"'");
+				$.ajax({
+					type: "GET",
+					url: "/leaderboard/"+mode+"/"+level, 
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				}).done(function(leaderInfo) {
+					console.log("download complete"+JSON.stringify(leaderInfo));
+					leaders[leaderInfo.mode][leaderInfo.level]=leaderInfo.leaders;
+					//console.log("leader info for level" +level+" and mode "+mode+" is "+ JSON.stringify(leaderInfo));
+					console.log("leaders = "+leaderInfo.mode+" "+leaderInfo.level+" "+JSON.stringify(leaders));
+					//console.log("just got user info!!");
+				});	
+			}
+		}
 	}
 	
 	
@@ -100,7 +121,7 @@ var userModel = (function() {
 		getUserInfo: getUserInfo,
 		loadGameStats: loadGameStats,
 		
-		getGameStats: function(){ return {visual:visualStats, auditory:auditoryStats};},
+		getGameStats: function(){ return {visual:visualStats, auditory:auditoryStats, leaders:leaders};},
 		
 		getLevel: function() { return userState.level;},
 		getMode: function() { return userState.mode;},

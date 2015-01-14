@@ -275,6 +275,25 @@ app.get('/summarystats/:mode/:level',function(req,res){
 
 })
 
+app.get('/leader/:mode/:level',function(req,res){
+    var level = req.params.level;
+    var mode = req.params.mode;
+    var collection = db.get("gamesummary");
+
+    collection.col.aggregate([
+        {$match: {level: level, mode:mode}},
+        {$group: 
+        {_id:"total",
+         tries:  {$sum: "$summary.tries"},
+         correct:{$sum: "$summary.correct"},
+         time:{$sum: "$summary.totalTime"},
+         count:{$sum: 1}  
+        }}],
+      function(err,result){
+        res.json(result);          
+      }    );
+
+})
 // this shows my stats for level 7
 app.get('/mysummarystats/:mode/:level',function(req,res){
     var level = req.params.level;
@@ -386,6 +405,8 @@ app.get('/mybeststats/:mode',function(req,res){
 
 })
 
+
+
 // this shows my stats for level 7
 app.get('/leaderboard/:mode/:level',function(req,res){
     var level = req.params.level;
@@ -406,8 +427,8 @@ app.get('/leaderboard/:mode/:level',function(req,res){
 		{$sort: {accuracy:-1, reaction:1, _id:1}}
     	],
       function(err,result){
-		  console.log("Error in leaderboard"+JSON.stringify(err));
-        res.json(result);          
+		  //console.log("Error in leaderboard"+JSON.stringify(err));
+        res.json({level:level, mode:mode, leaders:result});          
       }    );
 
 })

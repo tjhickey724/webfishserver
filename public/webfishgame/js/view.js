@@ -214,8 +214,15 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
 			var level = y["_id"].level;
+			var leaders = gameStats.leaders.visual[x];
+			console.log("leaders = "+JSON.stringify(leaders));
+			var leader={accuracy:0,reaction:2000};
+			if (leaders!=null && leaders.length>0) {leader = leaders[0];}
 			rows += "<tr><td><button onclick='gameControl.changeLevelMode("+level+",\"visual\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
-			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+" ms</td></tr>";
+			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+" ms</td>"+
+			"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
+			"<td>"+Math.round(leader["reaction"])+"ms </td>"+
+			"</tr>";
 			
 		}
 		//console.log(rows);
@@ -229,8 +236,15 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
 			var level = y["_id"].level;
+			var leaders = gameStats.leaders.auditory[x];
+			var leader={accuracy:0,reaction:2000};
+			if (leaders!=null && leaders.length>0) {leader = leaders[0];}
 			rows += "<tr><td><button  onclick='gameControl.changeLevelMode("+level+",\"auditory\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
-			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+"ms </td></tr>";
+			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+"ms </td>"+
+			"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
+			"<td>"+Math.round(leader["reaction"])+"ms </td>"+
+			//"<td>"+JSON.stringify(leader)+"</td>"+			
+			"</tr>";
 			
 		}
 		//console.log(rows);		
