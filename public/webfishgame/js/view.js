@@ -214,7 +214,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
 			var leaders = gameStats.leaders.visual[x];
-			var leader={accuracy:0,reaction:2000};
+			var leader={accuracy:0,reaction:2000,"_id":{nickname:"--"}};
 			if (leaders!=null && leaders.length>0) {leader = leaders[0];}
 			
 			if (y==undefined){
@@ -223,6 +223,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				rows += "<tr><td><button  "+active+"> Level "+x+" </button>  </td><td>--</td>"+
 				"<td>"+Math.round(100*leader["accuracy"])+"% ("+
 				      Math.round(leader["reaction"])+"ms) </td>"+
+				      "<td>"+leader["_id"].nickname+"</td>"+
 				"</tr>";
 			} else {
 				var level = y["_id"].level;
@@ -233,6 +234,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				"<td>"+Math.round(y.accuracy*100)+"% ("+Math.round(y.reaction)+"ms)</td>"+
 				"<td>"+Math.round(100*leader["accuracy"])+"% ("+
 				       Math.round(leader["reaction"])+"ms) </td>"+
+				      "<td>"+leader["_id"].nickname+"</td>"+
 				"</tr>";
 			}
 			
@@ -250,22 +252,22 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			var y = levels[x];
 			
 			var leaders = gameStats.leaders.auditory[x];
-			var leader={accuracy:0,reaction:2000};
+			var leader={accuracy:0,reaction:2000,"_id":{nickname:"--"}};
 			if (leaders!=null && leaders.length>0) {leader = leaders[0];}
 			if (y==undefined){
 				var active = "class='btn btn-sm btn-default' disabled";
 				if (x==0 || levels[x-1]!= undefined  && levels[x-1].accuracy > 0.8) {active = "class='btn btn-sm btn-success' onclick='gameControl.changeLevelMode("+x+",\"auditory\")'";}
-				rows += "<tr><td><button "+active+ "> Level "+x+" </button>  </td><td>--</td><td>--</td>"+
-				"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
-				"<td>"+Math.round(leader["reaction"])+"ms </td>"+
+				rows += "<tr><td><button "+active+ "> Level "+x+" </button>  </td><td>--</td>"+
+				"<td>"+Math.round(100*leader["accuracy"])+"% ("+Math.round(leader["reaction"])+"ms) </td>"+
+				      "<td>"+leader["_id"].nickname+"</td>"+
 				"</tr>";
 			}else {
 				var level = y["_id"].level;
 			
 				rows += "<tr><td><button  class='btn btn-sm btn-primary' onclick='gameControl.changeLevelMode("+level+",\"auditory\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
-				"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+"ms </td>"+
-				"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
-				"<td>"+Math.round(leader["reaction"])+"ms </td>"+
+				"<td>"+Math.round(y.accuracy*100)+"% ("+Math.round(y.reaction)+"ms) </td>"+
+				"<td>"+Math.round(100*leader["accuracy"])+"% ("+Math.round(leader["reaction"])+"ms) </td>"+
+				      "<td>"+leader["_id"].nickname+"</td>"+
 				//"<td>"+JSON.stringify(leader)+"</td>"+			
 				"</tr>";
 			}

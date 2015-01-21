@@ -127,11 +127,14 @@ var userModel = (function() {
 		getMode: function() { return userState.mode;},
 		getAge: function() { return userState.age;},
 		getConsent: function() { return userState.consent;},
+		getNickname: function() {return userState.nickname;},
 		setLevel: function(x) { userState.level = x; $("#level").html(x); updateUserState();},
 		setMode: function(x) { userState.mode = x;$("#gameMode").html(x); updateUserState();},
 		setAge: function(x) { userState.age = x;updateUserState();},
 		setConsent: function(x) { userState.consent = x;updateUserState();},
-		printInfo: printInfo
+		setNickname: function(x) {userState.nickname = x; updateUserState();},
+		printInfo: printInfo,
+		getUserState: function(){return userState}
 		
 		
 	}

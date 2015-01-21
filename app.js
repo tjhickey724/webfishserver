@@ -419,7 +419,7 @@ app.get('/leaderboard/:mode/:level',function(req,res){
 
 		{$project:
 			{
-				_id:{user:"$userID", level:"$level"},
+				_id:{user:"$userID", nickname:"$nickname", level:"$level"},
 				//level:"$level",
 				accuracy:{$divide:["$summary.correct","$summary.tries"]},
 				reaction:{$divide:["$summary.totalTime","$summary.tries"]}

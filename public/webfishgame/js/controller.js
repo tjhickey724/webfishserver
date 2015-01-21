@@ -404,6 +404,7 @@ var gameControl = (function() {
         var age = userModel.getAge(); 
         var mode = userModel.getMode(); 
         var theTime = new Date().getTime();
+		var nickname = userModel.getNickname();
         var logItem = 
             {userID:userID,
              level:userLevel,
@@ -426,6 +427,7 @@ var gameControl = (function() {
          var summaryStats = getSummaryStats();
          var summaryItem = 
             {userID:userID,
+			 nickname:nickname,
              level:userLevel,
              age:age,
              mode:mode,
@@ -474,6 +476,7 @@ var gameControl = (function() {
 		userModel.setLevel(0);
 		userModel.setAge($("#age").val());
 		userModel.setMode((Math.random()>0.5)?"visual":"auditory");
+		userModel.setNickname($("#nickname").val());
 
         $("#gameMode").text(userModel.getMode());
 		$("#level").text(userModel.getLevel());
