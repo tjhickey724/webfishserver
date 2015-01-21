@@ -6,6 +6,15 @@ html,body {
     background: #ccffcc;
 }
 
+#visuallist tr td {
+	white-space:nowrap;
+	text-align:right;
+}
+#auditorylist tr td {
+	white-space:nowrap;
+	text-align:right;
+}
+
 #canvas2 {
     background-position: 0px;
 /*     background-image: url('../images/stream.jpg'); */

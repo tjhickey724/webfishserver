@@ -210,46 +210,71 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		var rows;
 		levels =gameStats.visual;
 		rows="";
-		for(var x in levels){
+		for(var x=0; x<=10; x++){
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
-			var level = y["_id"].level;
 			var leaders = gameStats.leaders.visual[x];
-			console.log("leaders = "+JSON.stringify(leaders));
 			var leader={accuracy:0,reaction:2000};
 			if (leaders!=null && leaders.length>0) {leader = leaders[0];}
-			rows += "<tr><td><button onclick='gameControl.changeLevelMode("+level+",\"visual\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
-			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+" ms</td>"+
-			"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
-			"<td>"+Math.round(leader["reaction"])+"ms </td>"+
-			"</tr>";
+			
+			if (y==undefined){
+				var active = "class='btn btn-sm btn-default' disabled";
+				if (x==0 || levels[x-1]!= undefined  && levels[x-1].accuracy > 0.8) {active = "class='btn btn-sm btn-success' onclick='gameControl.changeLevelMode("+x+",\"visual\")'";}
+				rows += "<tr><td><button  "+active+"> Level "+x+" </button>  </td><td>--</td>"+
+				"<td>"+Math.round(100*leader["accuracy"])+"% ("+
+				      Math.round(leader["reaction"])+"ms) </td>"+
+				"</tr>";
+			} else {
+				var level = y["_id"].level;
+			
+				console.log("leaders = "+JSON.stringify(leaders));
+				
+				rows += "<tr><td><button class='btn btn-sm btn-primary' onclick='gameControl.changeLevelMode("+level+",\"visual\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
+				"<td>"+Math.round(y.accuracy*100)+"% ("+Math.round(y.reaction)+"ms)</td>"+
+				"<td>"+Math.round(100*leader["accuracy"])+"% ("+
+				       Math.round(leader["reaction"])+"ms) </td>"+
+				"</tr>";
+			}
 			
 		}
 		//console.log(rows);
 		var z1 = document.getElementById("visualList");
-		z1.innerHTML = rows;
+		var header="<thead><tr><th>level</th><th>my score</th><th>best score</th><th>best user</th></tr></thead>";
+		z1.innerHTML = header+rows;
 		
 		
 		levels =gameStats.auditory;
 		rows="";
-		for(var x in levels){
+		for(var x=0;x<=10;x++){
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
-			var level = y["_id"].level;
+			
 			var leaders = gameStats.leaders.auditory[x];
 			var leader={accuracy:0,reaction:2000};
 			if (leaders!=null && leaders.length>0) {leader = leaders[0];}
-			rows += "<tr><td><button  onclick='gameControl.changeLevelMode("+level+",\"auditory\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
-			"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+"ms </td>"+
-			"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
-			"<td>"+Math.round(leader["reaction"])+"ms </td>"+
-			//"<td>"+JSON.stringify(leader)+"</td>"+			
-			"</tr>";
+			if (y==undefined){
+				var active = "class='btn btn-sm btn-default' disabled";
+				if (x==0 || levels[x-1]!= undefined  && levels[x-1].accuracy > 0.8) {active = "class='btn btn-sm btn-success' onclick='gameControl.changeLevelMode("+x+",\"auditory\")'";}
+				rows += "<tr><td><button "+active+ "> Level "+x+" </button>  </td><td>--</td><td>--</td>"+
+				"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
+				"<td>"+Math.round(leader["reaction"])+"ms </td>"+
+				"</tr>";
+			}else {
+				var level = y["_id"].level;
+			
+				rows += "<tr><td><button  class='btn btn-sm btn-primary' onclick='gameControl.changeLevelMode("+level+",\"auditory\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
+				"<td>"+Math.round(y.accuracy*100)+"% </td><td>"+Math.round(y.reaction)+"ms </td>"+
+				"<td>"+Math.round(100*leader["accuracy"])+"% </td>"+
+				"<td>"+Math.round(leader["reaction"])+"ms </td>"+
+				//"<td>"+JSON.stringify(leader)+"</td>"+			
+				"</tr>";
+			}
 			
 		}
 		//console.log(rows);		
 		var z2 = document.getElementById("auditoryList");
-		z2.innerHTML = rows;
+		
+		z2.innerHTML = header+rows;
 	}
     
     return({
