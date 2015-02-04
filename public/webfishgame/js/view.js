@@ -223,7 +223,11 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				rows += "<tr><td><button  "+active+"> Level "+x+" </button>  </td><td>--</td>"+
 				"<td>"+Math.round(100*leader["accuracy"])+"% ("+
 				      Math.round(leader["reaction"])+"ms) </td>"+
-				      "<td>"+leader["_id"].nickname+"</td>"+
+				      "<td>"+leader["_id"].nickname+
+				      
+				      " <a href='#' class='statModalURL' data-type='visual' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>"+
+				      
+				      "</td>"+
 				"</tr>";
 			} else {
 				var level = y["_id"].level;
@@ -234,14 +238,16 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				"<td>"+Math.round(y.accuracy*100)+"% ("+Math.round(y.reaction)+"ms)</td>"+
 				"<td>"+Math.round(100*leader["accuracy"])+"% ("+
 				       Math.round(leader["reaction"])+"ms) </td>"+
-				      "<td>"+leader["_id"].nickname+"</td>"+
+				      "<td>"+leader["_id"].nickname+
+" <a href='#' class='statModalURL' data-type='visual' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>"+				      
+				      "</td>"+
 				"</tr>";
 			}
 			
 		}
 		//console.log(rows);
 		var z1 = document.getElementById("visualList");
-		var header="<thead><tr><th>level</th><th>my score</th><th>best score</th><th>best user</th></tr></thead>";
+		var header="<thead><tr><th>Level</th><th>My Score</th><th>Top Score</th><th>Top User</th></tr></thead>";
 		z1.innerHTML = header+rows;
 		
 		
@@ -259,7 +265,9 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				if (x==0 || levels[x-1]!= undefined  && levels[x-1].accuracy > 0.8) {active = "class='btn btn-sm btn-success' onclick='gameControl.changeLevelMode("+x+",\"auditory\")'";}
 				rows += "<tr><td><button "+active+ "> Level "+x+" </button>  </td><td>--</td>"+
 				"<td>"+Math.round(100*leader["accuracy"])+"% ("+Math.round(leader["reaction"])+"ms) </td>"+
-				      "<td>"+leader["_id"].nickname+"</td>"+
+				      "<td>"+leader["_id"].nickname+
+" <a href='#' class='statModalURL' data-type='auditory' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>"+				      
+				      "</td>"+
 				"</tr>";
 			}else {
 				var level = y["_id"].level;
@@ -267,7 +275,9 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				rows += "<tr><td><button  class='btn btn-sm btn-primary' onclick='gameControl.changeLevelMode("+level+",\"auditory\")'"+ " >Level "+ y["_id"].level +"</button></td>"+
 				"<td>"+Math.round(y.accuracy*100)+"% ("+Math.round(y.reaction)+"ms) </td>"+
 				"<td>"+Math.round(100*leader["accuracy"])+"% ("+Math.round(leader["reaction"])+"ms) </td>"+
-				      "<td>"+leader["_id"].nickname+"</td>"+
+				      "<td>"+leader["_id"].nickname+
+" <a href='#' class='statModalURL' data-type='auditory' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>"+				      
+				      "</td>"+
 				//"<td>"+JSON.stringify(leader)+"</td>"+			
 				"</tr>";
 			}
