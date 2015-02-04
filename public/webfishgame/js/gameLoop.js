@@ -35,7 +35,7 @@ var gameLoop = (function(){
         
         window.requestAnimationFrame(gameLoop);
 
-        var now = currentTime();;
+        var now = currentTime();
         var delta = (now-lastTime);
         lastStepTime=delta;
         stepTimes[delta] = stepTimes[delta]+1 | 1;

@@ -522,7 +522,9 @@ var gameControl = (function() {
 		{
 	    	if(gameOn){
 	    		gameOn = false;
-				endGame();
+	    		location.reload();
+	    		//gameLoop.stop();
+				//endGame();
 	    	}
 		});
     
