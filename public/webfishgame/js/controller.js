@@ -35,7 +35,7 @@ var gameControl = (function() {
     
     window.onhashchange = function(){showView(window.location.hash.substring(1))};
 
-
+	var gameOn = false;
     var log = [];
     var gameStart = (new Date()).getTime();
     var allStats={};
@@ -515,6 +515,17 @@ var gameControl = (function() {
     }
     
     function startGame(){
+    
+	    // force game to end when clicking on back button
+	    gameOn = true;
+	    window.addEventListener('popstate', function(event)
+		{
+	    	if(gameOn){
+	    		gameOn = false;
+				endGame();
+	    	}
+		});
+    
         //getAllStats();
         log=[];
         gameStats = initGameStats();
