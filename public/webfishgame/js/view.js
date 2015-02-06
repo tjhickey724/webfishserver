@@ -237,7 +237,8 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td>" + leader["_id"].nickname +
 
-				" <a href='#' class='statModalURL' data-type='visual' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
+					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"visual\"," + level 
+				           + ")'  data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
 
 				"</td>" +
 					"</tr>";
@@ -289,7 +290,8 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				rows += "<tr><td><button " + active + "> Level " + x + " </button>  </td><td>--</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td>" + leader["_id"].nickname +
-					" <a href='#' class='statModalURL' data-type='auditory' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
+					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"auditory\"," + level 
+				           + ")'  data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
 					"</td>" +
 					"</tr>";
 			} else {
@@ -299,7 +301,8 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms) </td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td>" + leader["_id"].nickname +
-					" <a href='#' class='statModalURL' data-type='auditory' data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
+					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"auditory\"," + level 
+				           + ")'  data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
 					"</td>" +
 				//"<td>"+JSON.stringify(leader)+"</td>"+			
 				"</tr>";
@@ -313,7 +316,50 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	}
 
 	function genLeaderData(mode, level) {
-		document.getElementById("leaderboard").innerHTML = "You are the leader!!!";
+				
+		//document.getElementById("leaderboard").innerHTML = "You are the leader!!!";
+		// fancey title for popup
+		var title = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase() + " Mode (Level " + level + ")";
+		$("#leaderboardTitle").html(title);
+		
+		level = 0;
+		var leadersFound = 0;
+		var output = "";
+		
+        $.ajax({
+               type: "GET",
+               url: "/leaderboard/"+mode+"/"+level,
+               contentType: "application/json; charset=utf-8",
+               dataType: "json"
+           }).done(function(list) {
+
+           		var leaders = list["leaders"];
+           		
+           		for(var i=0; i<leaders.length; i++){
+	           		
+	           		var nickname = list["leaders"][i]["_id"]["nickname"];
+	           		var accuracy = list["leaders"][i]["accuracy"];
+	           		var reaction = list["leaders"][i]["reaction"];
+	           		var counter = i+1;
+	           		
+	           		output += "<tr><td>"+i+"</td><td>" + nickname + "</td><td>" + Math.round(accuracy * 100) + "</td><td>" + Math.round(reaction) + "</td></tr>";
+
+	           		leadersFound++;
+           		}  
+           		
+           		
+           		if(leadersFound == 0)
+           			output = "<tr><td colspan='4'>No Leaders Found</td></tr>";
+           		
+
+           		$("#leaderboardBody").html(
+           		'<table class="table table-striped">' + 
+           			'<tr><th>#</th><th>Nickname</th><th>Accuracy</th><th>Reaction</th></tr>'+
+           			output + 
+           		"</table>"
+           		);             
+               
+           });		
 	}
 
 	return ({
