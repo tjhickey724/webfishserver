@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
   <title>game</title>
@@ -37,7 +37,7 @@
 		<div id="start-view" class="game_introWrapper view">
 			
 			<div id="userName"></div>
-			<div class="game_logoLarge">Fish Police</div>
+			<div class="game_logoLarge">Fish Police!!</div>
 				   			
 			<div class="game_introButtonsWrapper">
 				<br><br>
@@ -55,6 +55,13 @@
 		<div id="debugging-view" class="view">
 			This shouldn't appear!!
 		</div>
+		
+		
+		<div id="warning-view" class="view">
+			FishPolice!! doesn't work on safari or non-desktop machines...
+		</div>
+		
+		
 
 		<div id="game-view" class="view">
 		
@@ -89,7 +96,26 @@
 				<br><br>
 				<a href="game.html" role="button" class="btn btn-lg btn-primary game_introButton">Play Game</a>
 				-->
+					<div class="row">
+						<div class="col-md-6 offset-3">
 				<div class="game_consent">
+					
+					<h2>Fish Police!! Consent Form</h2>
+					<h3>A game by R. Sekuler and T. Hickey (Brandeis University)</h3>
+					<p> 
+						Explores how your eyes and your ears work together. 
+					</p><p>
+						Playing Fish Police!! has minimal risk and minimal benefit, 
+						except for the challenge and fun you’ll have.
+						</p><p> 
+						When we analyze the data, we will not use any information that can identify you personally.
+						</p><p> 
+
+						Before you begin our game, we’d like to ask a few questions.  
+						If you  choose not to answer, you may still play.  
+						
+
+					</p>
 					My nickname for this game (used on the leaderboards) will be 
 					<input type="text" class="span2" id="nickname" name="nickname">
 					<br/>
@@ -112,6 +138,7 @@
 						</button>
 					</div>	
 				</div>
+			</div></div>
 			</div>
 		</div>
 	
@@ -129,6 +156,7 @@
 					</div>
 					<div class="game_indicatorTopText game_indicatorTopRightSm">Level</div>			
 					<div class="cleaner"></div>
+					
 				</div>
 		    </nav>		
 			
@@ -144,6 +172,13 @@
 				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.showView('profile')">
 					View your best games
 				</button>
+				<br/>
+				
+					<button  class="btn btn-lg btn-success" data-toggle='modal' data-target='#instructions'
+					    onclick="gameControl.setInstructions()">
+						View Instructions
+					</button>
+				
 					<!-- 
 						<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
 						<button id="aural" onclick="gameControl.runAural()"> Aural</button>
@@ -242,6 +277,58 @@
   </div>
 </div>
 
+<div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="instructionsTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="instructionsTitle">Instructions</h4>
+      </div>
+      <div class="modal-body" id="visualInstrBody">
+        
+		<h2>Instructions for VISUAL version of game.</h2>
+		 <h3>Fish Police!!: SVU</h3>
+		<p>
+		Congratulations on becoming a cadet in Fish Police!!: Special Visual Unit. 
+		Your job is to watch and judge the strange, puffing fish that live in the river.
+	</p><p>
+		The river’s  bad, invasive fish and its good, native fish look alike but they behave differently, 
+		one is more jittery and one more relaxed. .
+		Press the L key to LURE a fish from the invasive, bad species.  
+		These fish are jittery and puff rapidly because they’re afraid you’ll spot them.
+		Press the P key to PET a fish from the good, native species.  
+		Because they are more relaxed, they puff more slowly than the bad fish.
+		Press the O key to OK any fish from the endangered species.  
+		Unlike other fish in the river, these fish make no sound as they swim. In fact, that’s their telltale sign.
+</p><p>
+		You’re just starting out now as a Fish Police!! cadet, but with hard work and concentration you could reach the Fish Police!!’s highest rank, its Commissioner.  To do that, you’ll have to make your judgments faster AND more accurately than other members of Fish Police!!’s cadet corps.
+	</p>
+      </div>
+	  
+	  <div class="modal-body" id="auditoryInstrBody">
+		 <h2>Instructions for AUDITORY version of game.</h2>
+		 <h3>Fish Police!!: SAU</h3>
+		 <p>
+		 Congratulations on becoming a cadet in Fish Police!!: Special Audition Unit. 
+		 Your job is to listen to and judge the strange, humming fish that live in the river.
+	 </p><p>
+		 The river’s bad, invasive fish and its good, native fish sound alike, both hum while they swim, but their humming differs. 
+		 Press the L key to LURE a fish from the invasive, bad species.  These fish are jittery —and hum rapidly because they’re afraid you’ll hear them.
+		 Press the P key to PET a fish from the good, native species.  Because they are more relaxed, they hum more slowly than the bad fish.
+		 Press the O key to OK any fish from the endangered species.  Unlike other fish in the river, these fish do not puff. In fact, that’s their telltale sign.
+		 </p><p>
+		 You’re just starting out now as a Fish Police!! cadet, but with hard work and concentration you could reach the Fish Police!!’s highest rank, its Commissioner.  To do that, you’ll have to make your judgments faster AND more accurately than other members of Fish Police!!’s cadet corps. 
+		 </p>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 		<script src="js/jquery-2.1.1.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/requestNextAnimationFrame.js"></script>
@@ -252,6 +339,7 @@
 		<script src="js/gameLoop.js"></script>
 		<script src="js/view.js"></script>
 		<script src="js/script.js"></script>
+ 		<script type='text/javascript' src="http://wurfl.io/wurfl.js"></script>
 
 		<script>gameControl.start(); </script>
 		

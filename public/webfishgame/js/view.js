@@ -237,7 +237,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td>" + leader["_id"].nickname +
 
-					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"visual\"," + level 
+					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"visual\"," + x 
 				           + ")'  data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
 
 				"</td>" +
@@ -246,6 +246,8 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				var level = y["_id"].level;
 
 				console.log("leaders = " + JSON.stringify(leaders));
+				console.log("******* level = "+level);
+				console.log("y="+JSON.stringify(y));
 
 				rows += "<tr><td><button class='btn btn-sm btn-primary' onclick='gameControl.changeLevelMode(" + level + ",\"visual\")'" + " >Level " + y["_id"].level + "</button></td>" +
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms)</td>" +
@@ -290,7 +292,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				rows += "<tr><td><button " + active + "> Level " + x + " </button>  </td><td>--</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td>" + leader["_id"].nickname +
-					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"auditory\"," + level 
+					" <a href='#' class='statModalURL' onclick='gameView.genLeaderData(\"auditory\"," + x 
 				           + ")'  data-toggle='modal' data-target='#statModal' style='font-size:10px;'>(View All)</a>" +
 					"</td>" +
 					"</tr>";
@@ -316,13 +318,13 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	}
 
 	function genLeaderData(mode, level) {
-				
+		console.log("gld-level="+level);
 		//document.getElementById("leaderboard").innerHTML = "You are the leader!!!";
 		// fancey title for popup
 		var title = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase() + " Mode (Level " + level + ")";
 		$("#leaderboardTitle").html(title);
 		
-		level = 0;
+		//level = 0;
 		var leadersFound = 0;
 		var output = "";
 		

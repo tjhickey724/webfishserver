@@ -24,7 +24,8 @@
 	</head>
 
 	<body>
-		<div class="game_introWrapper">
+		<div class="container">
+		<div class="game_introWrapper" id="mainEntry">
 			<div class="game_logoLarge">Fish Police</div>
 			<br><br>
 			<!-- 
@@ -37,6 +38,28 @@
 			<a href="/auth/logout" role="button" class="btn btn-lg btn-danger game_introButton" id="game_logoutButton">Logout</a>
 			-->
 		</div>
+		<div class="warningView">
+			<div id="warning-view" class="jumbotron view">
+				<h1>The FishPolice!! </h1>
+				<p>game can only be played on a non-Safari Desktop at the moment. Please use another device or browser to play FishPolice!!.  Thanks!!</p>
+			</div>
+		</div>
+	</div>
 	</body>
 				<script src="webfishgame/js/usermodel.js"></script>
+	<script type='text/javascript' src="http://wurfl.io/wurfl.js"></script>
+	<script type='text/javascript' >
+	$("#warning-view").hide();
+	function deviceOK(){
+		var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+		return (WURFL.form_factor == "Desktop") && (!isSafari);
+	}
+	if (!deviceOK()){
+		$("#mainEntry").hide();
+		$("#warning-view").show();
+	}
+		
+	
+	
+	</script>
 </html>

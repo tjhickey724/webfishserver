@@ -256,7 +256,7 @@ app.get('/allstats',function(req,res){
 })
 
 app.get('/summarystats/:mode/:level',function(req,res){
-    var level = req.params.level;
+    var level = parseInt(req.params.level);
     var mode = req.params.mode;
     var collection = db.get("gamesummary");
 
