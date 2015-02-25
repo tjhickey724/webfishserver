@@ -318,6 +318,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	}
 
 	function genLeaderData(mode, level) {
+		gameControl.logActivity("leaderboard",[mode,level]);
 		console.log("gld-level="+level);
 		//document.getElementById("leaderboard").innerHTML = "You are the leader!!!";
 		// fancey title for popup

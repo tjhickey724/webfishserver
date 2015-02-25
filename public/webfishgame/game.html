@@ -42,12 +42,15 @@
 			<div class="game_introButtonsWrapper">
 				<br><br>
 					
-					<button onclick="gameControl.showView('dashboard')" class="btn btn-lg btn-warning">Start Game</button>
+					<button onclick="gameControl.logActivity( 'start',[]);gameControl.showView('dashboard')" class="btn btn-lg btn-warning">Start Game</button>
 					
 					<br><br>
 								
-					<a href="/auth/logout" role="button" class="btn btn-lg btn-danger">Quit Game</a>
-		
+					
+		<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" 
+		         onclick= "gameControl.logActivity( 'logout',[])">
+			Log Out
+		</a>
 			</div>		
 		</div>
 
@@ -188,9 +191,17 @@
 				</button>
 				<br/>
 				
-					<button  class="btn btn-lg btn-success" data-toggle='modal' data-target='#instructions'>
+					<button  class="btn btn-lg btn-success" data-toggle='modal' data-target='#instructions'
+					         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
 						View Instructions
 					</button>
+					
+					<br/>
+					<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" 
+					         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
+						Log Out
+					</a>
+				
 			
 				
 					<!-- 

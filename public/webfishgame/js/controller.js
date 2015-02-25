@@ -17,7 +17,8 @@ var gameControl = (function() {
 		window.innerDocClick = false;
 	}
 
-	window.onhashchange = function() {
+// I think we can delete this onhashchange handler ...
+	window.onhashchangeZZZZ = function() {
 		if (window.innerDocClick) {
 			showView(window.location.hash.substring(1));
 
@@ -33,6 +34,7 @@ var gameControl = (function() {
 		console.log("Inside startGame popstate handler");
 		if (gameOn && !window.innerDocCLick) {
 			gameOn = false;
+			logActivity("reload",[]);
 			location.reload();
 			//gameLoop.stop();
 			//endGame();
@@ -41,8 +43,6 @@ var gameControl = (function() {
 	});
 	
 	window.addEventListener("keydown", function(event){return keyDownHandler(event)} , false);
-
-
 
 	var showView = function(selected) {
 		if (selected == "dashboard") {
@@ -69,9 +69,24 @@ var gameControl = (function() {
         }
 		   */
 		console.log("showing " + '#' + selected + '-view')
+			logActivity("showPage",selected);
 
 
 	};
+	
+	function logActivity(activity, data){
+		var msg = {activity: activity, data:data, time:Date.now(), user: userModel.getUserID()};
+		console.log(JSON.stringify(msg));
+		$.ajax({
+			type: "POST",
+			url: "/model/applog",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			data: JSON.stringify(msg)
+		}).done(function(userInfo) {
+			console.log("updated applog: "+userInfo);
+		});		
+	}
 
 	var goodFishKey = "U";
 	var badFishKey = "I";
@@ -537,6 +552,7 @@ var gameControl = (function() {
 	}
 
 	function runGame() {
+		
 		if (userModel.getMode() == "visual") {
 			runVisual();
 		} else {
@@ -615,6 +631,7 @@ var gameControl = (function() {
 
 	function startGame() {
 		console.log("inside startGame");
+		logActivity("runGame",[userModel.getMode(),userModel.getLevel()]);
 		// force game to end when clicking on back button
 		gameOn = true;
 
@@ -660,7 +677,8 @@ var gameControl = (function() {
 		getAllSummaryStats: getAllSummaryStats,
 		changeLevelMode: changeLevelMode,
 		showView: showView,
-		showInstructions: showInstructions
+		showInstructions: showInstructions,
+		logActivity: logActivity
 	})
 
 }())

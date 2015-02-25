@@ -90,10 +90,10 @@ var userModel = (function() {
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
 				}).done(function(leaderInfo) {
-					console.log("download complete"+JSON.stringify(leaderInfo));
+					//console.log("download complete"+JSON.stringify(leaderInfo));
 					leaders[leaderInfo.mode][leaderInfo.level]=leaderInfo.leaders;
 					//console.log("leader info for level" +level+" and mode "+mode+" is "+ JSON.stringify(leaderInfo));
-					console.log("leaders = "+leaderInfo.mode+" "+leaderInfo.level+" "+JSON.stringify(leaders));
+					//console.log("leaders = "+leaderInfo.mode+" "+leaderInfo.level+" "+JSON.stringify(leaders));
 					//console.log("just got user info!!");
 				});	
 			}
