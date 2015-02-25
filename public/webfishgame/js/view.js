@@ -367,11 +367,11 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	function updateInstr(mode){
 		console.log("updating "+mode);
 		if (mode=="visual"){
-			$("#visualInstructions").show();
-			$("#auditoryInstructions").hide();
+			$(".visualInstructions").show();
+			$(".auditoryInstructions").hide();
 		} else {
-			$("#visualInstructions").hide();
-			$("#auditoryInstructions").show();			
+			$(".visualInstructions").hide();
+			$(".auditoryInstructions").show();			
 		}
 	}
 

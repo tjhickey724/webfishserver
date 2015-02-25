@@ -73,9 +73,9 @@ var gameControl = (function() {
 
 	};
 
-	var goodFishKey = 'P';
-	var badFishKey = 'L';
-	var oddballKey = 'O';
+	var goodFishKey = "U";
+	var badFishKey = "I";
+	var oddballKey = "O";
 
 	var gameOn = false;
 	var log = [];
@@ -211,11 +211,11 @@ var gameControl = (function() {
 		//debugPrint("keydown = "+keyPressed);
 		// here is the case where they saw and/or heard a fish
 		// and pressed a key classifying it as good or bad
-		if (keyPressed == "P") {
+		if (keyPressed == goodFishKey) {
 			goodKeyPress(now);
-		} else if (keyPressed == "L") {
+		} else if (keyPressed == badFishKey) {
 			badKeyPress(now);
-		} else if (keyPressed == "O") {
+		} else if (keyPressed == oddballKey) {
 			oddKeyPress(now);
 		}
 	}
@@ -230,14 +230,14 @@ var gameControl = (function() {
 		// if there is not visual or audio any keypresses are wrong!
 		// these are the oddball cases ...
 		if (gameModel.getFishVisual() == 'none') {
-			gameModel.logKeyPress('novis', 'P', 'incorrect', now);
+			gameModel.logKeyPress('novis', goodFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			debugPrint("goodKeyPress: goodkey no visual");
 			gameModel.killFish();
 			return;
 		}
 		if (gameModel.getFishAudio() == 'none') {
-			gameModel.logKeyPress('noaud', 'P', 'incorrect', now);
+			gameModel.logKeyPress('noaud', goodFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			debugPrint("goodKeyPress: goodkey no audio");
 			gameModel.killFish();
@@ -249,10 +249,10 @@ var gameControl = (function() {
 
 
 			if (gameModel.isGoodFish()) {
-				gameModel.logKeyPress('good', 'P', 'correct', now);
+				gameModel.logKeyPress('good', goodFishKey, 'correct', now);
 				gameView.playGood(now);
 			} else {
-				gameModel.logKeyPress('bad', 'P', 'incorrect', now);
+				gameModel.logKeyPress('bad', goodFishKey, 'incorrect', now);
 				gameView.playBad(now);
 
 			}
@@ -267,13 +267,13 @@ var gameControl = (function() {
 		// if there is not visual or audio any keypresses are wrong!
 		// these are the oddball cases ...
 		if (gameModel.getFishVisual() == 'none') {
-			gameModel.logKeyPress('novis', 'L', 'incorrect', now);
+			gameModel.logKeyPress('novis', badFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			gameModel.killFish();
 			return;
 		}
 		if (gameModel.getFishAudio() == 'none') {
-			gameModel.logKeyPress('noaud', 'L', 'incorrect', now);
+			gameModel.logKeyPress('noaud', badFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			gameModel.killFish();
 			return;
@@ -286,10 +286,10 @@ var gameControl = (function() {
 			gameModel.killFish();
 
 			if (gameModel.isGoodFish()) {
-				gameModel.logKeyPress('good', 'L', 'incorrect', now);
+				gameModel.logKeyPress('good', badFishKey, 'incorrect', now);
 				gameView.playBad();
 			} else {
-				gameModel.logKeyPress('bad', 'L', 'correct', now);
+				gameModel.logKeyPress('bad', badFishKey, 'correct', now);
 				gameView.playGood();
 			}
 		}
@@ -303,13 +303,13 @@ var gameControl = (function() {
 		// if there is not visual or audio any keypresses are wrong!
 		// these are the oddball cases ...
 		if (gameModel.getFishVisual() == 'none') {
-			gameModel.logKeyPress('novis', 'O', 'correct', now);
+			gameModel.logKeyPress('novis', oddballKey, 'correct', now);
 			gameView.playGood(now);
 			gameModel.killFish();
 			return;
 		}
 		if (gameModel.getFishAudio() == 'none') {
-			gameModel.logKeyPress('noaud', 'O', 'correct', now);
+			gameModel.logKeyPress('noaud', oddballKey, 'correct', now);
 			gameView.playGood(now);
 			gameModel.killFish();
 			return;
@@ -321,10 +321,10 @@ var gameControl = (function() {
 		if (gameModel.getFishVisible()) {
 			gameModel.killFish();
 			if (gameModel.isGoodFish()) {
-				gameModel.logKeyPress('good', 'O', 'incorrect', now);
+				gameModel.logKeyPress('good', oddballKey, 'incorrect', now);
 				gameView.playBad();
 			} else {
-				gameModel.logKeyPress('bad', 'O', 'incorrect', now);
+				gameModel.logKeyPress('bad', oddballKey, 'incorrect', now);
 				gameView.playBad();
 			}
 		}
