@@ -161,29 +161,42 @@
 		    </nav>		
 			
 			<div class="game_introButtonsWrapper">
-			<!-- 
-				<button id="resetLevel" onclick="gameModel.resetUserLevel();$('#level').html(0)">Reset User Level to 0 </button>
-			-->
+
 			<br><br><br><br><br><br><br><br>
 				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.runGame()">
 					Ready to Play!
 				</button>
+				<br/><br/>
+				<div>
+					<div id="visualInstructions" class="text-center">
+						VISUAL MODE<br/> PAY ATTENTION TO THE IMAGES OF THE FISH <br/>	
+					</div>
+					<div id="auditoryInstructions" class="text-center">
+						AUDITORY MODE<br/> PAY ATTENTION TO THE SOUND OF THE FISH <br/>
+					</div>
+					<div class="text-center">
+						Good fish (slow) == P key <br/>
+						Bad fish (fast) == L key <br/>
+						Protected Species (oddball) == Oh key (i.e. no sound or no visuals)
+					</div>
+				</div>
 				<br/>
 				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.showView('profile')">
 					View your best games
 				</button>
 				<br/>
 				
-					<button  class="btn btn-lg btn-success" data-toggle='modal' data-target='#instructions'
-					    onclick="gameControl.setInstructions()">
+					<button  class="btn btn-lg btn-success" data-toggle='modal' data-target='#instructions'>
 						View Instructions
 					</button>
+			
 				
 					<!-- 
 						<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
 						<button id="aural" onclick="gameControl.runAural()"> Aural</button>
 					-->
 			</div>
+			
 		
 		</div>
 		

@@ -48,6 +48,7 @@ var gameControl = (function() {
 		if (selected == "dashboard") {
 			gameModel.updateParameters();
 			userModel.loadGameStats();
+			gameView.updateInstr(userModel.getMode());
 		} else if (selected == "profile") {
 			gameView.showLevels();
 
@@ -566,6 +567,7 @@ var gameControl = (function() {
 		userModel.setNickname($("#nickname").val());
 
 		$("#gameMode").text(userModel.getMode());
+		gameView.updateInstr(userModel.getMode());
 		$("#level").text(userModel.getLevel());
 
 		showView("dashboard");
@@ -632,7 +634,7 @@ var gameControl = (function() {
 		showView("dashboard");
 	}
 
-	function setInstructions() {
+	function showInstructions() {
 		if (userModel.getMode() == "visual") {
 			$("#visualInstrBody").show();
 			$("#auditoryInstrBody").hide();
@@ -658,7 +660,7 @@ var gameControl = (function() {
 		getAllSummaryStats: getAllSummaryStats,
 		changeLevelMode: changeLevelMode,
 		showView: showView,
-		setInstructions: setInstructions
+		showInstructions: showInstructions
 	})
 
 }())

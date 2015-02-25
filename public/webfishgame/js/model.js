@@ -84,6 +84,7 @@ var gameModel = (function() {
     function updateParameters(){
         $("#level").html(userModel.getLevel());
 		$("#gameMode").html(userModel.getMode()); 
+		//gameView.updateInstr(userModel.getModel());
         $("#gameDuration").attr('value',gameDuration);
         $("#minIFI").attr('value',getMinFishSpawn(userModel.getLevel()));
         $("#maxIFI").attr('value',getMaxFishSpawn(userModel.getLevel()));

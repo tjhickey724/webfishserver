@@ -363,6 +363,17 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
                
            });		
 	}
+	
+	function updateInstr(mode){
+		console.log("updating "+mode);
+		if (mode=="visual"){
+			$("#visualInstructions").show();
+			$("#auditoryInstructions").hide();
+		} else {
+			$("#visualInstructions").hide();
+			$("#auditoryInstructions").show();			
+		}
+	}
 
 	return ({
 		update: update,
@@ -372,6 +383,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		stopFishAudio: stopFishAudio,
 		setSkin: setSkin,
 		showLevels: showLevels,
+		updateInstr: updateInstr,
 		genLeaderData: genLeaderData
 	})
 }())

@@ -129,7 +129,7 @@ var userModel = (function() {
 		getConsent: function() { return userState.consent;},
 		getNickname: function() {return userState.nickname;},
 		setLevel: function(x) { userState.level = x; $("#level").html(x); updateUserState();},
-		setMode: function(x) { userState.mode = x;$("#gameMode").html(x); updateUserState();},
+		setMode: function(x) { userState.mode = x;$("#gameMode").html(x); gameView.updateInstr(userState.mode); updateUserState();},
 		setAge: function(x) { userState.age = x;updateUserState();},
 		setConsent: function(x) { userState.consent = x;updateUserState();},
 		setNickname: function(x) {userState.nickname = x; updateUserState();},
