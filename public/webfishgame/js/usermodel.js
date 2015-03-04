@@ -104,8 +104,9 @@ var userModel = (function() {
 	
 	
 	//console.log("getting user info");
-	getUserInfo();
-	getUserState();
+	//getUserInfo();
+	//getUserState();
+	loadGameStats();
 
 
 
