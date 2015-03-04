@@ -2,7 +2,7 @@
 The user model stores all information about the user 
 and it goes to the server to get the info if it is not available locally
 **/
-
+console.log("load userModel");
 var userModel = (function() {
 	var userProfile = null;
 	var visualStats=null;
@@ -23,6 +23,7 @@ var userModel = (function() {
 		}).done(function(newUserState) {
 			userState = newUserState;
 			console.log("just got user info!!"+JSON.stringify(userState));
+			gameControl.checkConsent();
 		});
 	}
 	
@@ -49,6 +50,7 @@ var userModel = (function() {
 		}).done(function(userInfo) {
 			//console.log("upload complete"+JSON.stringify(userInfo));
 			userProfile = userInfo.profile;
+			//gameControl.checkConsent();
 			//console.log("just got user info!!");
 		});
 
@@ -119,6 +121,7 @@ var userModel = (function() {
 		},
 
 		getUserInfo: getUserInfo,
+		getUserState: getUserState,
 		loadGameStats: loadGameStats,
 		
 		getGameStats: function(){ return {visual:visualStats, auditory:auditoryStats, leaders:leaders};},
@@ -133,9 +136,10 @@ var userModel = (function() {
 		setAge: function(x) { userState.age = x;updateUserState();},
 		setConsent: function(x) { userState.consent = x;updateUserState();},
 		setNickname: function(x) {userState.nickname = x; updateUserState();},
-		printInfo: printInfo,
-		getUserState: function(){return userState}
+		printInfo: printInfo
 		
 		
 	}
 }())
+
+console.log("user model loaded");

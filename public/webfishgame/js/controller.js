@@ -2,6 +2,7 @@
 The game controller handles all user input, including clicking on checkboxes,
 pressing keys, starting and ending the game, etc.
 **/
+console.log("loading gameControl");
 var gameControl = (function() {
 	debugPrint("loading controller");
 
@@ -17,7 +18,7 @@ var gameControl = (function() {
 		window.innerDocClick = false;
 	}
 
-// I think we can delete this onhashchange handler ...
+	// I think we can delete this onhashchange handler ...
 	window.onhashchangeZZZZ = function() {
 		if (window.innerDocClick) {
 			showView(window.location.hash.substring(1));
@@ -34,15 +35,17 @@ var gameControl = (function() {
 		console.log("Inside startGame popstate handler");
 		if (gameOn && !window.innerDocCLick) {
 			gameOn = false;
-			logActivity("reload",[]);
+			logActivity("reload", []);
 			location.reload();
 			//gameLoop.stop();
 			//endGame();
 		}
 
 	});
-	
-	window.addEventListener("keydown", function(event){return keyDownHandler(event)} , false);
+
+	window.addEventListener("keydown", function(event) {
+		return keyDownHandler(event)
+	}, false);
 
 	var showView = function(selected) {
 		if (selected == "dashboard") {
@@ -69,13 +72,18 @@ var gameControl = (function() {
         }
 		   */
 		console.log("showing " + '#' + selected + '-view')
-			logActivity("showPage",selected);
+		logActivity("showPage", selected);
 
 
 	};
-	
-	function logActivity(activity, data){
-		var msg = {activity: activity, data:data, time:Date.now(), user: userModel.getUserID()};
+
+	function logActivity(activity, data) {
+		var msg = {
+			activity: activity,
+			data: data,
+			time: Date.now(),
+			user: userModel.getUserID()
+		};
 		console.log(JSON.stringify(msg));
 		$.ajax({
 			type: "POST",
@@ -84,8 +92,8 @@ var gameControl = (function() {
 			dataType: "json",
 			data: JSON.stringify(msg)
 		}).done(function(userInfo) {
-			console.log("updated applog: "+userInfo);
-		});		
+			console.log("updated applog: " + userInfo);
+		});
 	}
 
 	var goodFishKey = "U";
@@ -552,7 +560,7 @@ var gameControl = (function() {
 	}
 
 	function runGame() {
-		
+
 		if (userModel.getMode() == "visual") {
 			runVisual();
 		} else {
@@ -600,24 +608,28 @@ var gameControl = (function() {
 			// show warning page
 			showView("warning");
 		} else {
-			showView("start");
+			//showView("start");
 			userModel.getUserInfo();
-			setTimeout(checkConsent, 2000);
+			userModel.getUserState();
+			//setTimeout(checkConsent, 2000);
 		}
 	}
 
 	function checkConsent() {
 		userModel.printInfo();
-		console.log("inside start method");
+		console.log("inside checkConsent method");
 
-		if (userModel.getConsent() != "consented")
+		if (userModel.getConsent() != "consented") {
+			//console.log("Calling showview consent");
 			showView("consent");
-		else {
+		} else {
+			//console.log("consented case");
 			$("#gameMode").text(userModel.getMode());
-			if (window.location.hash == "")
+			if (window.location.hash == "") {
+				//console.log("showView(start)");
 				showView("start");
-			else {
-				//console.log("showing "+window.location.hash);
+			} else {
+				//console.log("showing " + window.location.hash);
 				showView(window.location.hash.substring(1));
 			}
 		}
@@ -631,7 +643,7 @@ var gameControl = (function() {
 
 	function startGame() {
 		console.log("inside startGame");
-		logActivity("runGame",[userModel.getMode(),userModel.getLevel()]);
+		logActivity("runGame", [userModel.getMode(), userModel.getLevel()]);
 		// force game to end when clicking on back button
 		gameOn = true;
 
@@ -673,6 +685,7 @@ var gameControl = (function() {
 		pushLog: pushLog,
 		endGame: endGame,
 		consent: consent,
+		checkConsent: checkConsent,
 		setSkin: setSkin,
 		getAllSummaryStats: getAllSummaryStats,
 		changeLevelMode: changeLevelMode,
@@ -682,3 +695,5 @@ var gameControl = (function() {
 	})
 
 }())
+
+console.log("gameControl loaded");

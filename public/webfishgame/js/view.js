@@ -252,7 +252,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				console.log("******* level = "+level);
 				console.log("y="+JSON.stringify(y));
 
-				rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", " + level + ",\"visual\")'" + " >Level " + y["_id"].level + "</button></td>" +
+				rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", \"visual\"," + level + ")'" + " >Level " + y["_id"].level + "</button></td>" +
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms)</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" +
 					Math.round(leader["reaction"]) + "ms) </td>" +
@@ -307,7 +307,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					
 					var allowed = "trying";
 					
-					rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", " + level + ",\"auditory\")'" + " >Level " + y["_id"].level + "</button></td>" +
+					rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", \"auditory\"," + level + ")'" + " >Level " + y["_id"].level + "</button></td>" +
 
 				
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms) </td>" +
