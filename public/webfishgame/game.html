@@ -191,7 +191,7 @@
 						Ready to Play!
 					</button>  	
 					<button id="playGame" class="btn btn btn-success" onclick="gameControl.showView('profile')">
-						Best Games
+						Best Scores
 					</button>
 						<button  class="btn btn btn-warning" data-toggle='modal' data-target='#instructions'
 						         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
@@ -267,14 +267,14 @@
 					<div class="col-md-5 offset-1">
 						<div id="visual"><h1>Visual Mode</h1>
 
-							<table id="visualList" class="table table-bordered bg-info">
+							<table id="visualList" class="table table-bordered bg-info supterFixedTable">
 							</table>
 						</div>
 					</div>
 	
 					<div class="col-md-5 offset-1">
 						<div id="auditory"><h1>Auditory Mode</h1>	
-							<table id="auditoryList" class="table table-bordered bg-info">
+							<table id="auditoryList" class="table table-bordered bg-info supterFixedTable">
 							</table>
 						</div>
 					</div>
@@ -300,7 +300,7 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <center><button type="button" class="btn btn-default" id="popupPlayButton" data-dismiss="modal" disabled="disabled">Play Now</button></center>
       </div>
     </div>
   </div>

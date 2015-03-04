@@ -114,3 +114,12 @@ h3{
 .warningView {
 	visible:hidden;
 }
+.supterFixedTable td, th
+{
+	text-align: center;
+}
+#leaderboardBody
+{
+	overflow-y: scroll;
+	max-height:400px;
+}
