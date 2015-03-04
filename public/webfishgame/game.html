@@ -38,14 +38,14 @@
 			
 			<div id="userName"></div>
 			<div class="game_logoLarge">Fish Police!!</div>
-				   			
-			<div class="game_introButtonsWrapper">
-				<br><br>
+				
+
+<br><br>				
+<div class="btn-group game_introButtonsWrapper">
 					
-					<button onclick="gameControl.logActivity( 'start',[]);gameControl.showView('dashboard')" class="btn btn-lg btn-warning">Start Game</button>
 					
-					<br><br>
-								
+					<button onclick="gameControl.logActivity( 'start',[]);gameControl.showView('dashboard')" class="btn btn-lg btn-primary">Start Game</button>
+													
 					
 		<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" 
 		         onclick= "gameControl.logActivity( 'logout',[])">
@@ -165,49 +165,52 @@
 			
 			<div class="game_introButtonsWrapper">
 
-			<br><br><br><br><br><br><br><br>
-				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.runGame()">
-					Ready to Play!
-				</button>
-				<br/><br/>
-				<div>
-					<div class="visualInstructions text-center">
-						VISUAL MODE<br/> PAY ATTENTION TO THE IMAGES OF THE FISH <br/>	
-					</div>
-					<div class="auditoryInstructions text-center">
-						AUDITORY MODE<br/> PAY ATTENTION TO THE SOUND OF THE FISH <br/>
-					</div>
-					<div class="text-center">
-						Good fish (slow) ==  U key (for Usual Species) <br/>
-						Bad fish (fast) == I key (for Invasive Species)<br/>
-						Protected Species (oddball) == O key (i.e.either silent or invisible fish!)<br/>
-						You have 2 seconds to tag the fish in level 0 but only 0.5 seconds in level 10!<br/>
-						The fish also come faster as the level gets higher.
-					</div>
-				</div>
-				<br/>
-				<button id="playGame" class="btn btn-lg btn-success" onclick="gameControl.showView('profile')">
-					View your best games
-				</button>
-				<br/>
-				
-					<button  class="btn btn-lg btn-success" data-toggle='modal' data-target='#instructions'
-					         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
-						View Instructions
+
+
+			<br>
+			<div class="panel panel-default" style="max-width:500px; margin:0px auto;">
+			  <div class="panel-heading">
+			    <h3 class="panel-title visualInstructions">VISUAL MODE</h3>
+			    <h3 class="panel-title auditoryInstructions">AUDITORY MODE</h3>
+			  </div>
+			  <div class="panel-body">
+			    <div class="panel-title visualInstructions">PAY ATTENTION TO THE IMAGES OF THE FISH<br>&nbsp;</div>
+			    <div class="panel-title auditoryInstructions">PAY ATTENTION TO THE SOUND OF THE FISH<br>&nbsp;</div>
+				<div class="text-center">
+					<img src="images/keys.png" alt="" title="instructions" style="width:300px;">
+<!--
+					<br>
+					You have 2 seconds to tag the fish in level 0 but only 0.5 seconds in level 10!<br/>
+					The fish also come faster as the level gets higher.
+-->
+				</div>    
+			  </div>
+			  <div class="panel-footer">
+			  	<div class="btn-group" role="group">
+					<button id="playGame" class="btn btn btn-primary" onclick="gameControl.runGame()">
+						Ready to Play!
+					</button>  	
+					<button id="playGame" class="btn btn btn-success" onclick="gameControl.showView('profile')">
+						Best Games
 					</button>
-					
-					<br/>
-					<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" 
-					         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
-						Log Out
-					</a>
-				
-			
-				
-					<!-- 
-						<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
-						<button id="aural" onclick="gameControl.runAural()"> Aural</button>
-					-->
+						<button  class="btn btn btn-warning" data-toggle='modal' data-target='#instructions'
+						         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
+							Instructions
+						</button>
+						
+						<a href="/logout.html" role="button"  class="btn btn btn-danger" 
+						         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
+							Log Out
+						</a>
+						<!-- 
+							<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
+							<button id="aural" onclick="gameControl.runAural()"> Aural</button>
+						-->							  	
+			  	</div>
+			  </div>
+			</div>
+
+
 			</div>
 			
 		
