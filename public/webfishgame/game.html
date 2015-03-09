@@ -100,7 +100,7 @@
 				<a href="game.html" role="button" class="btn btn-lg btn-primary game_introButton">Play Game</a>
 				-->
 					<div class="row">
-						<div class="col-md-6 offset-3">
+						<div class="col-md-8 col-md-offset-2 bg-primary">
 				<div class="game_consent">
 					
 					<h2>Fish Police!! Consent Form</h2>
@@ -120,10 +120,10 @@
 
 					</p>
 					My nickname for this game (used on the leaderboards) will be 
-					<input type="text" class="span2" id="nickname" name="nickname">
+					<input type="text" class="span2 bg-warning" id="nickname" name="nickname">
 					<br/>
 					My age is 
-					<select id="age">
+					<select id="age" class="bg-warning">
 						<option value="0">0-9</option>
 						<option value="1">10-19</option>
 						<option value="2">20-29</option>
@@ -242,7 +242,7 @@
 					<br><br>		
 					<div id="log" class="game_logInfoWrapper"></div>
 					<br>
-					<button onclick="gameControl.showView('dashboard')" class="btn btn-lg btn-warning">Play Again?</button>
+					<button onclick="gameControl.showView('profile')" class="btn btn-lg btn-warning">Play Again?</button>
 				</div>
 
 			</div>
@@ -262,6 +262,12 @@
 			
 		
 			<div id="profile-view" class="view">
+				<div class="text-right">
+					<a href="/auth/logout" role="button"  class="btn btn btn-danger" data-dismiss="modal"
+					         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
+						Log Out
+					</a>
+				</div>
 				
 				<div class="row">
 					<div class="col-md-5 offset-1">
@@ -280,6 +286,7 @@
 					</div>
 					
 				</div>
+
 				
 			</div>
 				
@@ -300,7 +307,24 @@
         
       </div>
       <div class="modal-footer">
-        <center><button type="button" class="btn btn-default" id="popupPlayButton" data-dismiss="modal" disabled="disabled">Play Now</button></center>
+        <center>
+			<!-- >
+				<button type="button" class="btn btn-default" id="popupPlayButton" data-dismiss="modal"
+				 disabled="disabled">Play Now</button>
+				-->
+		<button id="playGame" class="btn btn btn-primary" data-dismiss="modal" onclick="gameControl.runGame()">
+			Ready to Play!
+		</button>  	
+		<button id="playGame" class="btn btn btn-success" data-dismiss="modal" onclick="gameControl.showView('profile')">
+			Best Scores
+		</button>
+		<button  class="btn btn btn-warning" data-toggle='modal' data-dismiss="modal" data-target='#instructions'
+		         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
+			Instructions
+		</button>
+		
+
+		</center>
       </div>
     </div>
   </div>

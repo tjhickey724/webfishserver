@@ -39,6 +39,12 @@ h3{
     font-size:24pt;
     font-weight:250;
 }
+.game_consent input {
+	color:black;
+}
+.game_consent select {
+	color:black;
+}
 
 .game_playGame
 {

@@ -215,11 +215,12 @@ app.get('/api/user', ensureAuthenticated, function(req, res) {
 });
 
 app.get('/api/userState',ensureAuthenticated,function(req,res){
+	console.log("\n\n **** user = "+JSON.stringify(req.user));
 		console.log("\n\n **** userState = '"+JSON.stringify(req.user.userState)+"'\n\n");
 	if (req.user.userState == undefined){
 		req.user.userState = {level:0, mode:"visual",consent:"no",age:-1};
 		var collection = db.get("user");
-		var u = collection.find({"_id":req.user["_id"]}); console.log(JSON.stringify(u));
+		//var u = collection.find({"_id":req.user["_id"]}); console.log("in apu/userState -- "+JSON.stringify(u));
 		collection.update({"_id":req.user["_id"]}, req.user);
 		req.session.passport.user = req.user;
 	}

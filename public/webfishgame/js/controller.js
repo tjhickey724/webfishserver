@@ -52,9 +52,9 @@ var gameControl = (function() {
 			gameModel.updateParameters();
 			userModel.loadGameStats();
 			gameView.updateInstr(userModel.getMode());
-		} else if (selected == "profile") {
+		}
+		if (selected == "profile"){
 			gameView.showLevels();
-
 		}
 		console.log("Username = " + userModel.getUserName());
 
@@ -594,7 +594,7 @@ var gameControl = (function() {
 		gameView.updateInstr(userModel.getMode());
 		$("#level").text(userModel.getLevel());
 
-		showView("dashboard");
+		showView("profile");
 	}
 
 
@@ -612,6 +612,7 @@ var gameControl = (function() {
 			userModel.getUserInfo();
 			setTimeout(userModel.getUserState(),500);
 			//setTimeout(checkConsent, 2000);
+			showView("profile");
 		}
 	}
 
