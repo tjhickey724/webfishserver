@@ -60,6 +60,7 @@ var gameView = (function() {
 
 	var soundFast = new Audio('sounds/8hz/fish.wav');
 	var soundSlow = new Audio('sounds/5hz/fish.wav');
+	var soundVerySlow = new Audio('sounds/3hz/fish.wav');
 	var soundOddball = new Audio('sounds/5hzHigh/fish.wav');
 
 	function setSkin(skin) {
@@ -84,7 +85,16 @@ var gameView = (function() {
 	}
 
 	function playFishAudio() {
-		fishSound = (gameModel.getFishAudio() == 'fast') ? soundFast : soundSlow;
+		//fishSound = (gameModel.getFishAudio() == 'fast') ? soundFast : soundSlow;
+		if (gameModel.getFishAudio() == 'fast') {
+			fishSound = soundFast;
+		} else if (gameModel.getFishAudio() == 'slow'){
+			if (userModel.getLevel()==0){
+				fishSound = soundVerySlow;
+			} else {
+				fishSound = soundSlow;
+			}
+		}
 
 		//if (gameModel.getFishVisual() == 'none'){
 		//    fishSound = soundOddball; 
@@ -105,7 +115,16 @@ var gameView = (function() {
 
 		drawBackground2(img1); // draw the background flowing by in a seamless way...
 		debugPrint(gameModel.getFishVisible());
-		var hz = (gameModel.getFishVisual() == 'fast') ? 8 : 5;
+		//var hz = (gameModel.getFishVisual() == 'fast') ? 8 : 5;
+		var hz;
+		if (gameModel.getFishVisual()=='fast') {
+			hz=8;
+		}else if (userModel.getLevel() ==0) {
+			hz=3;
+		} else {
+			hz=5;
+		}
+	
 
 		drawStats();
 		if (gameModel.getFishVisual() == 'none') {
