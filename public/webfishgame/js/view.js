@@ -234,7 +234,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		for (var x = 0; x <= 10; x++) {
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
-			var leaders = gameStats.leaders.visual[x];
+			var leaders = gameStats.leaders.visual[x] || [];
 			var leader = {
 				accuracy: 0,
 				reaction: 2000,
@@ -248,6 +248,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 
 			if (y == undefined) {
 				var allowed = "no";
+				var numLeaders = leaders.length;
 				var active = "class='btn btn-sm btn-default'";
 				
 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
@@ -259,6 +260,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				           + ")'> Level " + x + " </button>  </td><td>--</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" +
 					Math.round(leader["reaction"]) + "ms) </td>" +
+					"<td>--/"+numLeaders + "</td>" +
 					"<td>" + leader["_id"].nickname +
 
 				"</td>" +
@@ -266,6 +268,16 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			} else {
 				var level = y["_id"].level;
 				var allowed = "trying";
+				var numLeaders = leaders.length;
+				var userRank;
+				var counter=1;
+				for(var nns in leaders){
+					if (leaders[nns]["_id"].nickname == userModel.getNickname()){
+						userRank = counter;
+						break;
+					}
+					counter++;
+				}
 				
 				console.log("leaders = " + JSON.stringify(leaders));
 				console.log("******* level = "+level);
@@ -275,6 +287,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms)</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" +
 					Math.round(leader["reaction"]) + "ms) </td>" +
+					"<td>"+userRank+"/"+numLeaders+"</td>"+
 					"<td>" + leader["_id"].nickname +
 					"</td>" +
 					"</tr>";
@@ -283,7 +296,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		}
 		//console.log(rows);
 		var z1 = document.getElementById("visualList");
-		var header = "<thead><tr><th>Play</th><th>My Score</th><th>Top Score</th><th>Top User</th></tr></thead>";
+		var header = "<thead><tr><th>Play</th><th>My Score</th><th>Top Score</th><th>Rank</th><th>Top User</th></tr></thead>";
 		z1.innerHTML = header + rows;
 
 
@@ -293,7 +306,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			//console.log(JSON.stringify(levels[x]));
 			var y = levels[x];
 
-			var leaders = gameStats.leaders.auditory[x];
+			var leaders = gameStats.leaders.auditory[x] || [];
 			var leader = {
 				accuracy: 0,
 				reaction: 2000,
@@ -308,6 +321,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			
 				var allowed = "no";
 				var active = "class='btn btn-sm btn-default'";
+				var numLeaders = leaders.length;
 							
 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
 					allowed = "yes";
@@ -317,6 +331,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"auditory\"," + x + ")'> Level " + x + " </button>  </td><td>--</td>" +
 				
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
+					"<td> --/"+numLeaders+"</td>"+
 					"<td>" + leader["_id"].nickname +
 					"</td>" +
 					"</tr>";
@@ -325,12 +340,24 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					
 					
 					var allowed = "trying";
+					var numLeaders = leaders.length;
+					var userRank;
+					var counter=1;
+					for(var nns in leaders){
+						if (leaders[nns]["_id"].nickname == userModel.getNickname()){
+							userRank = counter;
+							break;
+						}
+						counter++;
+					}
+					
 					
 					rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", \"auditory\"," + level + ")'" + " >Level " + y["_id"].level + "</button></td>" +
 
 				
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms) </td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
+					"<td>"+userRank+"/"+numLeaders+"</td>"+
 					"<td>" + leader["_id"].nickname +
 					"</td>" +
 				//"<td>"+JSON.stringify(leader)+"</td>"+			

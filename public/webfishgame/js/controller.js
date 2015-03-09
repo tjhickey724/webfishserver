@@ -610,7 +610,7 @@ var gameControl = (function() {
 		} else {
 			//showView("start");
 			userModel.getUserInfo();
-			userModel.getUserState();
+			setTimeout(userModel.getUserState(),500);
 			//setTimeout(checkConsent, 2000);
 		}
 	}

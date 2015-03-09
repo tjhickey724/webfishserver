@@ -239,6 +239,17 @@ app.put('/api/userState',ensureAuthenticated, function(req,res){
 })
 //**********************************************************
 
+
+app.get('/newUserNum',function(req,res){
+    var collection = db.get("user");
+    collection.find({},{},
+      function(err,result){
+        res.json(result.length);          
+      }    );
+
+})
+
+
 app.get('/allstats',function(req,res){
     var collection = db.get("gamestats");
     collection.col.aggregate([{$group: {_id:"total",

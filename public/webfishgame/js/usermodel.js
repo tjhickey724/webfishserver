@@ -8,7 +8,7 @@ var userModel = (function() {
 	var visualStats=null;
 	var auditoryStats=null;
 	var leaders = {visual:[], auditory:[]};
-	var userState = {mode:"visual",level:"level",consentStatus:"no",age: -1};
+	var userState = {mode:"visual",level:"level",consentStatus:"no",nickname:"anon", age: -1};
 	
 	function printInfo(){
 		console.log("userState is '"+JSON.stringify(userState)+",");
@@ -56,7 +56,21 @@ var userModel = (function() {
 
 	}
 	
-	
+	function setNewUserNum(){
+		console.log("calling setNewUsernum");
+		$.ajax({
+			type: "GET",
+			url: "/newUserNum",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(userInfo) {
+			console.log("userInfo="+JSON.stringify(userInfo));
+			userState.nickname = userState.nickname+"-"+userInfo;
+			console.log("nickname="+userState.nickname);
+			
+		});
+		
+	}
 	
 	function loadGameStats(){
 		$.ajax({
@@ -115,7 +129,7 @@ var userModel = (function() {
 			return userProfile.id;
 		},
 		getUserName: function() {
-			return userProfile == null ? "" : userProfile.displayName;
+			return userState.nickname;
 		},
 		getUserProfile: function(){ 
 			return userProfile
@@ -136,7 +150,7 @@ var userModel = (function() {
 		setMode: function(x) { userState.mode = x;$("#gameMode").html(x); gameView.updateInstr(userState.mode); updateUserState();},
 		setAge: function(x) { userState.age = x;updateUserState();},
 		setConsent: function(x) { userState.consent = x;updateUserState();},
-		setNickname: function(x) {userState.nickname = x; updateUserState();},
+		setNickname: function(x) {userState.nickname = x; setNewUserNum();updateUserState();},
 		printInfo: printInfo
 		
 		
