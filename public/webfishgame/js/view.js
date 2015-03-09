@@ -110,10 +110,16 @@ var gameView = (function() {
 	}
 
 
+	function drawLevels(){
+		$("#game_data_l").html("Mode: "+ userModel.getMode()+"   Level: "+userModel.getLevel());
+	}
+
+
 	function update(now) {
 
 
 		drawBackground2(img1); // draw the background flowing by in a seamless way...
+		drawLevels();
 		debugPrint(gameModel.getFishVisible());
 		//var hz = (gameModel.getFishVisual() == 'fast') ? 8 : 5;
 		var hz;
@@ -372,7 +378,8 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	}
 
 	function genLeaderData(allowed, mode, level) {
-	
+		console.log("in genLeaderData("+mode+","+level+")");
+		gameControl.changeLevelMode(level,mode);
 	
 		if(allowed == "no"){
 			$("#popupPlayButton").prop("disabled", true);
