@@ -661,7 +661,7 @@ var gameControl = (function() {
 	function changeLevelMode(level, mode) {
 		userModel.setLevel(level);
 		userModel.setMode(mode);
-		showView("dashboard");
+		//showView("dashboard");
 	}
 
 	function showInstructions() {
