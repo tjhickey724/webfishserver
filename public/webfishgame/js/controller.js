@@ -495,6 +495,7 @@ var gameControl = (function() {
 			contentType: "application/json; charset=utf-8",
 			dataType: "json"
 		}).done(function(items) {
+			userModel.loadGameStats();
 			//console.log("upload complete"+JSON.stringify(items));
 		});
 	}
