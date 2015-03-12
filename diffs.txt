@@ -1,0 +1,111 @@
+diff --git a/public/webfishgame/game.html b/public/webfishgame/game.html
+index 10b21b5..f104305 100644
+--- a/public/webfishgame/game.html
++++ b/public/webfishgame/game.html
+@@ -187,10 +187,10 @@
+ 			  </div>
+ 			  <div class="panel-footer">
+ 			  	<div class="btn-group" role="group">
+-					<button id="playGame" class="btn btn btn-primary" onclick="gameControl.runGame()">
++					<button id="playGame2" class="btn btn btn-primary" onclick="gameControl.runGame()">
+ 						Ready to Play!
+ 					</button>  	
+-					<button id="playGame" class="btn btn btn-success" onclick="gameControl.showView('profile')">
++					<button id="playGame2a" class="btn btn btn-success" onclick="gameControl.showView('profile')">
+ 						Best Scores
+ 					</button>
+ 						<button  class="btn btn btn-warning" data-toggle='modal' data-target='#instructions'
+@@ -312,15 +312,15 @@
+ 				<button type="button" class="btn btn-default" id="popupPlayButton" data-dismiss="modal"
+ 				 disabled="disabled">Play Now</button>
+ 				-->
+-		<button id="playGame" class="btn btn btn-primary" data-dismiss="modal" onclick="gameControl.runGame()">
+-			Play!
++		<button id="playGame" class="btn btn btn-primary"  data-dismiss="modal" onclick="gameControl.runGame()">
++			Play the Game!
+ 		</button>  	
+ 
+ 		<button  class="btn btn btn-info" data-toggle='modal' data-dismiss="modal" data-target='#instructions'
+ 		         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
+ 			Instructions
+ 		</button>
+-		<button id="playGame" class="btn btn btn-warning" data-dismiss="modal" onclick="gameControl.showView('profile')">
++		<button id="cancel" class="btn btn btn-warning" data-dismiss="modal" onclick="gameControl.showView('profile')">
+ 			Cancel
+ 		</button>
+ 		
+diff --git a/public/webfishgame/js/view.js b/public/webfishgame/js/view.js
+index d5e1163..c70e71f 100644
+--- a/public/webfishgame/js/view.js
++++ b/public/webfishgame/js/view.js
+@@ -251,7 +251,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
+ 			if (leaders != null && leaders.length > 0) {
+ 				leader = leaders[0];
+ 			}
+-
++			
+ 			if (y == undefined) {
+ 				var allowed = "no";
+ 				var numLeaders = leaders.length;
+@@ -260,6 +260,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
+ 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
+ 					allowed = "yes";
+ 					active = "class='btn btn-sm btn-success'";
++					
+ 				}
+ 				
+ 				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"visual\"," + x 
+@@ -272,6 +273,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
+ 				"</td>" +
+ 					"</tr>";
+ 			} else {
++				
+ 				var level = y["_id"].level;
+ 				var allowed = "trying";
+ 				var numLeaders = leaders.length;
+@@ -323,15 +325,18 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
+ 			if (leaders != null && leaders.length > 0) {
+ 				leader = leaders[0];
+ 			}
++			
+ 			if (y == undefined) {
+ 			
+ 				var allowed = "no";
+ 				var active = "class='btn btn-sm btn-default'";
+ 				var numLeaders = leaders.length;
++				
+ 							
+ 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
+ 					allowed = "yes";
+ 					active = "class='btn btn-sm btn-success'";
++					
+ 				}
+ 				
+ 				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"auditory\"," + x + ")'> Level " + x + " </button>  </td><td>--</td>" +
+@@ -343,6 +348,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
+ 					"</tr>";
+ 			} else {
+ 				var level = y["_id"].level;
++				
+ 					
+ 					
+ 					var allowed = "trying";
+@@ -385,12 +391,16 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
+ 			$("#popupPlayButton").prop("disabled", true);
+ 			$("#popupPlayButton").attr("class","btn btn-default");
+ 			$("#popupPlayButton").unbind("click");
++			$("#playGame").attr("disabled","true");
++			
+ 
+ 		}
+ 		else
+ 		{
+-			if(allowed == "yes")
+-				$("#popupPlayButton").attr("class","btn btn-success");
++			$("#playGame").removeAttr("disabled");
++			if(allowed == "yes"){
++				$("#popupPlayButton").attr("class","btn btn-success");		
++			}
+ 			else
+ 				$("#popupPlayButton").attr("class","btn btn-primary");
+ 		

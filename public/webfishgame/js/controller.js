@@ -54,6 +54,9 @@ var gameControl = (function() {
 			gameView.updateInstr(userModel.getMode());
 		}
 		if (selected == "profile"){
+			gameModel.updateParameters();
+			userModel.loadGameStats();
+			gameView.updateInstr(userModel.getMode());
 			gameView.showLevels();
 		}
 		console.log("Username = " + userModel.getUserName());

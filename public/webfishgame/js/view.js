@@ -251,7 +251,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			if (leaders != null && leaders.length > 0) {
 				leader = leaders[0];
 			}
-
+			
 			if (y == undefined) {
 				var allowed = "no";
 				var numLeaders = leaders.length;
@@ -260,18 +260,21 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
 					allowed = "yes";
 					active = "class='btn btn-sm btn-success'";
+					
 				}
 				
 				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"visual\"," + x 
 				           + ")'> Level " + x + " </button>  </td><td>--</td>" +
+					"<td>--/"+numLeaders + "</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" +
 					Math.round(leader["reaction"]) + "ms) </td>" +
-					"<td>--/"+numLeaders + "</td>" +
+					
 					"<td>" + leader["_id"].nickname +
 
 				"</td>" +
 					"</tr>";
 			} else {
+				
 				var level = y["_id"].level;
 				var allowed = "trying";
 				var numLeaders = leaders.length;
@@ -290,10 +293,11 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				console.log("y="+JSON.stringify(y));
 
 				rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", \"visual\"," + level + ")'" + " >Level " + y["_id"].level + "</button></td>" +
+					"<td>"+userRank+"/"+numLeaders+"</td>"+
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms)</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" +
 					Math.round(leader["reaction"]) + "ms) </td>" +
-					"<td>"+userRank+"/"+numLeaders+"</td>"+
+					
 					"<td>" + leader["_id"].nickname +
 					"</td>" +
 					"</tr>";
@@ -302,7 +306,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		}
 		//console.log(rows);
 		var z1 = document.getElementById("visualList");
-		var header = "<thead><tr><th>Play</th><th>My Score</th><th>Top Score</th><th>Rank</th><th>Top User</th></tr></thead>";
+		var header = "<thead><tr><th>Play</th><th>My Rank</th><th>My Score</th><th>Top Score</th><th>Top User</th></tr></thead>";
 		z1.innerHTML = header + rows;
 
 
@@ -323,26 +327,30 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			if (leaders != null && leaders.length > 0) {
 				leader = leaders[0];
 			}
+			
 			if (y == undefined) {
 			
 				var allowed = "no";
 				var active = "class='btn btn-sm btn-default'";
 				var numLeaders = leaders.length;
+				
 							
 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
 					allowed = "yes";
 					active = "class='btn btn-sm btn-success'";
+					
 				}
 				
 				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"auditory\"," + x + ")'> Level " + x + " </button>  </td><td>--</td>" +
-				
-					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td> --/"+numLeaders+"</td>"+
+					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
+					
 					"<td>" + leader["_id"].nickname +
 					"</td>" +
 					"</tr>";
 			} else {
 				var level = y["_id"].level;
+				
 					
 					
 					var allowed = "trying";
@@ -360,7 +368,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					
 					rows += "<tr><td><button class='btn btn-sm btn-primary' data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\", \"auditory\"," + level + ")'" + " >Level " + y["_id"].level + "</button></td>" +
 
-				
+					"<td>"+userRank+"/"+numLeaders+"</td>"+
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms) </td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
 					"<td>"+userRank+"/"+numLeaders+"</td>"+
@@ -379,25 +387,31 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 
 	function genLeaderData(allowed, mode, level) {
 		console.log("in genLeaderData("+mode+","+level+")");
-		gameControl.changeLevelMode(level,mode);
+		//gameControl.changeLevelMode(level,mode);
 	
 		if(allowed == "no"){
-			$("#popupPlayButton").prop("disabled", true);
-			$("#popupPlayButton").attr("class","btn btn-default");
-			$("#popupPlayButton").unbind("click");
+			//$("#popupPlayButton").prop("disabled", true);
+			$("#playGame").attr("class","btn btn-default");
+			$("#playGame").unbind("click");
+			$("#playGame").attr("disabled","true");
+			
 
 		}
 		else
 		{
-			if(allowed == "yes")
-				$("#popupPlayButton").attr("class","btn btn-success");
+			$("#playGame").removeAttr("disabled");
+			if(allowed == "yes"){
+				$("#playGame").attr("class","btn btn-success");		
+			}
 			else
-				$("#popupPlayButton").attr("class","btn btn-primary");
+				$("#playGame").attr("class","btn btn-primary");
 		
-			$("#popupPlayButton").prop("disabled", false);
-			$("#popupPlayButton").click(function()
+			//$("#popupPlayButton").prop("disabled", false);
+			$("#playGame").click(function()
 			{
 				gameControl.changeLevelMode(level,mode);
+				var title = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase() + " Mode (Level " + level + ")";
+				$("#leaderboardTitle").html(title);
 			});			
 		}
 		
@@ -406,8 +420,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		console.log("gld-level="+level);
 		//document.getElementById("leaderboard").innerHTML = "You are the leader!!!";
 		// fancey title for popup
-		var title = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase() + " Mode (Level " + level + ")";
-		$("#leaderboardTitle").html(title);
+		
 		
 		//level = 0;
 		var leadersFound = 0;

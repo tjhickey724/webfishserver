@@ -187,10 +187,10 @@
 			  </div>
 			  <div class="panel-footer">
 			  	<div class="btn-group" role="group">
-					<button id="playGame" class="btn btn btn-primary" onclick="gameControl.runGame()">
+					<button id="playGame2" class="btn btn btn-primary" onclick="gameControl.runGame()">
 						Ready to Play!
 					</button>  	
-					<button id="playGame" class="btn btn btn-success" onclick="gameControl.showView('profile')">
+					<button id="playGame2a" class="btn btn btn-success" onclick="gameControl.showView('profile')">
 						Best Scores
 					</button>
 						<button  class="btn btn btn-warning" data-toggle='modal' data-target='#instructions'
@@ -312,15 +312,15 @@
 				<button type="button" class="btn btn-default" id="popupPlayButton" data-dismiss="modal"
 				 disabled="disabled">Play Now</button>
 				-->
-		<button id="playGame" class="btn btn btn-primary" data-dismiss="modal" onclick="gameControl.runGame()">
-			Play!
+		<button id="playGame" class="btn btn btn-primary"  data-dismiss="modal" onclick="gameControl.runGame()">
+			Play the Game!
 		</button>  	
 
 		<button  class="btn btn btn-info" data-toggle='modal' data-dismiss="modal" data-target='#instructions'
 		         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
 			Instructions
 		</button>
-		<button id="playGame" class="btn btn btn-warning" data-dismiss="modal" onclick="gameControl.showView('profile')">
+		<button id="cancel" class="btn btn btn-warning" data-dismiss="modal" onclick="gameControl.showView('profile')">
 			Cancel
 		</button>
 		
