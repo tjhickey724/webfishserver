@@ -182,6 +182,7 @@ app.get('/oauth2callback',
 app.use("/index.html",function(req,res){res.render("index",{val:77})})
 app.use("/login.html", express.static(__dirname + '/public/login.html'));
 app.use("/logout.html", express.static(__dirname + '/public/logout.html'));
+app.use("/video/fishpoliceintro480.mov", express.static(__dirname+'/public/video/fishpoliceintro480.mov'));
 
 
 app.use("/webfishgame",ensureAuthenticated, function(req, res, next) {   next() });
@@ -356,7 +357,7 @@ app.get('/mysummarystats/:mode',function(req,res){
 
 // this shows my stats for level 7
 app.get('/myavgstats/:mode',function(req,res){
-    //var level = req.params.level;
+    //var level = req.params.level;<
     var mode = req.params.mode;
     var collection = db.get("gamesummary");
 	//console.log("the user is "+JSON.stringify(req.user));
