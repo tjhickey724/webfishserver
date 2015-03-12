@@ -386,81 +386,107 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	}
 
 	function genLeaderData(allowed, mode, level) {
-		console.log("in genLeaderData("+mode+","+level+")");
+		console.log("in genLeaderData(" + mode + "," + level + ")");
 		//gameControl.changeLevelMode(level,mode);
-	
-		if(allowed == "no"){
-			//$("#popupPlayButton").prop("disabled", true);
-			$("#playGame").attr("class","btn btn-default");
-			$("#playGame").unbind("click");
-			$("#playGame").attr("disabled","true");
-			
 
-		}
-		else
-		{
+		if (allowed == "no") {
+			//$("#popupPlayButton").prop("disabled", true);
+			$("#playGame").attr("class", "btn btn-default");
+			$("#playGame").unbind("click");
+			$("#playGame").attr("disabled", "true");
+
+
+		} else {
 			$("#playGame").removeAttr("disabled");
-			if(allowed == "yes"){
-				$("#playGame").attr("class","btn btn-success");		
+			gameControl.changeLevelMode(level, mode);
+			gameModel.updateParameters();
+			
+			var title = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase() + " Mode (Level " + level + ")";
+			$("#leaderboardTitle").html(title);
+			
+			if (allowed == "yes") {
+				$("#playGame").attr("class", "btn btn-success");
+			} else {
+				$("#playGame").attr("class", "btn btn-primary");
+				//$("#playGame").unbind("click");
+				//$("#popupPlayButton").prop("disabled", false);
+				//$("#playGame").click(function() {
+					
+					//});
 			}
-			else
-				$("#playGame").attr("class","btn btn-primary");
-		
-			//$("#popupPlayButton").prop("disabled", false);
-			$("#playGame").click(function()
-			{
-				gameControl.changeLevelMode(level,mode);
-				var title = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase() + " Mode (Level " + level + ")";
-				$("#leaderboardTitle").html(title);
-			});			
 		}
-		
-	
-		gameControl.logActivity("leaderboard",[mode,level]);
-		console.log("gld-level="+level);
+
+
+		gameControl.logActivity("leaderboard", [mode, level]);
+		console.log("gld-level=" + level);
 		//document.getElementById("leaderboard").innerHTML = "You are the leader!!!";
 		// fancey title for popup
-		
-		
+
+
 		//level = 0;
 		var leadersFound = 0;
 		var output = "";
-		
+
+		$.ajax({
+			type: "GET",
+			url: "/leaderboard/" + mode + "/" + level,
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(list) {
+
+			var leaders = list["leaders"];
+
+			for (var i = 0; i < leaders.length; i++) {
+
+				var nickname = list["leaders"][i]["_id"]["nickname"];
+				var accuracy = list["leaders"][i]["accuracy"];
+				var reaction = list["leaders"][i]["reaction"];
+				var counter = i + 1;
+
+				output += "<tr><td>" + i + "</td><td>" + nickname + "</td><td>" + Math.round(accuracy * 100) + "</td><td>" + Math.round(reaction) + "</td></tr>";
+
+				leadersFound++;
+			}
+
+
+			if (leadersFound == 0)
+				output = "<tr><td colspan='4'>No Leaders Found</td></tr>";
+
+
+			$("#leaderboardBody").html(
+				'<table class="table table-striped">' +
+				'<tr><th>#</th><th>Nickname</th><th>Accuracy</th><th>Reaction</th></tr>' +
+				output +
+				"</table>"
+			);
+
+		});
+	}
+
+	function updateDataSummary(){
         $.ajax({
                type: "GET",
-               url: "/leaderboard/"+mode+"/"+level,
+               url: "/allstats",
                contentType: "application/json; charset=utf-8",
                dataType: "json"
-           }).done(function(list) {
-
-           		var leaders = list["leaders"];
-           		
-           		for(var i=0; i<leaders.length; i++){
-	           		
-	           		var nickname = list["leaders"][i]["_id"]["nickname"];
-	           		var accuracy = list["leaders"][i]["accuracy"];
-	           		var reaction = list["leaders"][i]["reaction"];
-	           		var counter = i+1;
-	           		
-	           		output += "<tr><td>"+i+"</td><td>" + nickname + "</td><td>" + Math.round(accuracy * 100) + "</td><td>" + Math.round(reaction) + "</td></tr>";
-
-	           		leadersFound++;
-           		}  
-           		
-           		
-           		if(leadersFound == 0)
-           			output = "<tr><td colspan='4'>No Leaders Found</td></tr>";
-           		
-
-           		$("#leaderboardBody").html(
-           		'<table class="table table-striped">' + 
-           			'<tr><th>#</th><th>Nickname</th><th>Accuracy</th><th>Reaction</th></tr>'+
-           			output + 
-           		"</table>"
-           		);             
-               
-           });		
-	}
+           }).done(function(statarray) {
+			   var stats = statarray[0];
+			   var congTotal = stats.ff+stats.ss;
+			   var incongTotal = stats.fs + stats.sf;
+			   var congCorrect = stats.ffc + stats.ssc;
+			   var incongCorrect = stats.fsc + stats.sfc;
+			   var congTime = stats.fft + stats.sst;
+			   var incongTime = stats.fst + stats.sft;
+			   console.log("stats.ff type= "+stats.ff);
+			   console.log("stats = "+JSON.stringify(stats));
+			   console.log("stats = "+JSON.stringify({ct:congTotal,it:incongTotal}));
+			   $("#correct-cong").html(Math.round(100*congCorrect/congTotal)+"% (N="+congTotal+")");
+			   $("#reaction-cong").html(Math.round(congTime/congCorrect)+"ms");
+			   $("#correct-incong").html(Math.round(100*incongCorrect/incongTotal)+"% (N="+incongTotal+")");
+			   $("#reaction-incong").html(Math.round(incongTime/incongCorrect)+"ms");
+			   
+		   })
+	   };
 	
 	function updateInstr(mode){
 		console.log("updating "+mode);
@@ -482,6 +508,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		setSkin: setSkin,
 		showLevels: showLevels,
 		updateInstr: updateInstr,
-		genLeaderData: genLeaderData
+		genLeaderData: genLeaderData,
+		updateDataSummary:updateDataSummary
 	})
 }())

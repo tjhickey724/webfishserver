@@ -59,6 +59,9 @@ var gameControl = (function() {
 			gameView.updateInstr(userModel.getMode());
 			gameView.showLevels();
 		}
+		if (selected == "datasummary"){
+			gameView.updateDataSummary();
+		}
 		console.log("Username = " + userModel.getUserName());
 
 		//$('#userName').text(userModel.getUserName());
@@ -493,6 +496,9 @@ var gameControl = (function() {
 			url: "/model/gamestats",
 			data: JSON.stringify({
 				user: userID,
+				mode: userModel.getMode(),
+				level: userModel.getLevel(),
+				age: userModel.getAge(),
 				stats: gameStats
 			}), // also upload the avmode and the level and date and other info (gameid?)
 			contentType: "application/json; charset=utf-8",
