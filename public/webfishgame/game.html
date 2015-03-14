@@ -47,7 +47,7 @@
 					<button onclick="gameControl.logActivity( 'start',[]);gameControl.showView('dashboard')" class="btn btn-lg btn-primary">Start Game</button>
 													
 					
-		<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" 
+		<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" style="margin-top:15px;" 
 		         onclick= "gameControl.logActivity( 'logout',[])">
 			Log Out
 		</a>
@@ -100,45 +100,57 @@
 				<a href="game.html" role="button" class="btn btn-lg btn-primary game_introButton">Play Game</a>
 				-->
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2 bg-primary">
+						<div class="col-md-8 col-md-offset-2">
 				<div class="game_consent">
 					
-					<h2>Fish Police!! Consent Form</h2>
-					<h3>A game by R. Sekuler and T. Hickey (Brandeis University)</h3>
-					<p> 
-						Explores how your eyes and your ears work together. 
-					</p><p>
-						Playing Fish Police!! has minimal risk and minimal benefit, 
-						except for the challenge and fun you’ll have.
-						</p><p> 
-						When we analyze the data, we will not use any information that can identify you personally.
-						</p><p> 
+					
+<div class="panel panel-primary">
+  <div class="panel-heading">Fish Police!! Consent Form</div>
+  <div class="panel-body">
 
-						Before you begin our game, we’d like to ask a few questions.  
-						If you  choose not to answer, you may still play.  
+		A game by R. Sekuler and T. Hickey (Brandeis University)
+		<p> 
+		Explores how your eyes and your ears work together. 
+		</p>
+		Playing Fish Police!! has minimal risk and minimal benefit, 
+		except for the challenge and fun you’ll have.
+		</p>
+		When we analyze the data, we will not use any information that can identify you personally.
+		</p>
+		
+		Before you begin our game, we’d like to ask a few questions.  
+		If you  choose not to answer, you may still play.  
+
+  </div>
+  <div class="panel-footer">
+		Nickname (used on the leaderboards):
+		<input type="text" class="span2 bg-warning" id="nickname" name="nickname">
+  </div>
+  <div class="panel-footer">
+		My age is 
+		<select id="age" class="bg-warning">
+			<option value="0">0-9</option>
+			<option value="1">10-19</option>
+			<option value="2">20-29</option>
+			<option value="3">30-39</option>
+			<option value="4">40-49</option>
+			<option value="5">50-59</option>
+			<option value="6">60-69</option>
+			<option value="7">70-79</option>
+			<option value="8">80+</option>
+		</select>
+  </div>
+  <div class="panel-footer">
+  		<div class="btn-group" data-toggle="buttons_checkbox">
+			<button type="checkbox" id="consentStatus" class="btn btn-sm btn-warning" onclick="gameControl.consent();"/>
+				I agree to participate in this study
+			</button>  
+  </div>
+</div>					
+					
 						
 
-					</p>
-					My nickname for this game (used on the leaderboards) will be 
-					<input type="text" class="span2 bg-warning" id="nickname" name="nickname">
-					<br/>
-					My age is 
-					<select id="age" class="bg-warning">
-						<option value="0">0-9</option>
-						<option value="1">10-19</option>
-						<option value="2">20-29</option>
-						<option value="3">30-39</option>
-						<option value="4">40-49</option>
-						<option value="5">50-59</option>
-						<option value="6">60-69</option>
-						<option value="7">70-79</option>
-						<option value="8">80+</option>
-					</select>
-					<br/>
-					<div class="btn-group" data-toggle="buttons_checkbox">
-						<button type="checkbox" id="consentStatus" class="btn btn-lg btn-warning" onclick="gameControl.consent();"/>
-							I agree to participate in this study
-						</button>
+					
 					</div>	
 				</div>
 			</div></div>
