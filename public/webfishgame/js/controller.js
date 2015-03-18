@@ -638,7 +638,7 @@ var gameControl = (function() {
 		if (userModel.getConsent() != "consented") {
 			//console.log("Calling showview consent");
 			showView("consent");
-			$('#videoModal').modal();
+			$('#viModal').modal();
 		} else {
 			//console.log("consented case");
 			$("#gameMode").text(userModel.getMode());
