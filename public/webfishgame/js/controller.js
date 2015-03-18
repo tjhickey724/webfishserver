@@ -106,7 +106,7 @@ var gameControl = (function() {
 	var goodFishKey = "U";
 	var badFishKey = "I";
 	var oddballKey = "O";
-	var gameVersion = "v1.0.0";
+	var gameVersion = "v1.0.1";
 
 	var gameOn = false;
 	var log = [];
