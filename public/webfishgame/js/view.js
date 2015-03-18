@@ -388,6 +388,9 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	}
 
 	function genLeaderData(allowed, mode, level) {
+	
+		$("#leaderboardBody").html("");
+		
 		console.log("in genLeaderData(" + mode + "," + level + ")");
 		//gameControl.changeLevelMode(level,mode);
 

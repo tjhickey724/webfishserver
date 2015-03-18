@@ -33,8 +33,10 @@
 			<br><br>
 			-->
 			<a href="webfishgame/game.html#profile" role="button" class="btn btn-lg btn-primary game_introButton" id="game_playButton">Play Game</a>
-			<br><br>	
-			<video src="video/fishpoliceintro480.mov" controls autoplay>You need a browser with video ability to see the intro</video>
+			<br><br>
+			<button type="button" class="btn btn-info btn-lg game_introButton" data-toggle="modal" data-target="#videoModal">
+			  Video Tutorial
+			</button>				
 			<!-- 					
 			<a href="/auth/logout" role="button" class="btn btn-lg btn-danger game_introButton" id="game_logoutButton">Logout</a>
 			-->
@@ -46,6 +48,29 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="videoModalLabel">Video Tutorial</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<center>
+			<video src="video/fishpoliceintro480.mov" controls autoplay>You need a browser with video ability to see the intro</video>
+	      	</center>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+	
+	
 	</body>
 				<script src="webfishgame/js/usermodel.js"></script>
 	<script type='text/javascript' src="http://wurfl.io/wurfl.js"></script>
