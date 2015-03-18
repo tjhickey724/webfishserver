@@ -37,7 +37,8 @@ var gameModel = (function() {
 
     // record the start time of the game and set the end time, all games are the same length
     var gameStart = (new Date()).getTime();
-    var gameDuration = 60; // in seconds
+    var gameDuration = 5; // in seconds
+	var gameDelay = 5000; // in ms
     var endTime = gameStart + gameDuration * 1000;
 
 
@@ -220,11 +221,12 @@ var gameModel = (function() {
         resetTrialStats();
         
         fishVisible = false;
-        gameStart = (new Date()).getTime();
+		gameDelay = 5000;
+        gameStart = (new Date()).getTime()+gameDelay;
         endTime = gameStart + gameDuration * 1000;
         fishCount = 0;
 
-        var delay = 1000 + randInt(1000);
+        var delay = 1000 + randInt(1000)+gameDelay;
         debugPrint("start: game started... new fish will spawn in " + delay + " ms");
         debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
         
@@ -301,13 +303,15 @@ var gameModel = (function() {
     }
 
     function getStatus() {
+		//console.log(timeRemaining - gameDuration);
         return ({
             correct: correct,
             incorrect: incorrect,
             missed: missed,
             totalReactionTime: totalReactionTime,
             lastReactionTime: lastReactionTime,
-            timeRemaining: timeRemaining
+            timeRemaining: timeRemaining,
+			countdown: timeRemaining - gameDuration
         });
     }
 

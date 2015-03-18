@@ -148,14 +148,15 @@ var gameView = (function() {
 		var ctx = canvas.getContext('2d');
 		var cw = canvas.width;
 		var ch = canvas.height;
-		ctx.font = "10pt monospace"
+		ctx.font = "40pt monospace"
 		ctx.fillStyle = '#FFAA33';
 		var status = gameModel.getStatus();
+		if (status.countdown < 0) return;
 		var correctness = Math.round(100 * status.correct / (status.correct + status.incorrect + status.missed));
-		ctx.fillText("" + correctness + "%", cw / 2 - 30, ch / 2);
-		ctx.fillText("" + Math.round(status.lastReactionTime) + " ms", cw / 2 - 30, ch / 2 + 20);
-		ctx.fillText("T - " + Math.round(status.timeRemaining) + " sec", cw / 2 - 30, ch / 2 + 40);
-		ctx.fillText(" " + gameLoop.getLastStepTime() + "ms " + Math.round(1000 / gameLoop.getLastStepTime()) + "fps", cw / 2 - 10, ch - 20);
+		//ctx.fillText("" + correctness + "%", cw / 2 - 30, ch / 2);
+		//ctx.fillText("" + Math.round(status.lastReactionTime) + " ms", cw / 2 - 30, ch / 2 + 20);
+		ctx.fillText("T - " + Math.round(status.countdown), cw / 2 - 30, ch / 2 + 40);
+		//ctx.fillText(" " + gameLoop.getLastStepTime() + "ms " + Math.round(1000 / gameLoop.getLastStepTime()) + "fps", cw / 2 - 10, ch - 20);
 	}
 
 
@@ -235,7 +236,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		var gameStats = userModel.getGameStats();
 		var levels;
 		var rows;
-		levels = gameStats.visual;
+		levels = gameStats.visual || [undefined, undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined ];
 		rows = "";
 		for (var x = 0; x <= 10; x++) {
 			//console.log(JSON.stringify(levels[x]));
@@ -264,8 +265,9 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 				}
 				
 				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"visual\"," + x 
-				           + ")'> Level " + x + " </button>  </td><td>--</td>" +
+				           + ")'> Level " + x + " </button> "+
 					"<td>--/"+numLeaders + "</td>" +
+					" </td><td>--</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" +
 					Math.round(leader["reaction"]) + "ms) </td>" +
 					
@@ -310,7 +312,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		z1.innerHTML = header + rows;
 
 
-		levels = gameStats.auditory;
+		levels = gameStats.auditory || [undefined, undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined ];
 		rows = "";
 		for (var x = 0; x <= 10; x++) {
 			//console.log(JSON.stringify(levels[x]));
@@ -341,8 +343,9 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					
 				}
 				
-				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"auditory\"," + x + ")'> Level " + x + " </button>  </td><td>--</td>" +
+				rows += "<tr><td><button "+active+" data-toggle='modal' data-target='#statModal' onclick='gameView.genLeaderData(\""+allowed+"\",\"auditory\"," + x + ")'> Level " + x + " </button>  </td>"+
 					"<td> --/"+numLeaders+"</td>"+
+					"<td>--</td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
 					
 					"<td>" + leader["_id"].nickname +
@@ -371,7 +374,6 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 					"<td>"+userRank+"/"+numLeaders+"</td>"+
 					"<td>" + Math.round(y.accuracy * 100) + "% (" + Math.round(y.reaction) + "ms) </td>" +
 					"<td>" + Math.round(100 * leader["accuracy"]) + "% (" + Math.round(leader["reaction"]) + "ms) </td>" +
-					"<td>"+userRank+"/"+numLeaders+"</td>"+
 					"<td>" + leader["_id"].nickname +
 					"</td>" +
 				//"<td>"+JSON.stringify(leader)+"</td>"+			
