@@ -88,6 +88,7 @@ var gameControl = (function() {
 			activity: activity,
 			data: data,
 			time: Date.now(),
+			gameVersion: gameVersion,
 			user: userModel.getUserID()
 		};
 		console.log(JSON.stringify(msg));
@@ -105,6 +106,7 @@ var gameControl = (function() {
 	var goodFishKey = "U";
 	var badFishKey = "I";
 	var oddballKey = "O";
+	var gameVersion = "v1.0.0";
 
 	var gameOn = false;
 	var log = [];
@@ -499,6 +501,7 @@ var gameControl = (function() {
 				mode: userModel.getMode(),
 				level: userModel.getLevel(),
 				age: userModel.getAge(),
+				gameVersion: gameVersion,
 				stats: gameStats
 			}), // also upload the avmode and the level and date and other info (gameid?)
 			contentType: "application/json; charset=utf-8",
@@ -531,6 +534,7 @@ var gameControl = (function() {
 			mode: mode,
 			time: theTime,
 			deviceInfo: deviceInfo,
+			gameVersion: gameVersion,
 			log: log
 		};
 		//console.log("log element is \n"+log+"\n");
@@ -552,6 +556,7 @@ var gameControl = (function() {
 			age: age,
 			mode: mode,
 			time: theTime,
+			gameVersion: gameVersion,
 			summary: summaryStats
 		};
 		//console.log("log element is \n"+JSON.stringify(log)+"\n");
