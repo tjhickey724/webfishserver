@@ -17,5 +17,11 @@ html,body {
 
 #canvas2 {
     background-position: 0px;
+    
 /*     background-image: url('../images/stream.jpg'); */
+}
+#canvas {
+ position: absolute; 
+  top: 0px;
+  left: 0px;
 }
