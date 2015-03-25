@@ -264,7 +264,7 @@
 					<button onclick="gameView.updateDataSummary()">update</button>	
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4">
-							<table class="table table-border">
+							<table class="table table-border bg-info">
 								<thead>
 									<tr><th>Congruence</th><th>Percent Correct</th><th>Reaction Time</th></tr>
 								</thead>
@@ -276,7 +276,55 @@
 									<tr><td>InCongruent</td>
 										<td id="correct-incong">???</td>
 										<td  id="reaction-incong">???</td>
+									</tr>
+									<tr><td>Oddball</td>
+										<td id="correct-oddball">???</td>
+										<td  id="reaction-oddball">???</td>
 									</tr>						
+								</tbody>
+							</table>
+							
+							<table class="table table-border bg-info">
+								<thead>
+									<tr><th>Congruence</th><th>Percent Correct</th><th>Reaction Time</th></tr>
+								</thead>
+								<tbody>
+									<tr><td>Fast/Fast</td>
+										<td id="ffc">???</td>
+										<td id="fft">???</td>
+									</tr>
+									<tr><td>Slow/Slow</td>
+										<td id="ssc">???</td>
+										<td id="sst">???</td>
+									</tr>
+									
+									<tr><td>Fast/Slow</td>
+										<td id="fsc">???</td>
+										<td id="fst">???</td>
+									</tr>
+									
+									<tr><td>Slow/Fast</td>
+										<td id="sfc">???</td>
+										<td id="sft">???</td>
+									</tr>
+									
+									<tr><td>Fast/None</td>
+										<td id="fnc">???</td>
+										<td id="fnt">???</td>
+									</tr>
+									<tr><td>Slow/None</td>
+										<td id="snc">???</td>
+										<td id="snt">???</td>
+									</tr>	
+									<tr><td>None/Fast</td>
+										<td id="nfc">???</td>
+										<td id="nft">???</td>
+									</tr>
+									<tr><td>None/Slow</td>
+										<td id="nsc">???</td>
+										<td id="nst">???</td>
+									</tr>
+				
 								</tbody>
 							</table>
 						</div>

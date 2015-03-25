@@ -252,15 +252,26 @@ app.get('/newUserNum',function(req,res){
 })
 
 
-app.get('/allstats',function(req,res){
+app.get('/allstats/:mode/:level',function(req,res){
+	var mode = req.params.mode;
+	var level = parseInt(req.params.level);
+	console.log([mode,level]);
     var collection = db.get("gamestats");
-    collection.col.aggregate([{$group: {_id:"total",
+    collection.col.aggregate([
+		{$match:{mode:mode, level:{$gt:level-1}}},
+	  {$group: {_id:"total",
       ff:{$sum: "$stats.fast.fast.tries"},ss:{$sum: "$stats.slow.slow.tries"},
       fs:{$sum: "$stats.fast.slow.tries"},sf:{$sum: "$stats.slow.fast.tries"} ,
+      fn:{$sum: "$stats.fast.none.tries"},sn:{$sum: "$stats.slow.none.tries"},
+      ns:{$sum: "$stats.none.slow.tries"},nf:{$sum: "$stats.none.fast.tries"} ,
       ffc:{$sum: "$stats.fast.fast.correct"},ssc:{$sum: "$stats.slow.slow.correct"},
       fsc:{$sum: "$stats.fast.slow.correct"},sfc:{$sum: "$stats.slow.fast.correct"},
+      fnc:{$sum: "$stats.fast.none.correct"},snc:{$sum: "$stats.slow.none.correct"},
+      nsc:{$sum: "$stats.none.slow.correct"},nfc:{$sum: "$stats.none.fast.correct"},
       fft:{$sum: "$stats.fast.fast.time"},sst:{$sum: "$stats.slow.slow.time"},
-      fst:{$sum: "$stats.fast.slow.time"},sft:{$sum: "$stats.slow.fast.time"},      
+      fst:{$sum: "$stats.fast.slow.time"},sft:{$sum: "$stats.slow.fast.time"},  
+      fnt:{$sum: "$stats.fast.none.time"},snt:{$sum: "$stats.slow.none.time"},
+      nst:{$sum: "$stats.none.slow.time"},nft:{$sum: "$stats.none.fast.time"},     
       }}],
       function(err,result){
         res.json(result);          

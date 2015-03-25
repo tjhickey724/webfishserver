@@ -471,7 +471,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	function updateDataSummary(){
         $.ajax({
                type: "GET",
-               url: "/allstats",
+               url: "/allstats/visual/5",
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(statarray) {
@@ -489,6 +489,41 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			   $("#reaction-cong").html(Math.round(congTime/congCorrect)+"ms");
 			   $("#correct-incong").html(Math.round(100*incongCorrect/incongTotal)+"% (N="+incongTotal+")");
 			   $("#reaction-incong").html(Math.round(incongTime/incongCorrect)+"ms");
+			   var oddballTotal = stats.fn+stats.sn+stats.nf+stats.ns;
+			   var oddballCorrect = stats.fnc+stats.snc + stats.nfc+ stats.nsc;
+			   var oddballTime = stats.fnt+stats.snt+stats.nft+ stats.nst;
+			   
+			   $("#correct-oddball").html(Math.round(100*oddballCorrect/oddballTotal)+"% (N="+oddballTotal+")");
+			   $("#reaction-oddball").html(Math.round(oddballTime/oddballCorrect)+"ms")
+			   
+			   
+			   $("#ffc").html(Math.round(100*stats.ffc/stats.ff)+"% (N="+stats.ff+")");
+			   $("#fft").html(Math.round(    stats.fft/stats.ffc)+"ms");
+			   
+			   $("#ssc").html(Math.round(100*stats.ssc/stats.ss)+"% (N="+stats.ss+")");
+			   $("#sst").html(Math.round(    stats.sst/stats.ssc)+"ms");
+			   
+			   $("#fsc").html(Math.round(100*stats.fsc/stats.fs)+"% (N="+stats.ff+")");
+			   $("#fst").html(Math.round(    stats.fst/stats.fsc)+"ms");
+			   
+			   $("#sfc").html(Math.round(100*stats.sfc/stats.sf)+"% (N="+stats.sf+")");
+			   $("#sft").html(Math.round(    stats.sft/stats.sfc)+"ms");
+			   
+			  
+			   $("#fnc").html(Math.round(100*stats.fnc/stats.fn)+"% (N="+stats.fn+")");
+			   $("#fnt").html(Math.round(    stats.fnt/stats.fnc)+"ms");
+			   
+			   $("#snc").html(Math.round(100*stats.snc/stats.sn)+"% (N="+stats.sn+")");
+			   $("#snt").html(Math.round(    stats.snt/stats.snc)+"ms");
+			   
+			   $("#nfc").html(Math.round(100*stats.nfc/stats.nf)+"% (N="+stats.nf+")");
+			   $("#nft").html(Math.round(    stats.nft/stats.nfc)+"ms");
+			   
+			   $("#nsc").html(Math.round(100*stats.nsc/stats.ns)+"% (N="+stats.nf+")");
+			   $("#nst").html(Math.round(    stats.nst/stats.nsc)+"ms");
+			  
+			   
+			  
 			   
 		   })
 	   };
