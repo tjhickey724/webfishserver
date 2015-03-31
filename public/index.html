@@ -35,8 +35,12 @@
 			<a href="webfishgame/game.html#profile" role="button" class="btn btn-lg btn-primary game_introButton" id="game_playButton">Play Game</a>
 			<br><br>
 			<button type="button" class="btn btn-info btn-lg game_introButton" data-toggle="modal" data-target="#videoModal">
+			  Video Intro
+			</button>		
+			<br><br>
+			<button type="button" class="btn btn-info btn-lg game_introButton" data-toggle="modal" data-target="#videoModal2">
 			  Video Tutorial
-			</button>				
+			</button>		
 			<!-- 					
 			<a href="/auth/logout" role="button" class="btn btn-lg btn-danger game_introButton" id="game_logoutButton">Logout</a>
 			-->
@@ -56,7 +60,28 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="videoModalLabel">Video Tutorial</h4>
+	        <h4 class="modal-title" id="videoModalLabel">Video Intro</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<center>
+			<video src="video/CatIntroFishPolice!!.mp4" controls style="width:100%">You need a browser with video ability to see the intro</video>
+	      	</center>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+	
+	<!-- Modal -->
+	<div class="modal fade" id="videoModal2" tabindex="-1" role="dialog" 
+	      aria-labelledby="videoModalLabel2" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="videoModalLabel2">Video Tutorial</h4>
 	      </div>
 	      <div class="modal-body">
 	      	<center>
@@ -68,7 +93,7 @@
 	      </div>
 	    </div>
 	  </div>
-	</div>	
+	</div>
 	
 	
 	</body>
