@@ -469,7 +469,34 @@ var gameControl = (function() {
 		});
 	}
 
-
+	function getSpecificStats() {
+		//add an on checkbox click function that changes above url to what's clicked
+		$(".checkbox").click(function(){
+			if(($("#visual").checked == true && $("#auditory").checked == false) || ($("#visual").checked == false && $("#auditory").checked == true))
+			{
+				console.log("INSIDE THE IF STATEMENT, " + this.value + " WAS CLICKED");
+				var checkedBox;
+				if($("#visual").checked == true)
+					checkedbox = $("#visual").value;
+				else
+					checkedbox = $("#auditory").value;
+					
+				$.ajax({
+					type: "GET",
+					url: "/allstats2/" + checkedbox,
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				}).done(function(stats) {
+					
+				});
+			}
+			else
+			{
+				getAllStats();
+			}
+		})
+	}
+	//getSpecificStats();
 
 	function getAllSummaryStats(mode, level) {
 		$.ajax({

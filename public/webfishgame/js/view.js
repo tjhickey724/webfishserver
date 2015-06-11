@@ -471,7 +471,7 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	function updateDataSummary(){
         $.ajax({
                type: "GET",
-               url: "/allstats/visual/5",
+               url: "/allstats/visual/3",
                contentType: "application/json; charset=utf-8",
                dataType: "json"
            }).done(function(statarray) {
