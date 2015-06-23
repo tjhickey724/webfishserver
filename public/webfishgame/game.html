@@ -354,6 +354,21 @@
 		
 			<div id="profile-view" class="view">
 				<div class="text-right">
+					<select onclick = "gameControl.setSkin()" id = "skin">
+						<option value = "fish" selected = "selected">Select a Skin</option>
+					  	<option value = "fish">Fish Theme</option>
+					  	<option value = "space">Space Theme</option>
+						<option value = "starfish">Starfish Theme</option>
+						<option value = "clownfish">Clownfish Theme</option>
+						<option value = "anglerfish">Anglerfish Theme</option>
+						<option value = "shark">Shark Theme</option>
+						<option value = "seahorse">Seahorse Theme</option>
+						<option value = "stingray">Stingray Theme</option>
+						<option value = "octopus">Octopus Theme</option>
+						<option value = "dolphin">Dolphin Theme</option>
+						<option value = "sanddollar">Sand Dollar Theme</option>
+					</select>
+
 					<a href="/auth/logout" role="button"  class="btn btn btn-danger" data-dismiss="modal"
 					         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
 						Log Out

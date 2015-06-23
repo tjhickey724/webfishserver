@@ -15,32 +15,41 @@ var gameView = (function() {
 		cw = canvas.width,
 		ch = canvas.height,
 		cx = null;
+	
+	// Allows for different skins to be created, keyword passed in must match the value of the option in game.html
+	// Sound files can be added once we have different sounds
+	function skin(keyword, imgL, imgR, bg)
+	{
+		var imageL = new Image();
+		imageL.src = imgL;
 
-	// Here we load up the background images to be used in the game!
-	var imgStream = new Image();
-	imgStream.src = 'images/stream.jpg';
-
-	var imgSpace = new Image();
-	imgSpace.src = 'images/o-HUBBLE-UV-900.jpg';
-
-	var img1 = imgStream;
-
-	// next the "Fish" images
-	var imgFishL = new Image();
-	imgFishL.src = 'images/fish/fishL.png';
-
-	var imgFishR = new Image();
-	imgFishR.src = 'images/fish/fishR.png';
-
-	var imgSpaceshipL = new Image();
-	imgSpaceshipL.src = 'images/spaceship/SpaceShipNormalL.png';
-
-	var imgSpaceshipR = new Image();
-	imgSpaceshipR.src = 'images/spaceship/SpaceShipNormalR.png'
-
-	var imgTargetL = imgFishL;
-	var imgTargetR = imgFishR;
-
+		var imageR = new Image();
+		imageR.src = imgR;
+		
+		var background = new Image();
+		background.src = bg;
+		
+		return ({
+			imageL: imageL,
+			imageR: imageR,
+			background: background,
+			keyword: keyword
+		})
+	};
+	
+	// Here we make different skins
+	var fishSkin = new skin("fish", "images/fish/fishL.png", "images/fish/fishR.png", "images/stream.jpg");
+	var spaceSkin = new skin("space", "images/spaceship/SpaceShipNormalL.png", "images/spaceship/SpaceShipNormalR.png", "images/o-HUBBLE-UV-900.jpg");
+	var starFishSkin = new skin("starfish", "images/starfish/starfish.png", "images/starfish/starfish.png", "images/starfish/sand.jpg");
+	var clownFishSkin = new skin("clownfish", "images/clownFish/clownFishL.png", "images/clownFish/clownFishR.png", "images/clownfish/anemone.jpg");
+	var anglerFishSkin = new skin("anglerfish", "images/anglerfish/anglerfishL.png", "images/anglerfish/anglerfishR.png", "images/anglerfish/deepSea.jpg");
+	var sharkSkin = new skin("shark", "images/shark/sharkL.png", "images/shark/sharkR.png", "images/shark/fishSchool.jpg");
+	var seahorseSkin = new skin("seahorse", "images/seahorse/seahorsesL.png", "images/seahorse/seahorsesR.png", "images/seahorse/reef.jpg");
+	var stingraySkin = new skin("stingray", "images/stingray/stingrayL.png", "images/stingray/stingrayR.png", "images/stingray/underwaterSun.jpg");
+	var octopusSkin = new skin("octopus", "images/octopus/octopusL.png", "images/octopus/octopusR.png", "images/octopus/underwater.jpg");
+	var dolphinSkin = new skin("dolphin", "images/dolphin/dolphinL.png", "images/dolphin/dolphinR.png", "images/dolphin/underwater.jpg");
+	var sanddollarSkin = new skin("sanddollar", "images/sanddollar/sandDollar.png", "images/sanddollar/sandDollar.png", "images/sanddollar/sand.jpg");
+	
 	// Here we load up the sounds to be used ..
 
 	var audioFastFish = new Audio('sounds/8hz/fish.wav'); //document.getElementById('fastFish');
@@ -63,18 +72,53 @@ var gameView = (function() {
 	var soundVerySlow = new Audio('sounds/3hz/fish.wav');
 	var soundOddball = new Audio('sounds/5hzHigh/fish.wav');
 
+	var imgTargetL = fishSkin.imageL;
+    var imgTargetR = fishSkin.imageR;
+	var img1 = fishSkin.background;
+	
+	function setImages(skinType)
+	{
+		imgTargetL = skinType.imageL;
+		imgTargetR = skinType.imageR;
+		img1 = skinType.background;
+	};
+	
 	function setSkin(skin) {
-		if (skin == "fish") {
-			imgTargetL = imgFishL;
-			imgTargetR = imgFishR;
-			img1 = imgStream;
-		} else if (skin == "space") {
-			imgTargetL = imgSpaceshipL;
-			imgTargetR = imgSpaceshipR;
-			img1 = imgSpace;
+		switch(skin) {
+		    case spaceSkin.keyword:
+		        setImages(spaceSkin);
+		        break;
+		    case starFishSkin.keyword:
+		        setImages(starFishSkin);
+		        break;
+		    case clownFishSkin.keyword:
+		        setImages(clownFishSkin);
+		        break;
+			case anglerFishSkin.keyword:
+				setImages(anglerFishSkin);
+				break;
+			case sharkSkin.keyword:
+				setImages(sharkSkin);
+				break;
+			case seahorseSkin.keyword:
+				setImages(seahorseSkin);
+				break;
+			case stingraySkin.keyword:
+				setImages(stingraySkin);
+				break;
+			case octopusSkin.keyword:
+				setImages(octopusSkin);
+				break;
+			case dolphinSkin.keyword:
+				setImages(dolphinSkin);
+				break;
+			case sanddollarSkin.keyword:
+				setImages(sanddollarSkin);
+				break;
+		    default:
+		        setImages(fishSkin);
 		}
 	}
-
 
 	function playGood() {
 		audioGood.play();

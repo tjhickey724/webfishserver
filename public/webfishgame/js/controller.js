@@ -680,8 +680,9 @@ var gameControl = (function() {
 	}
 
 	function setSkin() {
+		console.log("Inside the controller setSkin() function");
 		var skinsel = $("#skin option:selected");
-		var a = skinsel.text();
+		var a = skinsel.val();
 		gameView.setSkin(a);
 	}
 
