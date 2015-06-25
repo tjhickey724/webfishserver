@@ -18,7 +18,7 @@ var gameView = (function() {
 	
 	// Allows for different skins to be created, keyword passed in must match the value of the option in game.html
 	// Sound files can be added once we have different sounds
-	function skin(keyword, imgL, imgR, bg)
+	function skin(keyword, phrase, imgL, imgR, bg)
 	{
 		var imageL = new Image();
 		imageL.src = imgL;
@@ -29,6 +29,8 @@ var gameView = (function() {
 		var background = new Image();
 		background.src = bg;
 		
+		addOption(keyword, phrase);
+		
 		return ({
 			imageL: imageL,
 			imageR: imageR,
@@ -37,18 +39,24 @@ var gameView = (function() {
 		})
 	};
 	
+	//adds the new skin as an option to the html selector on the game.html page
+	function addOption(keyword, phrase)
+	{
+		$("#skin").append("<option value='" + keyword + "'>" + phrase + "</option>");
+	};
+	
 	// Here we make different skins
-	var fishSkin = new skin("fish", "images/fish/fishL.png", "images/fish/fishR.png", "images/stream.jpg");
-	var spaceSkin = new skin("space", "images/spaceship/SpaceShipNormalL.png", "images/spaceship/SpaceShipNormalR.png", "images/o-HUBBLE-UV-900.jpg");
-	var starFishSkin = new skin("starfish", "images/starfish/starfish.png", "images/starfish/starfish.png", "images/starfish/sand.jpg");
-	var clownFishSkin = new skin("clownfish", "images/clownFish/clownFishL.png", "images/clownFish/clownFishR.png", "images/clownfish/anemone.jpg");
-	var anglerFishSkin = new skin("anglerfish", "images/anglerfish/anglerfishL.png", "images/anglerfish/anglerfishR.png", "images/anglerfish/deepSea.jpg");
-	var sharkSkin = new skin("shark", "images/shark/sharkL.png", "images/shark/sharkR.png", "images/shark/fishSchool.jpg");
-	var seahorseSkin = new skin("seahorse", "images/seahorse/seahorsesL.png", "images/seahorse/seahorsesR.png", "images/seahorse/reef.jpg");
-	var stingraySkin = new skin("stingray", "images/stingray/stingrayL.png", "images/stingray/stingrayR.png", "images/stingray/underwaterSun.jpg");
-	var octopusSkin = new skin("octopus", "images/octopus/octopusL.png", "images/octopus/octopusR.png", "images/octopus/underwater.jpg");
-	var dolphinSkin = new skin("dolphin", "images/dolphin/dolphinL.png", "images/dolphin/dolphinR.png", "images/dolphin/underwater.jpg");
-	var sanddollarSkin = new skin("sanddollar", "images/sanddollar/sandDollar.png", "images/sanddollar/sandDollar.png", "images/sanddollar/sand.jpg");
+	var fishSkin = new skin("fish", "Original Skin", "images/fish/fishL.png", "images/fish/fishR.png", "images/stream.jpg");
+	var spaceSkin = new skin("space", "Space Skin", "images/spaceship/SpaceShipNormalL.png", "images/spaceship/SpaceShipNormalR.png", "images/o-HUBBLE-UV-900.jpg");
+	var starFishSkin = new skin("starfish", "Starfish Skin", "images/starfish/starfish.png", "images/starfish/starfish.png", "images/starfish/sand.jpg");
+	var clownFishSkin = new skin("clownfish", "Clownfish Skin", "images/clownFish/clownFishL.png", "images/clownFish/clownFishR.png", "images/clownfish/anemone.jpg");
+	var anglerFishSkin = new skin("anglerfish", "Anglerfish Skin", "images/anglerfish/anglerfishL.png", "images/anglerfish/anglerfishR.png", "images/anglerfish/deepSea.jpg");
+	var sharkSkin = new skin("shark", "Shark Skin", "images/shark/sharkL.png", "images/shark/sharkR.png", "images/shark/fishSchool.jpg");
+	var seahorseSkin = new skin("seahorse", "Seahorse Skin", "images/seahorse/seahorsesL.png", "images/seahorse/seahorsesR.png", "images/seahorse/reef.jpg");
+	var stingraySkin = new skin("stingray", "Stingray Skin", "images/stingray/stingrayL.png", "images/stingray/stingrayR.png", "images/stingray/underwaterSun.jpg");
+	var octopusSkin = new skin("octopus", "Octopus Skin", "images/octopus/octopusL.png", "images/octopus/octopusR.png", "images/octopus/underwater.jpg");
+	var dolphinSkin = new skin("dolphin", "Dolphin Skin", "images/dolphin/dolphinL.png", "images/dolphin/dolphinR.png", "images/dolphin/underwater.jpg");
+	var sanddollarSkin = new skin("sanddollar", "Sand Dollar Skin", "images/sanddollar/sandDollar.png", "images/sanddollar/sandDollar.png", "images/sanddollar/sand.jpg");
 	
 	// Here we load up the sounds to be used ..
 
