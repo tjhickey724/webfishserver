@@ -465,7 +465,7 @@ app.get('/leaderboard/:mode/:level',function(req,res){
 				_id:{user:"$userID", nickname:"$nickname", level:"$level"},
 				//level:"$level",
 				accuracy:{$divide:["$summary.correct","$summary.tries"]},
-				reaction:{$divide:["$summary.totalTime","$summary.tries"]}
+				reaction:{$divide:["$summary.totalTime","$summary.correct"]}
 			}},
 		{$sort: {accuracy:-1, reaction:1, _id:1}}
     	],
