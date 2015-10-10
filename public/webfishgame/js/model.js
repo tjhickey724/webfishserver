@@ -210,7 +210,11 @@ var gameModel = (function() {
         gameView.stopFishAudio();
 
     }
-
+	
+	function startTimerBar(numDelay){
+		$("#timer").delay(numDelay).animate({width: "0px"}, 60000);
+	}
+	
     function start() {
         fishLifetime = parseInt($("#lifetime").val());
         minFishSpawn = parseInt($("#minIFI").val());
@@ -225,15 +229,16 @@ var gameModel = (function() {
         gameStart = (new Date()).getTime()+gameDelay;
         endTime = gameStart + gameDuration * 1000;
         fishCount = 0;
-
+		
         var delay = 1000 + randInt(1000)+gameDelay;
         debugPrint("start: game started... new fish will spawn in " + delay + " ms");
         debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
         
         setTimeout(spawnFish, delay);
-
+		
         setCanvasSize();
         window.onresize = setCanvasSize;
+		startTimerBar(gameDelay);
     };
 
     function setCanvasSize() {

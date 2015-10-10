@@ -163,6 +163,7 @@ var gameView = (function() {
 
 
 	function drawLevels(){
+		console.log("IS THE DRAWLEVELS FUNCTION WORKING???");
 		$("#game_data_l").html("Mode: "+ userModel.getMode()+"   Level: "+userModel.getLevel());
 	}
 
@@ -210,8 +211,6 @@ var gameView = (function() {
 		ctx.fillText("T - " + Math.round(status.countdown), cw / 2 - 30, ch / 2 + 40);
 		//ctx.fillText(" " + gameLoop.getLastStepTime() + "ms " + Math.round(1000 / gameLoop.getLastStepTime()) + "fps", cw / 2 - 10, ch - 20);
 	}
-
-
 
 	function drawFish(img, hz) {
 		var canvas = document.getElementById('canvas');
@@ -271,7 +270,6 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		if (yoff > 100)
 			yoff -= 200;
 		ctx.drawImage(img, 0, yoff * ch / 100, cw, ch);
-
 	}
 
 	function drawFlippedImage(img, xoff, yoff, w, h) {
@@ -590,7 +588,12 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			$(".auditoryInstructions").show();			
 		}
 	}
-
+	
+	//for the userStat page
+	$("#userNameTitle").text(userModel.getUserName());
+	
+	
+	
 	return ({
 		update: update,
 		playGood: playGood,

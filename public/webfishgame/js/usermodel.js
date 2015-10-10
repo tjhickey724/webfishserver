@@ -121,9 +121,7 @@ var userModel = (function() {
 	//getUserInfo();
 	//getUserState();
 	loadGameStats();
-
-
-
+	
 	return {
 		getUserID: function() {
 			return userProfile.id;
