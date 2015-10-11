@@ -719,7 +719,6 @@ var gameControl = (function() {
 
 	}
 
-
 	return ({
 		showView: showView,
 		start: start,

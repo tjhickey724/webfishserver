@@ -592,8 +592,6 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 	//for the userStat page
 	$("#userNameTitle").text(userModel.getUserName());
 	
-	
-	
 	return ({
 		update: update,
 		playGood: playGood,
