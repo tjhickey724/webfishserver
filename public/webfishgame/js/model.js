@@ -212,6 +212,7 @@ var gameModel = (function() {
     }
 	
 	function startTimerBar(numDelay){
+		console.log("starting timer bar!");
 		$("#timer").delay(numDelay).animate({width: "0px"}, 60000);
 	}
 	

@@ -163,7 +163,7 @@ var gameView = (function() {
 
 
 	function drawLevels(){
-		console.log("IS THE DRAWLEVELS FUNCTION WORKING???");
+		//console.log("IS THE DRAWLEVELS FUNCTION WORKING???");
 		$("#game_data_l").html("Mode: "+ userModel.getMode()+"   Level: "+userModel.getLevel());
 	}
 
@@ -302,11 +302,12 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 			if (leaders != null && leaders.length > 0) {
 				leader = leaders[0];
 			}
-			
+			console.dir(y);
 			if (y == undefined) {
 				var allowed = "no";
 				var numLeaders = leaders.length;
 				var active = "class='btn btn-sm btn-default'";
+				console.log("y is undefined");
 				
 				if (x == 0 || levels[x - 1] != undefined && levels[x - 1].accuracy > 0.8) {
 					allowed = "yes";

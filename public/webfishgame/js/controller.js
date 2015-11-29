@@ -518,8 +518,10 @@ var gameControl = (function() {
 	}
 
 	function uploadStats(gameStats) {
-		//console.log("uploading stats!!");
+		
 		var userID = userModel.getUserID();
+		console.log("uploading stats!! "+userID);
+		
 		$.ajax({
 			type: "POST",
 			url: "/model/gamestats",
@@ -564,7 +566,7 @@ var gameControl = (function() {
 			gameVersion: gameVersion,
 			log: log
 		};
-		//console.log("log element is \n"+log+"\n");
+		console.log("log element is \n"+log+"\n");
 		$.ajax({
 			type: "POST",
 			url: "/model/gamelog",

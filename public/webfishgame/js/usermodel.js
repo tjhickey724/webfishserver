@@ -96,10 +96,10 @@ var userModel = (function() {
 		});	
 		
 		for(var level=0; level<=10; level++){
-			console.log("level = "+level);
+			//console.log("level = "+level);
 			for(var mode in leaders){
-				console.log("trying level "+level+" and mode "+mode);
-				console.log("with the url = '"+"/leaderboard/"+mode+"/"+level+"'");
+				//console.log("trying level "+level+" and mode "+mode);
+				//console.log("with the url = '"+"/leaderboard/"+mode+"/"+level+"'");
 				$.ajax({
 					type: "GET",
 					url: "/leaderboard/"+mode+"/"+level, 
