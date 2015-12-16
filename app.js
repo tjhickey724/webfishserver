@@ -251,6 +251,18 @@ app.get('/newUserNum',function(req,res){
 
 })
 
+app.get('/gamelogs', function(req,res){
+	var collection = db.get("gamelog");
+    collection.find({}, {}, function(e, docs) {
+        //console.log(JSON.stringify(docs));
+        //res.json(200, docs);
+		var mdocs = convertToText(docs);
+		res.format({'text/plain': function(){res.send(mdocs)}});
+    })
+
+	
+})
+
 
 app.get('/allstats/:mode/:level',function(req,res){
 	var mode = req.params.mode;
@@ -568,9 +580,46 @@ app.get('/model/:collection', function(req, res) {
     }, {}, function(e, docs) {
         //console.log(JSON.stringify(docs));
         res.json(200, docs);
+		//var mdocs = convertToText(docs);
+		//res.format({'text/plain': function(){res.send(JSON.stringify(mdocs))}});
     })
 });
 
+function convertToText(docs){
+	var result=[];
+    for(var i=0; i<docs.length; i++){
+		var d = docs[i];
+    	//result.push({id:d._id, userID:d.userID,level:d.level,age:d.age,mode:d.mode,time:d.time,gameVersion:d.gameVersion});
+		var header = {id:d._id, userID:d.userID,level:d.level,age:d.age,mode:d.mode,time:d.time,gameVersion:d.gameVersion};
+		var headerString = JSON.stringify(header);
+		var j=0;
+		while(j<d.log.length){
+			var a1=d.log[j];
+			
+			if (a1.action=="keypress") {  // pressing key when no fish is there!
+				var a2=a1;
+				a1={time:0, id:0, visual:"nofish", audio:"nofish", side:"nofish"};
+				//console.log(JSON.stringify(a1)+" "+JSON.stringify(a2));console.dir(a2);
+				var trial =d._id+" "+d.userID+" "+d.level+" "+d.age+" "+d.mode+" "+d.time+" "+
+				a1.time+" "+a1.id+" "+" "+a1.visual+" "+a1.audio+" "+a1.side+" "+
+				a2.action+" "+a2.time+" "+a2.reaction+" "+a2.key+" "+a2.correct+" "+a2.consistent;
+				result.push(trial);
+				j += 1;
+			}
+			else {
+				var a2=(j+1<d.log.length)?d.log[j+1]:{};
+				var trial =d._id+" "+d.userID+" "+d.level+" "+d.age+" "+d.mode+" "+d.time+" "+
+					a1.time+" "+a1.id+" "+" "+a1.visual+" "+a1.audio+" "+a1.side+" "+
+					a2.action+" "+a2.time+" "+a2.reaction+" "+a2.key+" "+a2.correct+" "+a2.consistent;
+					result.push(trial);
+				j+=2;
+			}
+			
+		}	
+    }
+
+	return result;
+}
 // change an item in the model
 app.put('/model/:collection/:id', function(req, res) {
     var collection = db.get(req.params.collection);
