@@ -587,6 +587,8 @@ app.get('/model/:collection', function(req, res) {
 
 function convertToText(docs){
 	var result=[];
+	var heading = "objectId userId level age mode gameTime eventTime eventId visual audio side action actionTime reaction key correct consistent";
+	result=[heading];
     for(var i=0; i<docs.length; i++){
 		var d = docs[i];
     	//result.push({id:d._id, userID:d.userID,level:d.level,age:d.age,mode:d.mode,time:d.time,gameVersion:d.gameVersion});
