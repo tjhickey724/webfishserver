@@ -165,7 +165,8 @@ var gameModel = (function() {
             id: fishCount,
             visual: fishVisual,
             audio: fishAudio,
-            side: fishSide
+            side: fishSide,
+			timestamp: now
         };
         gameControl.pushLog(entry);
         debugPrint("spawnFish: just pushed birth" + JSON.stringify(entry));
@@ -184,7 +185,8 @@ var gameModel = (function() {
                     action: "missed",
                     visual: fishVisual,
                     audio: fishAudio,
-                    side: fishSide
+                    side: fishSide,
+					timestamp:now
                 };
                 gameControl.pushLog(entry);
                 debugPrint("KFIV:"+entry);
@@ -253,7 +255,8 @@ var gameModel = (function() {
             reaction: (now - fishBirth),
             visual: fishVisual,
             audio: fishAudio,
-            side: fishSide
+            side: fishSide,
+			timestamp:now
         };
         gameControl.pushLog(entry);
         debugPrint("logKeyPress"+JSON.stringify(entry));

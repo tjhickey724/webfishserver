@@ -612,6 +612,194 @@ app.delete('/model/:collection/:id', function(req, res) {
 
 
 
+app.get('/gamelogsMuse/:id', function(req,res){
+	var id = req.params.id;
+	var collection = db.get("gamelog");
+	console.log("calculating logs with id = "+id);
+	collection.find({}, {}, function(e, docs) {
+		//console.log(JSON.stringify(docs));
+		//res.json(200, docs);
+		var mdocs = convertToTextMuse(docs,id);
+		res.format({'text/plain': function(){res.send(mdocs)}});
+	    })
+
+	    
+	    })
+
+
+function convertToTextMuse(docs,game_id){
+    /*
+      we run through the logs looking at the events and compressing it a bit
+
+      when we see a fish spawn event, we look at the next event
+        if it is a keypress event, then we generate a regular FishEvent (user pressed a key when a fish was visible)
+	and we skip to the next event
+      if we see another fish spawn event, then we generate a MISSED fish event without consuming the fish spawn event
+
+      when we see a keypress event which doesn't follow a fish spawn event, then we generate an Keypress event (errant keypress)
+
+
+    */
+    var result=[];
+    var heading = "objectId userId level age mode gameTime eventTime eventId visual audio side action actionTime reaction key correct consistent";
+    var gameids = {count:1};
+    var userids = {count:1};
+    result=[heading];
+    for(var i=0; i<docs.length; i++){
+	var d = docs[i];
+	//result.push({id:d._id, userID:d.userID,level:d.level,age:d.age,mode:d.mode,time:d.time,gameVersion:d.gameVersion});
+	var header = {id:d._id, userID:d.userID,level:d.level,age:d.age,mode:d.mode,time:d.time,gameVersion:d.gameVersion};
+	var headerString = JSON.stringify(header);
+	var j=0;
+	var lastbirth = d.log[0].timestamp | d.time;
+	var lastEventId = 0;
+	while(j<d.log.length){
+		var this_game_id = getid(gameids,d._id);
+		if (this_game_id < game_id) {
+			console.log("skipping game "+this_game_id);
+			j++;
+			continue;
+		} 
+		console.log("processing game "+this_game_id);
+	    var a1=d.log[j];  // here we grab the next event, either a fishspaw or a random keypress ..
+	    if (a1.timestamp==undefined) {//make this backward compatible to data before we added timestamps
+			a1.timestamp = d.time+a1.time;
+	    }
+	    if (a1.action=="keypress") {  // pressing key when no fish is there!
+		var a2=a1;
+		a1={time:-1, id:-1, visual:"nofish", audio:"nofish", side:"nofish"};
+		//console.log(JSON.stringify(a1)+" "+JSON.stringify(a2));console.dir(a2);
+		var trial =
+		    getid(gameids,d._id)+" "+
+		    getid(userids,d.userID)+" "+
+		        d.level+" "+
+		        d.age+" "+
+		    eM("mode",d.mode)+" "+
+		        lastbirth+" "+ //
+		    a2.time + " "+//"-1 "+ //a1.time+" "+
+		    lastEventId+" "+ // "-1 "+ //a1.id+" "+" "+
+		    "-1 "+ //a1.visual+" "+
+		    "-1 "+ //a1.audio+" "+
+		    "-1 "+ //a1.side+" "+
+		    "3 "+ // a2.action+" "+  
+		        a2.timestamp+" "+
+		(	a2.timestamp-lastbirth) + " "+ //"-1 "+ //a2.reaction+" "+
+		    eM("key",a2.key)+" "+
+		    "-1 "+ //eM("correct",a2.correct)+" "+
+		    "-1 " //+ eM("congruent",a2.consistent);
+		    ; 
+		var trial0 = 
+			a2.timestamp/1000.0 + " 3 ";  // keypress after fish disappears
+		result.push(trial0+trial);
+		j += 1;
+	    }
+	    else { // this is a "birth" event and is followed by either a missed or a keypress event
+		var a2=(j+1<d.log.length)?d.log[j+1]:{}; // grab the next event, either keypress or fishspawn
+		var oddball = ((a2.visual=='none') || (a2.audio=='none'));
+		lastEventId = a2.eventId;
+	    if (a2.timestamp==undefined) { //make this backward compatible to data before we added timestamps
+			a2.timestamp = d.time+a2.time;
+		}
+		if (a2.action=="keypress") { // this is a regular FISH event, pressing a key when a fish is visible
+		    var trial =
+			getid(gameids,d._id)+" "+
+			getid(userids,d.userID)+" "+
+			    d.level+" "+
+			    d.age+" "+
+			eM("mode",d.mode)+" "+
+			    a1.timestamp+" "+ //d.time+" "+
+			    a1.time+" "+
+			    a1.id+" "+
+			eM("visual",a1.visual,d.level)+" "+
+			eM("auditory",a1.audio,d.level)+" "+
+			eM("side",a1.side)+" "+
+			"1 "+ //a2.action+" "+
+			    a2.timestamp+" "+
+			    a2.reaction+" "+
+			eM("key",a2.key)+" "+ 
+			eM("correct",a2.correct)+" "+
+			(oddball?3:eM("congruent",a2.consistent))
+			;
+		    var trial0 = (a1.timestamp)/1000.0+" 1 ";  // fish spawned
+		    result.push(trial0+trial);
+		    trial0 = (a2.timestamp)/1000.0+" 2 ";  // key pressed
+		    result.push(trial0+trial);
+			lastbirth = a1.timestamp;
+		    j+=2;
+		} else { // this is a missed fish event
+		    var trial =
+			getid(gameids,d._id)+" "+
+			getid(userids,d.userID)+" "+
+			    d.level+" "+
+			    d.age+" "+
+			eM("mode",d.mode)+" "+
+			    a1.timestamp + " "+ //d.time+" "+
+			    a1.time+" "+
+			    a1.id+" "+
+			eM("visual",a1.visual,d.level)+" "+
+			eM("auditory",a1.audio,d.level)+" "+
+			eM("side",a1.side)+" "+
+			"2 "+ //a2.action+" "+
+			    a2.timestamp+" "+
+			(a2.timestamp - a1.timestamp) + " "+//"-1 "+ //a2.reaction+" "+
+			"-1 "+ //a2.key+" "+
+			"-1 "+ //a2.correct+" "+
+			(oddball?3:eM("congruent",a2.consistent) )
+			;
+		    var trial0 = (a1.timestamp/1000.0)+" 1 ";  // fish spawn for missed fish
+		    result.push(trial0+trial);
+			trial0 = (a2.timestamp/1000.0)+" 4 ";  // fish vanish time for missed fish
+			result.push(trial0+trial);
+			lastbirth = a1.timestamp;
+		    j+=2;
+		}
+
+	    }
+	    
+	}
+    }
+
+    return result;
+
+}
+
+function getid(ids,val){
+    var z = ids[val];
+    if (z==undefined) {
+        ids[val]= ids.count;
+        z = ids.count;
+        ids.count = ids.count+1;
+    }
+    return z;
+}
+
+
+
+function eM(field,val,level){  // eM = encodeMatlab and the last two fields are optional                                       
+    if (field=="mode") {
+        if (val=="visual") return 1; else return 2;
+    } else if ((field == "visual")||(field=="auditory")) {
+        if (val=="fast") return 8;
+        else if (val=="none") return 0;
+        else if (level==0) return 3;
+        else return 5;
+    } else if (field=="side") {
+        if (val=="left") return 1; else return 2;
+    } else if (field == "key") {
+        if (val==undefined) return -1;
+        else return val.charCodeAt();
+    } else if (field=="correct"){
+        if (val) return 1; else return 0;
+    } else if (field=="congruent"){
+        //if (val=="true" || val==true || val=="true") return 1; else return 2;                                                
+        if (val) return 1; else return 2;
+    } else return undefined;
+}
+
+
+
+
+
 //**********************************************************
 // Finally we assign the server to a port ....
 //**********************************************************
