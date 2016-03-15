@@ -693,12 +693,13 @@ function convertToTextMuse(docs,game_id){
 			a2.timestamp/1000.0 + " 3 ";  // keypress after fish disappears
 		if (lastEventId!=0)   // don't record pressing keys before the first fish appears
 		 result.push(trial0+trial);
+		else console.log("not pushing "+JSON.stringify(trial0+trial));
 		j += 1;
 	    }
 	    else { // THIS is a "birth" event and is followed by either a missed or a keypress event
 		var a2=(j+1<d.log.length)?d.log[j+1]:{}; // grab the next event, either keypress or fishspawn
 		var oddball = ((a2.visual=='none') || (a2.audio=='none'));
-		lastEventId = a2.eventId | lastEventId;
+		lastEventId = a1.id; // | lastEventId;
 	    if (a2.timestamp==undefined) { //make this backward compatible to data before we added timestamps
 			a2.timestamp = d.time+a2.time;
 		}

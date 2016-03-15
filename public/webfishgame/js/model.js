@@ -242,6 +242,7 @@ var gameModel = (function() {
 
         setCanvasSize();
         window.onresize = setCanvasSize;
+		startTimerBar(gameDelay)
     };
 
     function setCanvasSize() {
