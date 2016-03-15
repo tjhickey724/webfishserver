@@ -1,22 +1,21 @@
-
 <html>
 <head>
-  <title>game</title>
+	<title>game</title>
 <!--
   <link href="css/bootstrap-3.2.0-dist/css/bootstrap.css" rel="stylesheet" />
   <link href="css/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
 --> 
- <meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta name="keywords" content="Brandeis, Fish, Police, Game">
 	<meta name="description" content="Fish Police">
 	<meta name="Author" content="Brandeis University"> 
  
 	<link rel="icon" href="favicon.ico" type="image/x-icon"> 
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/game.css"/>
+	<link rel="stylesheet" href="css/game.css"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/bootstrap-theme.css" rel="stylesheet" />
-	<link href="css/fishgame.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../css/fishgame.css" type="text/css" media="screen">
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -27,47 +26,29 @@
 	<title>Fish Police!!</title>
 </head>
 <body>
-	
-
-	
-
 	<div id="header" class="container-fluid">
-
-	
-		<div id="start-view" class="game_introWrapper view">
-			
+		<div id="start-view" class="game_introWrapper view">	
 			<div id="userName"></div>
-			<div class="game_logoLarge">Fish Police!!</div>
-				
-
-<br><br>				
-<div class="btn-group game_introButtonsWrapper">
-					
-					
-					<button onclick="gameControl.logActivity( 'start',[]);gameControl.showView('dashboard')" class="btn btn-lg btn-primary">Start Game</button>
-													
-					
-		<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" style="margin-top:15px;" 
+			<div class="game_logoLarge">Fish Police!!<br/>for first-time players</div>
+			<br/><br/>
+			<div class="btn-group game_introButtonsWrapper">	
+				<button onclick="gameControl.logActivity( 'start',[]);gameControl.showView('dashboard')" class="btn btn-lg btn-primary">Start Game</button>
+				<a href="/logout.html" role="button"  class="btn btn-lg btn-danger" style="margin-top:15px;" 
 		         onclick= "gameControl.logActivity( 'logout',[])">
-			Log Out
-		</a>
+				 	Log Out
+				</a>
 			</div>		
 		</div>
-
-
+		
 		<div id="debugging-view" class="view">
 			This shouldn't appear!!
 		</div>
-		
 		
 		<div id="warning-view" class="view">
 			FishPolice!! doesn't work on safari or non-desktop machines...
 		</div>
 		
-		
-
 		<div id="game-view" class="view">
-		
 			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="game_indicatorsWrapper">
 					<div class="game_indicatorTopText game_indicatorTopLeft" id="game_data_l"></div>
@@ -76,22 +57,17 @@
 					<div class="cleaner"></div>
 				</div>
 		    </nav>	
-		    		
-		    		
+			
 			<canvas id="canvas"></canvas>
+			<div id = "timer"></div>
 			<audio id="fastFish" src="sounds/8hz/fish.wav"></audio>
 			<audio id="slowFish" src="sounds/5hz/fish.wav"></audio>
-			<audio id="good" src="sounds/good.wav"></audio>
+			<audio id="good" src="sounds/good .wav"></audio>
 			<audio id="bad" src="sounds/bad.wav"></audio>
 		</div>
 
-
-
-
 		<div id="consent-view" class="game_introWrapper view">
-		
-			<div class="game_logoLarge">Fish Police</div>
-				   			
+			<div class="game_logoLarge">Fish Police</div>  			
 			<div class="game_introButtonsWrapper">		
 				<!--
 				<br><br>
@@ -99,435 +75,412 @@
 				<br><br>
 				<a href="game.html" role="button" class="btn btn-lg btn-primary game_introButton">Play Game</a>
 				-->
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2">
-				<div class="game_consent">
-					
-					
-<div class="panel panel-primary">
-  <div class="panel-heading">Fish Police!! Consent Form</div>
-  <div class="panel-body">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="game_consent">
+							<div class="panel panel-primary">
+								<div class="panel-heading">Fish Police!! Consent Form</div>
+  							<div class="panel-body">
+								A game by R. Sekuler and T. Hickey (Brandeis University)
+								<p> 
+								Explores how your eyes and your ears work together. 
+								</p>
+								Playing Fish Police!! has minimal risk and minimal benefit, 
+								except for the challenge and fun you’ll have.
+								</p>
+								The only identifier we will collect is your nickname and age. 
+								The data that we collect during your play of the game will not be tied to your identity in any way.
+								</p>
+								
+								Before you begin our game, we’d like to ask a few questions.  
+								If you  choose not to answer, you may still play.  
 
-		A game by R. Sekuler and T. Hickey (Brandeis University)
-		<p> 
-		Explores how your eyes and your ears work together. 
-		</p>
-		Playing Fish Police!! has minimal risk and minimal benefit, 
-		except for the challenge and fun you’ll have.
-		</p>
-		The only identifier we will collect is your nickname and age. 
-		The data that we collect during your play of the game will not be tied to your identity in any way.
-		</p>
-		
-		Before you begin our game, we’d like to ask a few questions.  
-		If you  choose not to answer, you may still play.  
-
-  </div>
-  <div class="panel-footer">
-		Nickname (used on the leaderboards):
-		<input type="text" class="span2 bg-warning" id="nickname" name="nickname">
-  </div>
-  <div class="panel-footer">
-		My age is 
-		<select id="age" class="bg-warning">
-			<option value="0">0-9</option>
-			<option value="1">10-19</option>
-			<option value="2">20-29</option>
-			<option value="3">30-39</option>
-			<option value="4">40-49</option>
-			<option value="5">50-59</option>
-			<option value="6">60-69</option>
-			<option value="7">70-79</option>
-			<option value="8">80+</option>
-		</select>
-  </div>
-  <div class="panel-footer">
-  		<div class="btn-group" data-toggle="buttons_checkbox">
-			<button type="checkbox" id="consentStatus" class="btn btn-sm btn-warning" onclick="gameControl.consent();"/>
-				I agree to participate in this study
-			</button>  
-  </div>
-</div>					
-					
-						
-
-					
-					</div>	
+  						  	</div>
+							<div class="panel-footer">
+								Nickname (used on the leaderboards):
+								<input type="text" class="span2 bg-warning" id="nickname" name="nickname">
+ 							</div>
+							<div class="panel-footer">
+								My age is 
+								<select id="age" class="bg-warning">
+									<option value="0">0-9</option>
+									<option value="1">10-19</option>
+									<option value="2">20-29</option>
+									<option value="3">30-39</option>
+									<option value="4">40-49</option>
+									<option value="5">50-59</option>
+									<option value="6">60-69</option>
+									<option value="7">70-79</option>
+									<option value="8">80+</option>
+								</select>
+							</div>
+							<div class="panel-footer">
+								<div class="btn-group" data-toggle="buttons_checkbox">
+									<button type="checkbox" id="consentStatus" class="btn btn-sm btn-warning" onclick="gameControl.consent();"/>
+										I agree to participate in this study
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div></div>
 			</div>
 		</div>
-	
-	
-	
-		<div id="dashboard-view" class="game_paddedView view">
-		
-			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-				<div class="game_indicatorsWrapper">
-					<div class="game_indicatorTopText game_indicatorTopLeft"><span id="gameMode">No</span> Mode</div>
-	<!-- 				<div class="game_indicatorTopText game_indicatorTopRightSm">/10</div>	 -->
-					<div class="game_indicatorTopText game_indicatorTopRightSm">&nbsp;</div>
-					<div class="game_indicatorTopText game_indicatorTopRightLg">
-						<span id="level">0</span>
-					</div>
-					<div class="game_indicatorTopText game_indicatorTopRightSm">Level</div>			
-					<div class="cleaner"></div>
-					
+	</div>
+   
+	<div id="dashboard-view" class="game_paddedView view">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="game_indicatorsWrapper">
+				<div class="game_indicatorTopText game_indicatorTopLeft">
+					<span id="gameMode">No</span> Mode
 				</div>
-		    </nav>		
-			
-			<div class="game_introButtonsWrapper">
-
-
-
+	<!-- 				<div class="game_indicatorTopText game_indicatorTopRightSm">/10</div>	 -->
+				<div class="game_indicatorTopText game_indicatorTopRightSm">&nbsp;</div>
+				<div class="game_indicatorTopText game_indicatorTopRightLg">
+					<span id="level">0</span>
+				</div>
+				<div class="game_indicatorTopText game_indicatorTopRightSm">Level</div>			
+				<div class="cleaner"></div>	
+			</div>
+		</nav>		
+		<div class="game_introButtonsWrapper">
 			<br>
 			<div class="panel panel-default" style="max-width:500px; margin:0px auto;">
-			  <div class="panel-heading">
-			    <h3 class="panel-title visualInstructions">VISUAL MODE</h3>
-			    <h3 class="panel-title auditoryInstructions">AUDITORY MODE</h3>
-			  </div>
-			  <div class="panel-body">
-			    <div class="panel-title visualInstructions">PAY ATTENTION TO THE IMAGES OF THE FISH<br>&nbsp;</div>
-			    <div class="panel-title auditoryInstructions">PAY ATTENTION TO THE SOUND OF THE FISH<br>&nbsp;</div>
-				<div class="text-center">
-					<img src="images/keys.png" alt="" title="instructions" style="width:300px;">
+				<div class="panel-heading">
+					<h3 class="panel-title visualInstructions">VISUAL MODE</h3>
+					<h3 class="panel-title auditoryInstructions">AUDITORY MODE</h3>
+				</div>
+				<div class="panel-body">
+					<div class="panel-title visualInstructions">
+						PAY ATTENTION TO THE IMAGES OF THE FISH<br>&nbsp;
+					</div>
+					<div class="panel-title auditoryInstructions">
+						PAY ATTENTION TO THE SOUND OF THE FISH<br>&nbsp;
+					</div>
+					<div class="text-center">
+						<img src="images/keys.png" alt="" title="instructions" style="width:300px;">
 <!--
 					<br>
 					You have 2 seconds to tag the fish in level 0 but only 0.5 seconds in level 10!<br/>
 					The fish also come faster as the level gets higher.
 -->
-				</div>    
-			  </div>
-			  <div class="panel-footer">
-			  	<div class="btn-group" role="group">
-					<button id="playGame2" class="btn btn btn-primary" onclick="gameControl.runGame()">
-						Ready to Play!
-					</button>  	
-					<button id="playGame2a" class="btn btn btn-success" onclick="gameControl.showView('profile')">
-						Best Scores
-					</button>
-						<button  class="btn btn btn-warning" data-toggle='modal' data-target='#instructions'
-						         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
+					</div>    
+				</div>
+				<div class="panel-footer">
+					<div class="btn-group" role="group">
+						<button id="playGame2" class="btn btn btn-primary" onclick="gameControl.runGame()">
+							Ready to Play!
+						</button>  	
+						<button id="playGame2a" class="btn btn btn-success" onclick="gameControl.showView('profile')">
+							Best Scores
+						</button>
+						<button class="btn btn btn-warning" data-toggle='modal' data-target='#instructions' onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
 							Instructions
 						</button>
-						
-						<a href="/logout.html" role="button"  class="btn btn btn-danger" 
-						         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
+						<a href="/logout.html" role="button"  class="btn btn btn-danger" onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
 							Log Out
 						</a>
 						<!-- 
 							<button id="visual" onclick="gameControl.runVisual()"> Visual </button>
 							<button id="aural" onclick="gameControl.runAural()"> Aural</button>
 						-->							  	
-			  	</div>
-			  </div>
-			</div>
-
-
-			</div>
-			
-		
-		</div>
-		
-		<div id="params-view" class="view">
-			<h1>Set Parameters</h1>
-			<div>
-				<input type="text" id="gameDuration" value="10"> game Length (in sec)<br/>
-				<input type="text" id="fishSizePercent" value="10"> fish size (in percent of screen width)<br/>
-				<input type="text" id="lifetime" value="2000"> fish lifetime (in ms)<br/>
-				<input type="text" id="minIFI" value="500"> minimum interfish interval (in ms)<br/>
-				<input type="text" id="maxIFI" value="2000"> maximum interfish interval (in ms)<br/>
-				<input type="text" id="oddBallRate" value="25"> oddball rate (in percent)<br/>
-			</div>
-		</div>
-	
-	
-	
-
-
-	
-		
-		
-
-			<div id="log-view" class="game_introWrapper view">
-				   			
-				<div class="game_introButtonsWrapper">	
-					<br><br>		
-					<div id="log" class="game_logInfoWrapper"></div>
-					<br>
-					<button onclick="gameControl.showView('profile')" class="btn btn-lg btn-warning">Play Again?</button>
+					</div>
 				</div>
-
 			</div>
+		</div>
+	</div>
+		
+	<div id="params-view" class="view">
+		<h1>Set Parameters</h1>
+		<div>
+			<input type="text" id="gameDuration" value="10"> game Length (in sec)<br/>
+			<input type="text" id="fishSizePercent" value="10"> fish size (in percent of screen width)<br/>
+			<input type="text" id="lifetime" value="2000"> fish lifetime (in ms)<br/>
+			<input type="text" id="minIFI" value="500"> minimum interfish interval (in ms)<br/>
+			<input type="text" id="maxIFI" value="2000"> maximum interfish interval (in ms)<br/>
+			<input type="text" id="oddBallRate" value="25"> oddball rate (in percent)<br/>
+		</div>
+	</div>
+	
+	<div id="log-view" class="game_introWrapper view">
+		<div class="game_introButtonsWrapper">	
+			<br><br>		
+			<div id="log" class="game_logInfoWrapper"></div>
+			<br>
+			<button onclick="gameControl.showView('profile')" class="btn btn-lg btn-warning">
+				Play Again?
+			</button>
+		</div>
+	</div>
 
-			<div id="datasummary-view" class="view">
-				   	<h1> Data Summary</h1>	
-					<button onclick="gameView.updateDataSummary()">update</button>
-					<div id = "options">
-						<input class = "checkbox" id = "visual" type = "checkbox" value = "visual">
-						<label for = "viual">Visual Mode<br></label>
-						<input class = "checkbox" id = "auditory" type = "checkbox" value = "auditory">
-						<label for = "auditory">Auditory Mode<br></label>
-					</div>	
-					<div class="row">
-						<div class="col-md-4 col-md-offset-4">
-							<table class="table table-border bg-info">
-								<thead>
-									<tr><th>Congruence</th><th>Percent Correct</th><th>Reaction Time</th></tr>
-								</thead>
-								<tbody>
-									<tr><td>Congruent</td>
-										<td id="correct-cong">???</td>
-										<td id="reaction-cong">???</td>
-									</tr>
-									<tr><td>InCongruent</td>
-										<td id="correct-incong">???</td>
-										<td  id="reaction-incong">???</td>
-									</tr>
-									<tr><td>Oddball</td>
-										<td id="correct-oddball">???</td>
-										<td  id="reaction-oddball">???</td>
-									</tr>						
-								</tbody>
-							</table>
+	<div id="datasummary-view" class="view">
+		<h1> Data Summary</h1>	
+		<button onclick="gameView.updateDataSummary()">update</button>
+		<div id = "options">
+			<input class = "checkbox" id = "visual" type = "checkbox" value = "visual">
+			<label for = "viual">Visual Mode<br></label>
+			<input class = "checkbox" id = "auditory" type = "checkbox" value = "auditory">
+			<label for = "auditory">Auditory Mode<br></label>
+		</div>	
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<table class="table table-border bg-info">
+					<thead>
+						<tr><th>Congruence</th><th>Percent Correct</th><th>Reaction Time</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>Congruent</td>
+							<td id="correct-cong">???</td>
+							<td id="reaction-cong">???</td>
+						</tr>
+						<tr><td>InCongruent</td>
+							<td id="correct-incong">???</td>
+							<td  id="reaction-incong">???</td>
+						</tr>
+						<tr><td>Oddball</td>
+							<td id="correct-oddball">???</td>
+							<td  id="reaction-oddball">???</td>
+						</tr>						
+					</tbody>
+				</table>
 							
-							<table class="table table-border bg-info">
-								<thead>
-									<tr><th>Congruence</th><th>Percent Correct</th><th>Reaction Time</th></tr>
-								</thead>
-								<tbody>
-									<tr><td>Fast/Fast</td>
-										<td id="ffc">???</td>
-										<td id="fft">???</td>
-									</tr>
-									<tr><td>Slow/Slow</td>
-										<td id="ssc">???</td>
-										<td id="sst">???</td>
-									</tr>
-									
-									<tr><td>Fast/Slow</td>
-										<td id="fsc">???</td>
-										<td id="fst">???</td>
-									</tr>
-									
-									<tr><td>Slow/Fast</td>
-										<td id="sfc">???</td>
-										<td id="sft">???</td>
-									</tr>
-									
-									<tr><td>Fast/None</td>
-										<td id="fnc">???</td>
-										<td id="fnt">???</td>
-									</tr>
-									<tr><td>Slow/None</td>
-										<td id="snc">???</td>
-										<td id="snt">???</td>
-									</tr>	
-									<tr><td>None/Fast</td>
-										<td id="nfc">???</td>
-										<td id="nft">???</td>
-									</tr>
-									<tr><td>None/Slow</td>
-										<td id="nsc">???</td>
-										<td id="nst">???</td>
-									</tr>
-				
-								</tbody>
-							</table>
-						</div>
-					</div>
-
+				<table class="table table-border bg-info">
+					<thead>
+						<tr><th>Congruence</th><th>Percent Correct</th><th>Reaction Time</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>Fast/Fast</td>
+							<td id="ffc">???</td>
+							<td id="fft">???</td>
+						</tr>
+						<tr><td>Slow/Slow</td>
+							<td id="ssc">???</td>
+							<td id="sst">???</td>
+						</tr>
+						<tr><td>Fast/Slow</td>
+							<td id="fsc">???</td>
+							<td id="fst">???</td>
+						</tr>
+						<tr><td>Slow/Fast</td>
+							<td id="sfc">???</td>
+							<td id="sft">???</td>
+						</tr>
+						<tr><td>Fast/None</td>
+							<td id="fnc">???</td>
+							<td id="fnt">???</td>
+						</tr>
+						<tr><td>Slow/None</td>
+							<td id="snc">???</td>
+							<td id="snt">???</td>
+						</tr>	
+						<tr><td>None/Fast</td>
+							<td id="nfc">???</td>
+							<td id="nft">???</td>
+						</tr>
+						<tr><td>None/Slow</td>
+							<td id="nsc">???</td>
+							<td id="nst">???</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-
-
-
-
-			<div id="graph-view" class="view">
-				<canvas id="graphCanvas" width="400" height="400"></canvas>
-			</div>
-			
-			<div id="control-view" class="view">
-				<button onclick="gameControl.clearData()">Reset All</button><br/>
-				<a href="/auth/logout">logout</a>
-			</div>
-			
-		
-			<div id="profile-view" class="view">
-				<div class="text-right">
-					<select onclick = "gameControl.setSkin()" id = "skin">
-						<option value = "fish" selected = "selected">Select a Skin</option>
-					</select>
-
-					<a href="/auth/logout" role="button"  class="btn btn btn-danger" data-dismiss="modal"
-					         onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
-						Log Out
-					</a>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-5 offset-1">
-						<div id="visual"><h1>Visual Mode</h1>
-
-							<table id="visualList" class="table table-bordered bg-info supterFixedTable">
-							</table>
-						</div>
-					</div>
-	
-					<div class="col-md-5 offset-1">
-						<div id="auditory"><h1>Auditory Mode</h1>	
-							<table id="auditoryList" class="table table-bordered bg-info supterFixedTable">
-							</table>
-						</div>
-					</div>
-					
-				</div>
-
-				
-			</div>
-				
-			
-
 		</div>
-</div>
+	</div>
 
+	<div id="graph-view" class="view">
+		<canvas id="graphCanvas" width="400" height="400"></canvas>
+	</div>
+			
+	<div id="control-view" class="view">
+		<button onclick="gameControl.clearData()">Reset All</button><br/>
+		<a href="/auth/logout">logout</a>
+	</div>
+			
+	<div id="profile-view" class="view">
+		<div class="text-right">
+			<!-- select onclick = "gameControl.setSkin()" id = "skin">
+				<option value = "fish" selected = "selected">Select a Skin</option>
+			</select-->
+			
+			<!-- button type="button" onclick="gameControl.showView('userStat')" class="btn btn-default">My Stats</button-->
+			
+			<a href="/auth/logout" role="button"  class="btn btn btn-danger" data-dismiss="modal" onclick= "gameControl.logActivity( 'logout',[userModel.getMode(),userModel.getLevel()])">
+				Log Out
+			</a>
+		</div>
+		<h1 style="text-align:center; font-size:40pt">For First-time Players</h1>
+				
+		<div class="row">
+			<div class="col-md-5 offset-1">
+				<div id="visual">
+					<h1>Visual Mode</h1>
+					<table id="visualList" class="table table-bordered bg-info supterFixedTable">
+					</table>
+				</div>
+			</div>
+			<div class="col-md-5 offset-1">
+				<div id="auditory">
+					<h1>Auditory Mode</h1>	
+					<table id="auditoryList" class="table table-bordered bg-info supterFixedTable">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div class="modal fade" id="statModal" tabindex="-1" role="dialog" aria-labelledby="leaderboardTitle" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="leaderboardTitle"></h4>
-      </div>
-      <div class="modal-body" id="leaderboardBody">
-        
-      </div>
-      <div class="modal-footer">
-        <center>
+	<div class="modal fade" id="statModal" tabindex="-1" role="dialog" aria-labelledby="leaderboardTitle" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="leaderboardTitle"></h4>
+				</div>
+				<div class="modal-body" id="leaderboardBody"></div>
+				<div class="modal-footer">
+					<center>
 			<!-- >
 				<button type="button" class="btn btn-default" id="popupPlayButton" data-dismiss="modal"
 				 disabled="disabled">Play Now</button>
 				-->
-		<button id="playGame" class="btn btn btn-primary"  data-dismiss="modal" onclick="gameControl.runGame()">
-			Play the Game!
-		</button>  	
+						<button id="playGame" class="btn btn btn-primary" data-dismiss="modal" onclick="gameControl.runGame()">
+							Play the Game!
+						</button>  	
+						<button class="btn btn btn-info" data-toggle='modal' data-dismiss="modal" data-target='#instructions' onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
+							Instructions
+						</button>
+						<button id="cancel" class="btn btn btn-warning" data-dismiss="modal" onclick="gameControl.showView('profile')">
+							Cancel
+						</button>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--	Two extra </div> tags were here.	-->
 
-		<button  class="btn btn btn-info" data-toggle='modal' data-dismiss="modal" data-target='#instructions'
-		         onclick="gameControl.logActivity('view instructions',[userModel.getMode()])">
-			Instructions
-		</button>
-		<button id="cancel" class="btn btn btn-warning" data-dismiss="modal" onclick="gameControl.showView('profile')">
-			Cancel
-		</button>
-		
-
-		</center>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="instructionsTitle" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-toggle='modal'  data-dismiss="modal" data-target='#statModal' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="instructionsTitle">Instructions</h4>
-      </div>
-      <div class="modal-body visualInstructions" id="visualInstrBody">
-        
-		<h2>Instructions for VISUAL version of game.</h2>
-		 <h3>Fish Police!!: SVU</h3>
-		<p>
+	<div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="instructionsTitle" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-toggle='modal' data-dismiss="modal" data-target='#statModal' aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="instructionsTitle">Instructions</h4>
+				</div>
+				<div class="modal-body visualInstructions" id="visualInstrBody">
+					<h2>Instructions for VISUAL version of game.</h2>
+					<h3>Fish Police!!: SVU</h3>
+					<p>
 		Congratulations on becoming a cadet in Fish Police!!: Special Visual Unit. 
 		Your job is to watch and judge the strange, puffing fish that live in the river and tag them according to their species. As you advance to higher levels, the fish spend less time on the surface (where you can tag them) so you have to react more quickly.
-	</p><p>
+					</p>
+					<p>
 		The river’s  bad, invasive fish and its good, native fish look alike but they behave differently, 
 		one is more jittery and one more relaxed.
-		<ul><li>
+						<ul>
+							<li>
 		Press the I key to tag a fish from the invasive, bad species.  
 		These fish are jittery and puff rapidly because they’re afraid you’ll spot them.
-			</li><li>
+							</li>
+							<li>
 		Press the U key to tag a fish from the usual, good, native species.  
 		Because they are more relaxed, they puff more slowly than the bad fish.
-			</li><li>
+							</li>
+							<li>
 		Press the O key to OK any fish from the endangered species.  Unlike other fish in the river, these fish either swim beneath the surface so you can hear them but can't see them, or they swim silently on the surface. These fish only start appearing in level 3.
-			</li></ul>
-</p><p>
+							</li>
+						</ul>
+					</p>
+					<p>
 		You’re just starting out now as a Fish Police!! cadet, but with hard work and concentration you could reach the Fish Police!!’s highest rank, its Commissioner.  To do that, you’ll have to make your judgments faster AND more accurately than other members of Fish Police!!’s cadet corps.
-	</p>
-      </div>
+					</p>
+				</div>
 	  
-	  <div class="modal-body auditoryInstructions" id="auditoryInstrBody">
-		 <h2>Instructions for AUDITORY version of game.</h2>
-		 <h3>Fish Police!!: SAU</h3>
-		 <p>
+				<div class="modal-body auditoryInstructions" id="auditoryInstrBody">
+					<h2>Instructions for AUDITORY version of game.</h2>
+					<h3>Fish Police!!: SAU</h3>
+					<p>
 		 Congratulations on becoming a cadet in Fish Police!!: Special Audition Unit. 
 		 Your job is to listen to and judge the strange, humming fish that live in the river, and tag them according to their species. As you advance to higher levels, the fish spend less time on the surface (where you can tag them) so you have to react more quickly.
-	 </p><p>
-		 
+	 				</p>
+					<p>
 		 The river’s bad, invasive fish and its good, native fish sound alike, both hum while they swim, but their humming differs. 
-		 <ul><li>
+		 				<ul>
+							<li>
 		 Press the I key to tag a fish from the invasive, bad species.  These fish are jittery —and hum rapidly because they’re afraid you’ll hear them.
-	 </li><li>
+	 						</li>
+							<li>
 		 Press the U key to tag a fish from the usual, good, native species.  Because they are more relaxed, they hum more slowly than the bad fish.
-		  </li><li>
+	 						</li>
+							<li>
 		 Press the O key to OK any fish from the endangered species.  Unlike other fish in the river, these fish either swim beneath the surface so you can hear them but can't see them, or they swim silently on the surface. These fish only start appearing in level 3.
-		  </li></ul>
-		 </p><p>
-		 You’re just starting out now as a Fish Police!! cadet, but with hard work and concentration you could reach the Fish Police!!’s highest rank, its Commissioner.  To do that, you’ll have to make your judgments faster AND more accurately than other members of Fish Police!!’s cadet corps. 
-		 </p>
-	  </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle='modal' data-target='#statModal' aria-label="Close">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
+	 						</li>
+						</ul>
+					</p>
+					<p>
+		 You’re just starting out now as a Fish Police!! cadet, but with hard work and concentration you could reach the Fish Police!!’s highest rank, its Commissioner.  To do that, you’ll have to make your judgments faster AND more accurately than other members of Fish Police!!’s cadet corps.
+	 				</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" data-toggle='modal' data-target='#statModal' aria-label="Close">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="userStat-view" class="view">
+		<div class="text-right">
+			<h3 id = "userNameTitle">UserName</h3>
+			<button type="button" onclick="gameControl.showView('profile')" class="btn btn-default">Back</button>
+		</div>
+		<div id = "graphSpace" class = "background">
+			<p>Reaction Time per Level</p>
+		</div>
+		<div id = "chartSpace" class = "background">
+			<p>Visual vs Auditory</p>
+		</div>
+	</div>
 
 	<!-- Modal -->
 	<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="videoModalLabel">FishPolice!! Video Tutorial</h4>
-	      </div>
-	      <div class="modal-body">
-	      	<center>
-			<video controls style="width:100%">
-			  <source src="video/movie2.mp4" type="video/mp4">
-			  Your browser does not support the <code>video</code> element.
-			</video>
-	      	</center>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="videoModalLabel">FishPolice!! Video Tutorial</h4>
+				</div>
+				<div class="modal-body">
+					<center>
+						<video controls style="width:100%">
+							<source src="video/movie2.mp4" type="video/mp4">
+								Your browser does not support the <code>video</code> element.
+						</video>
+					</center>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>	
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/requestNextAnimationFrame.js"></script>
+	<script src="js/plog.js"></script>
 	
-
-
-		<script src="js/jquery-2.1.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/requestNextAnimationFrame.js"></script>
-		<script src="js/plog.js"></script>
-
-		<script src="js/usermodel.js"></script>
-		<script src="js/model.js"></script>
-		<script src="js/controller.js"></script>
-
-		<script src="js/gameLoop.js"></script>
-		<script src="js/view.js"></script>
-		<script src="js/script.js"></script>
- 		<script type='text/javascript' src="http://wurfl.io/wurfl.js"></script>
-
-		<script>gameControl.start(); </script>
-		
-		
-	</body>
+	<script src="js/usermodel.js"></script>
+	<script src="js/model.js"></script>
+	<script src="js/controller.js"></script>
+	
+	<script src="js/gameLoop.js"></script>
+	<script src="js/view.js"></script>
+	<script src="js/script.js"></script>
+	<script type='text/javascript' src="http://wurfl.io/wurfl.js"></script>
+	
+	<script>gameControl.start(); </script>
+</body>
 </html>

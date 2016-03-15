@@ -213,6 +213,12 @@ var gameModel = (function() {
 
     }
 
+	function startTimerBar(numDelay){
+         console.log("starting timer bar! "+numDelay+" -- "+userModel.getMode() );
+         $("#timer").animate({width:"95%"},5000);
+         $("#timer").show().delay(numDelay).animate({width: "0px"}, 60000);
+	}
+
     function start() {
         fishLifetime = parseInt($("#lifetime").val());
         minFishSpawn = parseInt($("#minIFI").val());

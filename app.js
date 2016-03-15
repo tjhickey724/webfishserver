@@ -431,7 +431,7 @@ app.get('/mybeststats/:mode',function(req,res){
 				_id:{level:"$level"},
 				//level:"$level",
 				accuracy:{$divide:["$summary.correct","$summary.tries"]},
-				reaction:{$divide:["$summary.totalTime","$summary.tries"]}
+				reaction:{$divide:["$summary.totalTime","$summary.correct"]}
 			}},
 		{$sort: {_id:1,accuracy:-1, reaction:1}},
 		{$group:
@@ -656,7 +656,7 @@ function convertToTextMuse(docs,game_id){
 	while(j<d.log.length){
 		var this_game_id = getid(gameids,d._id);
 		if (this_game_id < game_id) {
-			console.log("skipping game "+this_game_id);
+			//console.log("skipping game "+this_game_id);
 			j++;
 			continue;
 		} 
@@ -666,6 +666,7 @@ function convertToTextMuse(docs,game_id){
 			a1.timestamp = d.time+a1.time;
 	    }
 	    if (a1.action=="keypress") {  // pressing key when no fish is there!
+			
 		var a2=a1;
 		a1={time:-1, id:-1, visual:"nofish", audio:"nofish", side:"nofish"};
 		//console.log(JSON.stringify(a1)+" "+JSON.stringify(a2));console.dir(a2);
@@ -690,13 +691,14 @@ function convertToTextMuse(docs,game_id){
 		    ; 
 		var trial0 = 
 			a2.timestamp/1000.0 + " 3 ";  // keypress after fish disappears
-		result.push(trial0+trial);
+		if (lastEventId!=0)   // don't record pressing keys before the first fish appears
+		 result.push(trial0+trial);
 		j += 1;
 	    }
-	    else { // this is a "birth" event and is followed by either a missed or a keypress event
+	    else { // THIS is a "birth" event and is followed by either a missed or a keypress event
 		var a2=(j+1<d.log.length)?d.log[j+1]:{}; // grab the next event, either keypress or fishspawn
 		var oddball = ((a2.visual=='none') || (a2.audio=='none'));
-		lastEventId = a2.eventId;
+		lastEventId = a2.eventId | lastEventId;
 	    if (a2.timestamp==undefined) { //make this backward compatible to data before we added timestamps
 			a2.timestamp = d.time+a2.time;
 		}
