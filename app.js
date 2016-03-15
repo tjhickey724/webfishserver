@@ -458,7 +458,7 @@ app.get('/leaderboard/:mode/:level',function(req,res){
 	//console.log("the user is "+JSON.stringify(req.user));
 	console.log("the userid is "+JSON.stringify(req.user.openID));
     collection.col.aggregate([
-        {$match: {level:level, mode:mode,"summary.tries":{$gt:0}}}, // watch out for division by zero!!
+        {$match: {level:level, mode:mode,"summary.tries":{$gt:0}, "summary.correct":{$gt:0}}}, // watch out for division by zero!!
 
 		{$project:
 			{

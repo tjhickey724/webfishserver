@@ -591,6 +591,8 @@ one can flip the canvas vertically, then translate y'+h from the bottom and draw
 		}
 	}
 
+ 	$("#userNameTitle").text(userModel.getUserName());
+
 	return ({
 		update: update,
 		playGood: playGood,
