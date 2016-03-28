@@ -14,15 +14,15 @@ var gameModel = (function() {
     debugPrint("creating gameModel");
     
     function getFishLifetime(level){ // 2000 -> 500ms in 10 steps
-        return 2000-level*150;
+        return 2000; //-level*150;
     }
     
     function getMinFishSpawn(level){ // 1000 -> 250
-        return 1000 - level*75;
+        return 1000;// - level*75;
     }
     
     function getMaxFishSpawn(level){ // 2000 -> 500
-        return 2000 - level*150;
+        return 1000; // 2000 - level*150;
     }
     
     function getOddBallRate(level){
@@ -37,7 +37,7 @@ var gameModel = (function() {
 
     // record the start time of the game and set the end time, all games are the same length
     var gameStart = (new Date()).getTime();
-    var gameDuration = 60; // in seconds
+    var gameDuration = 90; // in seconds
 	var gameDelay = 5000; // in ms
     var endTime = gameStart + gameDuration * 1000;
 
@@ -75,6 +75,7 @@ var gameModel = (function() {
     var fishXVelocity = 10;
     var fishYVelocity = 0;
     var fishVisible = true;
+	var fishAlive = true;
     var fishVisual = 'fast';
     var fishAudio = 'fast';
     var fishSide = 'left';
@@ -114,9 +115,17 @@ var gameModel = (function() {
     function getFishVisible() {
         return fishVisible;
     }
+	
+    function getFishAlive() {
+        return fishAlive;
+    }
 
     function setFishVisible(val) {
         fishVisible = val;
+    }
+	
+    function setFishAlive(val) {
+        fishAlive = val;
     }
 
     function randInt(N) {
@@ -132,30 +141,44 @@ var gameModel = (function() {
         }
         fishPos = [0, 50];
         fishVisible = true;
-        fishVisual = (randBool()) ? 'fast' : 'slow';
-        fishAudio = (randBool()) ? 'fast' : 'slow';
+		fishAlive = true;
+		
+
         fishSide = (randBool()) ? 'left' : 'right';
         fishXVelocity = (fishSide == 'left') ? 20 : -20;
         fishYVelocity = 0;
         fishPos[0] = (fishSide == 'left') ? 0 : 100;
         newFish = true;
 
-        if (randInt(100) < oddBallRate) {
+		// fishVisual and fishAudio need to be selected from an array
+        //fishVisual = (randBool()) ? 'fast' : 'slow';
+        //fishAudio = (randBool()) ? 'fast' : 'slow';
+        //if (randInt(100) < oddBallRate) {
 
-            if (randBool()) {
-                debugPrint("spawnFish: novis oddball!");
-                fishVisual = 'none';
-            } else {
-                debugPrint("spawnFish: noaud oddball!");
-                fishAudio = 'none';
-            }
-        }
+          //  if (randBool()) {
+           //     debugPrint("spawnFish: novis oddball!");
+            //    fishVisual = 'none';
+          //  } else {
+           //     debugPrint("spawnFish: noaud oddball!");
+            //    fishAudio = 'none';
+           // }
+       // }
+		switch (fishTypes[fishCount]) {
+			case 3: fishVisual='slow'; fishAudio='none'; break;
+			case 4: fishVisual='slow'; fishAudio='slow'; break;
+			case 5: fishVisual='slow'; fishAudio='fast'; break;
+			case 6: fishVisual='fast'; fishAudio='none'; break;
+			case 7: fishVisual='fast'; fishAudio='slow'; break;
+			case 8: fishVisual='fast'; fishAudio='fast'; break;
+		}
 
 
         fishCount++;
         debugPrint("spawnFish: spawned fish #" + fishCount + " at time " + (new Date()).getTime());
         debugPrint("spawnFish:"+JSON.stringify([fishVisual, fishAudio, fishSide, fishXVelocity]));
-        setTimeout(killFishIfVisible(fishCount), fishLifetime);
+        setTimeout(killFishIfVisible(fishCount), 2000); // HARDCODED :()
+		setTimeout(function(){spawnFish()}, 3000); // HARDCODED
+		//setTimeout(function(){killFish();}, fishLifetime);
 
         fishBirth = (new Date()).getTime();
         debugPrint("spawnFish: about to push birth!");
@@ -176,10 +199,11 @@ var gameModel = (function() {
 
     function killFishIfVisible(n) {
         return (function() {
-            if (fishVisible && (fishCount == n)) {
-                debugPrint("KFIV: Times up!"+fishVisible+" "+fishCount+" "+n);
+			fishVisible = false;
+			gameView.stopFishAudio();
+            if (fishAlive && (fishCount == n)) {
+                debugPrint("KFIV: Times up!"+fishAlive+" "+fishCount+" "+n);
                 var now = (new Date()).getTime();
-                fishVisible = false;
                 var entry = {
                     time: now - gameStart,
                     action: "missed",
@@ -190,36 +214,41 @@ var gameModel = (function() {
                 };
                 gameControl.pushLog(entry);
                 debugPrint("KFIV:"+entry);
+				fishAlive = false;
                 killFish();
                 lastReactionTime = 0;
-                if (fishVisual == 'none' || fishAudio == 'none') {
-                    gameView.playGood();
-                } else {
-                    missed++;
-                    gameView.playBad();
-                }
+                
+                missed++;
+                gameView.playBad();
+                
             }
+
         });
     }
 
     function killFish() {
 
-        fishVisible = false;
-        var delay = minFishSpawn + randInt(maxFishSpawn - minFishSpawn);
-        debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
-        debugPrint("killFish: fish killed... new fish will spawn in " + delay + " ms");
-        setTimeout(spawnFish, delay);
-        gameView.stopFishAudio();
+        //var delay = minFishSpawn + randInt(maxFishSpawn - minFishSpawn);
+        //debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
+        //debugPrint("killFish: fish killed... new fish will spawn in " + delay + " ms");
+		fishAlive = false;
+        //setTimeout(spawnFish, 1000ms); //delay);
+        
 
     }
 
 	function startTimerBar(numDelay){
          console.log("starting timer bar! "+numDelay+" -- "+userModel.getMode() );
          $("#timer").animate({width:"95%"},5000);
-         $("#timer").show().delay(numDelay).animate({width: "0px"}, 60000);
+         $("#timer").show().delay(numDelay).animate({width: "0px"}, gameDuration*1000);
 	}
 
+	var fishTypes = [];
+
     function start() {
+		
+		
+		console.log("******* STARTING GAME  ********")
         fishLifetime = parseInt($("#lifetime").val());
         minFishSpawn = parseInt($("#minIFI").val());
         maxFishSpawn = parseInt($("#maxIFI").val());
@@ -229,6 +258,7 @@ var gameModel = (function() {
         resetTrialStats();
         
         fishVisible = false;
+		fishAlive=false;
 		gameDelay = 5000;
         gameStart = (new Date()).getTime()+gameDelay;
         endTime = gameStart + gameDuration * 1000;
@@ -243,6 +273,17 @@ var gameModel = (function() {
         setCanvasSize();
         window.onresize = setCanvasSize;
 		startTimerBar(gameDelay)
+		
+		// create a random permutation of the fishTypes array
+		fishTypes=[];
+		var j=0;
+		for(var i=3; i<=8; i++){
+			for(var k=0; k<5; k++){
+				fishTypes[j++] = i;
+			}
+		}
+		fishTypes = _.shuffle(fishTypes);
+		console.log("fishtypes="+JSON.stringify(fishTypes));
     };
 
     function setCanvasSize() {
@@ -333,6 +374,8 @@ var gameModel = (function() {
         },
         getFishVisible: getFishVisible,
         setFishVisible: setFishVisible,
+        getFishAlive: getFishAlive,
+        setFishAlive: setFishAlive,
 
         getImageOffset: function() {
             return (imageOffset)

@@ -57,7 +57,8 @@ var gameControl = (function() {
 			gameModel.updateParameters();
 			userModel.loadGameStats();
 			gameView.updateInstr(userModel.getMode());
-			gameView.showLevels();
+			//gameView.showLevels();
+			
 		}
 		if (selected == "datasummary"){
 			gameView.updateDataSummary();
@@ -232,7 +233,7 @@ var gameControl = (function() {
 		// this is the case where there was no fish visible
 		// and they pressed the key. It doesn't count as correct
 		// or incorrect 
-		if (!gameModel.getFishVisible()) {
+		if (!gameModel.getFishAlive()) {
 			gameModel.logKeyPress('nofish', keyPressed, 'incorrect', now);
 			gameView.playBad(now);
 			return;
@@ -275,7 +276,7 @@ var gameControl = (function() {
 			return;
 		}
 
-		if (gameModel.getFishVisible()) {
+		if (gameModel.getFishAlive()) {
 			gameModel.killFish();
 
 
@@ -313,7 +314,7 @@ var gameControl = (function() {
 
 		// this is the case where they saw and heard a fish
 		//  and pushed the "L" key        
-		if (gameModel.getFishVisible()) {
+		if (gameModel.getFishAlive()) {
 			gameModel.killFish();
 
 			if (gameModel.isGoodFish()) {
@@ -349,7 +350,7 @@ var gameControl = (function() {
 
 		// this is the case where they saw and heard a fish
 		//  and pushed the "O" key        
-		if (gameModel.getFishVisible()) {
+		if (gameModel.getFishAlive()) {
 			gameModel.killFish();
 			if (gameModel.isGoodFish()) {
 				gameModel.logKeyPress('good', oddballKey, 'incorrect', now);
@@ -443,9 +444,9 @@ var gameControl = (function() {
 		}
 
 
-		$("#log").html(levelInfo + "\n" + statString + "<\hr>");
+		$("#eeg-log").html(levelInfo + "\n" + statString + "<\hr>");
 		console.log(">>>>>>>>>>>    " + levelInfo + "\n" + statString + "<\hr>");
-		showView("log");
+		showView("eeg-log");
 		//gameLoop.stop();
 	}
 
@@ -654,7 +655,7 @@ var gameControl = (function() {
 			userModel.getUserInfo();
 			setTimeout(userModel.getUserState(),500);
 			//setTimeout(checkConsent, 2000);
-			showView("profile");
+			showView("eeg-log"); //profile");
 		}
 	}
 

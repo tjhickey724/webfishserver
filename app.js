@@ -39,7 +39,7 @@ var bodyParser = require('body-parser'); // this allows us to pass JSON values t
 var app = express();
 
 var monk = require('monk');
-var db = monk('localhost:27017/webfish');
+var db = monk('localhost:27017/webfisheeg');
 var User = db.get("user");
 
 app.set('views', __dirname + '/views');
