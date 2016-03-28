@@ -446,6 +446,7 @@ var gameControl = (function() {
 
 		$("#eeg-log").html(levelInfo + "\n" + statString + "<\hr>");
 		console.log(">>>>>>>>>>>    " + levelInfo + "\n" + statString + "<\hr>");
+		reportUserStats()
 		showView("eeg-log");
 		//gameLoop.stop();
 	}
@@ -541,6 +542,33 @@ var gameControl = (function() {
 	}
 
 
+	function reportUserStats(){
+		$.ajax({
+			type: "GET",
+			url: "/model/gamesummary",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(items) {
+			console.log(JSON.stringify(items));
+			var results=
+			"<div class='row'><div class='col-md-offset-3 col-md-6'><h1>Game History</h1><table class='table table-bordered'><tr><td>Accuracy</td><td>ReactionTime</td><td>Level</td></tr>\n";
+			var lines="";
+			for(x in items){
+				var item = items[x].summary;
+				var line = 
+					"<tr><td>"+Math.round(item.percentCorrect)+"%</td>"+
+					"<td>"+Math.round(item.reactionTime)+"ms</td>"+
+					"<td>"+Math.round(Math.max(0,(1000-item.reactionTime)/50))+"</td>"
+					"</tr>\n";
+				lines = line.concat(lines);
+				console.log("line="+ JSON.stringify(line)+"  lines="+ JSON.stringify(lines));
+				
+			}
+			results += lines + "</table></div></div>"
+			$("#eeg-history").html(results);
+			//console.log("log upload complete"); //+JSON.stringify(items));
+		});
+	}
 
 	function uploadLogAndSummary(log, summaryStats) {
 		//console.log("uploading log");
@@ -736,7 +764,8 @@ var gameControl = (function() {
 		changeLevelMode: changeLevelMode,
 		showView: showView,
 		showInstructions: showInstructions,
-		logActivity: logActivity
+		logActivity: logActivity,
+		reportUserStats: reportUserStats
 	})
 
 }())

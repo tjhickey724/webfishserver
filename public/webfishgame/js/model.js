@@ -238,7 +238,7 @@ var gameModel = (function() {
     }
 
 	function startTimerBar(numDelay){
-         console.log("starting timer bar! "+numDelay+" -- "+userModel.getMode() );
+         console.log("starting timer bar! "+numDelay+" -- "+userModel.getMode() +" gameDuration="+gameDuration);
          $("#timer").animate({width:"95%"},5000);
          $("#timer").show().delay(numDelay).animate({width: "0px"}, gameDuration*1000);
 	}
@@ -249,11 +249,13 @@ var gameModel = (function() {
 		
 		
 		console.log("******* STARTING GAME  ********")
+/*
         fishLifetime = parseInt($("#lifetime").val());
         minFishSpawn = parseInt($("#minIFI").val());
         maxFishSpawn = parseInt($("#maxIFI").val());
         gameDuration = parseInt($("#gameDuration").val());
         oddBallRate = parseInt($("#oddBallRate").val());
+		*/
         
         resetTrialStats();
         
