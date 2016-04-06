@@ -261,6 +261,8 @@ var gameControl = (function() {
 
 		// if there is not visual or audio any keypresses are wrong!
 		// these are the oddball cases ...
+		
+		// this never happens in the eeg case
 		if (gameModel.getFishVisual() == 'none') {
 			gameModel.logKeyPress('novis', goodFishKey, 'incorrect', now);
 			gameView.playBad(now);
@@ -268,7 +270,8 @@ var gameControl = (function() {
 			gameModel.killFish();
 			return;
 		}
-		if (gameModel.getFishAudio() == 'none') {
+		// in the eeg case, a noaudio fish is just like any other fish1
+		if (false && gameModel.getFishAudio() == 'none') {
 			gameModel.logKeyPress('noaud', goodFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			debugPrint("goodKeyPress: goodkey no audio");
@@ -298,13 +301,13 @@ var gameControl = (function() {
 
 		// if there is not visual or audio any keypresses are wrong!
 		// these are the oddball cases ...
-		if (gameModel.getFishVisual() == 'none') {
+		if (false && gameModel.getFishVisual() == 'none') {
 			gameModel.logKeyPress('novis', badFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			gameModel.killFish();
 			return;
 		}
-		if (gameModel.getFishAudio() == 'none') {
+		if (false && gameModel.getFishAudio() == 'none') {
 			gameModel.logKeyPress('noaud', badFishKey, 'incorrect', now);
 			gameView.playBad(now);
 			gameModel.killFish();
@@ -407,41 +410,24 @@ var gameControl = (function() {
 		summaryStats = getSummaryStats()
 		uploadLogAndSummary(log, summaryStats)
 
-
+		// In the EEG version, the level always increase by 1 no matter what
+		// but there is no change in the game until after level 20!
 
 		//console.log("Summary Stats ="+JSON.stringify(allSummaryStats));
 
-		if (percentCorrect > 80) {
+		if (true) {
 			userModel.setLevel(userModel.getLevel() + 1);
 			userLevel = userModel.getLevel();
 
-			levelInfo = "<h2>Congratulations!  You have advanced to level " + userLevel + "!</h2>";
+			levelInfo = "<h2>Congratulations!  You have advanced to game " + userLevel + "!</h2>";
 
 			//alert("new level is "+userLevel);
 			msgString = "Congrats!!! You have advanced to level " + userLevel;
-		} else {
-			userLevel = userModel.getLevel();
-			levelInfo = "<h2>Level " + userLevel + "</h2>";
 		}
 
 		//logelt.textContent = JSON.stringify(gameStats)+"\n\n\n"+(JSON.stringify(log));
-		var statString;
-		if (allSummaryStats.count == undefined) {
-			statString =
-				"<h2>Percent Correct: " + Math.round(summaryStats.percentCorrect) + "%" +
-				" </h2>" + "\n" +
-				"<h2>Reaction Time: " + Math.round(summaryStats.reactionTime) + "ms" +
-				" </h2>" +
-				"<h2>Yay!! You are the first person to play level " + originalLevel + "</h2>";
-		} else {
-			statString =
-				"<h2>Percent Correct: " + Math.round(summaryStats.percentCorrect) + "%" +
-				" (avg for all level " + originalLevel + " players is " + Math.round(allSummaryStats.correct * 100 / allSummaryStats.tries) + "%" + ")" +
-				" </h2>" + "\n" +
-				"<h2>Reaction Time: " + Math.round(summaryStats.reactionTime) + "ms" +
-				" (avg for all level " + originalLevel + "  players is " + Math.round(allSummaryStats.time / allSummaryStats.correct) + "ms" + ")" +
-				" </h2>";
-		}
+		var statString="";
+		
 
 
 		$("#eeg-log").html(levelInfo + "\n" + statString + "<\hr>");
@@ -551,14 +537,14 @@ var gameControl = (function() {
 		}).done(function(items) {
 			console.log(JSON.stringify(items));
 			var results=
-			"<div class='row'><div class='col-md-offset-3 col-md-6'><h1>Game History</h1><table class='table table-bordered'><tr><td>Accuracy</td><td>ReactionTime</td><td>Level</td></tr>\n";
+			"<div class='row'><div class='col-md-offset-3 col-md-6'><h1>Game History</h1><table class='table table-bordered'><tr><td>Game Number</td><td>Accuracy</td><td>ReactionTime</td><td>Score</td></tr>\n";
 			var lines="";
 			for(x in items){
 				var item = items[x].summary;
 				var line = 
-					"<tr><td>"+Math.round(item.percentCorrect)+"%</td>"+
+					"<tr><td>"+items[x].level+"</td><td>"+Math.round(item.percentCorrect)+"%</td>"+
 					"<td>"+Math.round(item.reactionTime)+"ms</td>"+
-					"<td>"+Math.round(Math.max(0,(1000-item.reactionTime)/50))+"</td>"
+				"<td>"+Math.round(10*Math.max(0,(1000-item.reactionTime)*Math.pow(item.percentCorrect/100.0,2)/50))+"</td>"
 					"</tr>\n";
 				lines = line.concat(lines);
 				console.log("line="+ JSON.stringify(line)+"  lines="+ JSON.stringify(lines));
@@ -631,12 +617,16 @@ var gameControl = (function() {
 	}
 
 	function runGame() {
-
+		// the eeg version is visual mode only!
+		userModel.setMode("visual");
+		runVisual();
+		/*
 		if (userModel.getMode() == "visual") {
 			runVisual();
 		} else {
 			runAural();
 		}
+		*/
 	}
 
 	function runVisual() {
@@ -665,7 +655,7 @@ var gameControl = (function() {
 		gameView.updateInstr(userModel.getMode());
 		$("#level").text(userModel.getLevel());
 
-		showView("profile");
+		showView("eeg-log");
 	}
 
 
@@ -682,7 +672,7 @@ var gameControl = (function() {
 			//showView("start");
 			userModel.getUserInfo();
 			setTimeout(userModel.getUserState(),500);
-			//setTimeout(checkConsent, 2000);
+			setTimeout(checkConsent, 2000);
 			showView("eeg-log"); //profile");
 		}
 	}
@@ -700,7 +690,7 @@ var gameControl = (function() {
 			$("#gameMode").text(userModel.getMode());
 			if (window.location.hash == "") {
 				//console.log("showView(start)");
-				showView("start");
+				showView("eeg-log");
 			} else {
 				//console.log("showing " + window.location.hash);
 				showView(window.location.hash.substring(1));
