@@ -14,10 +14,10 @@ var gameModel = (function() {
     debugPrint("creating gameModel");
     
     function getFishLifetime(level){ // 2000 -> 500ms in 10 steps
-		if (level< -20)
+		if (level< 20)
 			return 2000; //-level*150;
 		else
-			return 2000-(level)*150;
+			return 1500-(level-20)*75;
     }
     
     function getMinFishSpawn(level){ // 1000 -> 250
