@@ -14,10 +14,10 @@ var gameModel = (function() {
     debugPrint("creating gameModel");
     
     function getFishLifetime(level){ // 2000 -> 500ms in 10 steps
-		if (level<20)
+		if (level< -20)
 			return 2000; //-level*150;
 		else
-			return 1000-(level-20)*50;
+			return 2000-(level)*150;
     }
     
     function getMinFishSpawn(level){ // 1000 -> 250
@@ -41,7 +41,7 @@ var gameModel = (function() {
 
     // record the start time of the game and set the end time, all games are the same length
     var gameStart = (new Date()).getTime();
-    var gameDuration = 90; // in seconds
+    var gameDuration = 30; // in seconds
 	var gameDelay = 5000; // in ms
     var endTime = gameStart + gameDuration * 1000;
 
@@ -182,7 +182,9 @@ var gameModel = (function() {
         debugPrint("spawnFish:"+JSON.stringify([fishVisual, fishAudio, fishSide, fishXVelocity]));
         setTimeout(killFishIfVisible(fishCount), 2000); // HARDCODED :()
 		setTimeout(function(){spawnFish()}, 3000); // HARDCODED
-		//setTimeout(function(){killFish();}, fishLifetime);
+		setTimeout(function(){killFish();}, getFishLifetime(userModel.getLevel()));
+		console.log("Fish is born! wiil die in "+getFishLifetime(userModel.getLevel()));
+
 
         fishBirth = (new Date()).getTime();
         debugPrint("spawnFish: about to push birth!");
@@ -219,7 +221,7 @@ var gameModel = (function() {
                 gameControl.pushLog(entry);
                 debugPrint("KFIV:"+entry);
 				fishAlive = false;
-                killFish();
+                //killFish();
                 lastReactionTime = 0;
                 
                 missed++;
@@ -236,6 +238,7 @@ var gameModel = (function() {
         //debugPrint("minFS:"+minFishSpawn+" maxFS:"+maxFishSpawn);
         //debugPrint("killFish: fish killed... new fish will spawn in " + delay + " ms");
 		fishAlive = false;
+		console.log("ahhh you killed me!!! at level "+userModel.getLevel());
         //setTimeout(spawnFish, 1000ms); //delay);
         
 

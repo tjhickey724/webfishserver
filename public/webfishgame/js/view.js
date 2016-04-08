@@ -189,7 +189,15 @@ var gameView = (function() {
 			return;
 		}
 		if (gameModel.getFishVisible()) {
-			drawFish([imgTargetL, imgTargetR], hz);
+			if (gameModel.getFishAlive()) {
+				drawFish([imgTargetL, imgTargetR], hz);
+			} else {
+				var ctx = canvas.getContext('2d');
+				ctx.globalAlpha = 0.5;
+				drawFish([imgTargetL, imgTargetR], hz);
+				ctx.globalAlpha = 1.0;
+			}
+			
 		}
 
 
