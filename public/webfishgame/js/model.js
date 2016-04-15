@@ -41,7 +41,7 @@ var gameModel = (function() {
 
     // record the start time of the game and set the end time, all games are the same length
     var gameStart = (new Date()).getTime();
-    var gameDuration = 30; // in seconds
+    var gameDuration = 90; // in seconds
 	var gameDelay = 5000; // in ms
     var endTime = gameStart + gameDuration * 1000;
 

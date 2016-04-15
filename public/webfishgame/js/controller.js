@@ -248,7 +248,7 @@ var gameControl = (function() {
 		} else if (keyPressed == badFishKey) {
 			badKeyPress(now);
 		} else if (keyPressed == oddballKey) {
-			oddKeyPress(now);
+			//oddKeyPress(now);
 		}
 	}
 
